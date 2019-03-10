@@ -25,47 +25,61 @@ public class Lexer {
 	private final static Map<String, TokenType> reservedWords; //reserved words dictionary
 	private final static Map<Character, TokenType> punctuation; //punctuation characters dictionary
 	private final static Map<String, TokenType> operators; //operator characters dictionary
+        private final static Map<Character, TokenType> separator; //operator characters dictionary
 	
 	private int errors; //number of errors
 
 	static {
 		reservedWords = new HashMap<String, TokenType>();
+                reservedWords.put("kung", TokenType.IF);
+                reservedWords.put("maiba", TokenType.ELSE);
+                reservedWords.put("paraikot",TokenType.FOR);
+                reservedWords.put("letpa", TokenType.SWITCH);
+                reservedWords.put("kheys",TokenType.CASE);
+                reservedWords.put("Simula",TokenType.START);
+                reservedWords.put("Wakas", TokenType.END);
+                reservedWords.put("bool", TokenType.BOOLEAN);
+                reservedWords.put("omsim", TokenType.TRUE);
+                reservedWords.put("deins", TokenType.FALSE);
 		reservedWords.put("int", TokenType.INT);
-		reservedWords.put("float", TokenType.FLOAT);
-		reservedWords.put("char", TokenType.CHAR);
-		reservedWords.put("boolean", TokenType.BOOLEAN);
-		reservedWords.put("if", TokenType.IF);
-		reservedWords.put("else", TokenType.ELSE);
-		reservedWords.put("while", TokenType.WHILE);
-		reservedWords.put("main", TokenType.MAIN);
+                reservedWords.put("pakits", TokenType.PRINT);
+                reservedWords.put("patings", TokenType.SCAN);
+                reservedWords.put("char", TokenType.CHAR);
+                  reservedWords.put("stringtho", TokenType.STRINGTHO);
+                reservedWords.put("const", TokenType.CONST);
+                
 
 		punctuation = new HashMap<Character, TokenType>();
-		punctuation.put('(', TokenType.LPAREN);
-		punctuation.put(')', TokenType.RPAREN);
-		punctuation.put('[', TokenType.LBRACKET);
-		punctuation.put(']', TokenType.RBRACKET);
-		punctuation.put('{', TokenType.LBRACE);
-		punctuation.put('}', TokenType.RBRACE);
-		punctuation.put(';', TokenType.SEMI);
-		punctuation.put(',', TokenType.COMMA);
+		
 		punctuation.put('=', TokenType.ASSIGN);
-		punctuation.put('-', TokenType.NEGATIVE);
+		//punctuation.put('-', TokenType.NEGATIVE);
 		punctuation.put('!', TokenType.NOT);
+                
+                
+                separator = new HashMap <Character, TokenType>();
+                separator.put('(', TokenType.LPAREN);
+		separator.put(')', TokenType.RPAREN);
+		
+		separator.put('{', TokenType.LCURLY);
+		separator.put('}', TokenType.RCURLY);
+		separator.put(';', TokenType.SCLON);
+		separator.put(',', TokenType.COMMA);
 
 		operators = new HashMap<String, TokenType>();
 		operators.put("&&", TokenType.AND);
 		operators.put("||", TokenType.OR);
-		operators.put("==", TokenType.EQ);
-		operators.put("!=", TokenType.NEQ);
-		operators.put("<", TokenType.LT);
-		operators.put(">", TokenType.RT);
-		operators.put("<=", TokenType.LT_EQ);
-		operators.put(">=", TokenType.RT_EQ);
-		operators.put("+", TokenType.PLUS);
-		operators.put("-", TokenType.MINUS);
-		operators.put("*", TokenType.TIMES);
-		operators.put("/", TokenType.DIV);
-		operators.put("%", TokenType.MOD);
+		operators.put("=_=", TokenType.RELOP);
+		operators.put("!_=", TokenType.RELOP);
+		operators.put("<", TokenType.RELOP);
+		operators.put(">", TokenType.RELOP);
+		operators.put("<_=", TokenType.RELOP);
+		operators.put(">_=", TokenType.RELOP);
+		operators.put("+", TokenType.ADDSUB);
+		operators.put("-", TokenType.ADDSUB);
+		operators.put("*", TokenType.MULDIV);
+		operators.put("/", TokenType.MULDIV);
+                operators.put("^",TokenType.EXPON); 
+		
 	}
 
 	public Lexer(FileReader file) throws FileNotFoundException {
@@ -270,7 +284,7 @@ public class Lexer {
 			// check if next char is '=' to match '==' binop
 			if (nextChar == '=') {
 				nextChar = getChar();
-				return new Token(TokenType.EQ, new TokenAttribute(), lineNumber, columnNumber - 2);
+				return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
 			}
 			else 
 				return new Token(TokenType.ASSIGN, new TokenAttribute(), lineNumber, columnNumber - 1);
@@ -282,7 +296,7 @@ public class Lexer {
 			// check if next char is '!' to match '!=' binop
 			if (nextChar == '=') {
 				nextChar = getChar();
-				return new Token(TokenType.NEQ, new TokenAttribute(), lineNumber, columnNumber - 2);
+				return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
 			}
 			else 
 				return new Token(TokenType.NOT, new TokenAttribute(), lineNumber, columnNumber - 1);
@@ -294,9 +308,9 @@ public class Lexer {
 			// check if next char is '<' to match '<=' binop
 			if (nextChar == '=') {
 				nextChar = getChar();
-				return new Token(TokenType.LT_EQ, new TokenAttribute(), lineNumber, columnNumber - 2);
+				return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
 			} else
-				return new Token(TokenType.LT, new TokenAttribute(), lineNumber, columnNumber - 1);
+				return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
 
 		case '>':
 			columnNumber++;
@@ -305,34 +319,34 @@ public class Lexer {
 			// check if next char is '<' to match '<=' binop
 			if (nextChar == '=') {
 				nextChar = getChar();
-				return new Token(TokenType.RT_EQ, new TokenAttribute(), lineNumber, columnNumber - 2);
+				return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
 			} else
-				return new Token(TokenType.RT, new TokenAttribute(), lineNumber, columnNumber - 1);
+				return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
 
 		case '+':
 			columnNumber++;
 			nextChar = getChar();
-			return new Token(TokenType.PLUS, new TokenAttribute(), lineNumber, columnNumber - 1);
+			return new Token(TokenType.ADDSUB, new TokenAttribute(), lineNumber, columnNumber - 1);
 
 		case '-':
 			columnNumber++;
 			nextChar = getChar();
-			return new Token(TokenType.MINUS, new TokenAttribute(), lineNumber, columnNumber - 1);
+			return new Token(TokenType.ADDSUB, new TokenAttribute(), lineNumber, columnNumber - 1);
+                case '^':
+			columnNumber++;
+			nextChar = getChar();
+			return new Token(TokenType.EXPON, new TokenAttribute(), lineNumber, columnNumber - 1);
 
 		case '*':
 			columnNumber++;
 			nextChar = getChar();
-			return new Token(TokenType.TIMES, new TokenAttribute(), lineNumber, columnNumber - 1);
+			return new Token(TokenType.MULDIV, new TokenAttribute(), lineNumber, columnNumber - 1);
 
 		case '/':
 			columnNumber++;
 			nextChar = getChar();
-			return new Token(TokenType.DIV, new TokenAttribute(), lineNumber, columnNumber - 1);
+			return new Token(TokenType.MULDIV, new TokenAttribute(), lineNumber, columnNumber - 1);
 
-		case '%':
-			columnNumber++;
-			nextChar = getChar();
-			return new Token(TokenType.MOD, new TokenAttribute(), lineNumber, columnNumber - 1);
 		}
 
 		// check for punctuation

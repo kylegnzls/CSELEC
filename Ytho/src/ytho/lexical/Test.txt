@@ -1,0 +1,16 @@
+Simula simpleEAdd{
+	int num1 = 1;
+	int nos2 = 2;
+	@@num1 and nos2 will be added depending on the condition 
+
+	kung(num1 < 3){
+		int summa = num1 + nos2;
+		pakits “sagot: ”;
+		pakits summa;
+	}
+	maiba{
+		int summa = num1 + 3;
+		pakits “wala eh!”;
+		pakits summa;
+}
+}Wakas

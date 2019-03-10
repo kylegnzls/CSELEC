@@ -25,8 +25,9 @@ public class Lexer {
 	private final static Map<String, TokenType> reservedWords; //reserved words dictionary
 	private final static Map<Character, TokenType> punctuation; //punctuation characters dictionary
 	private final static Map<String, TokenType> operators; //operator characters dictionary
-        private final static Map<Character, TokenType> separator; //operator characters dictionary
-	
+       
+	 private final static Map<String, TokenType> comment; //operator characters dictionary
+         
 	private int errors; //number of errors
 
 	static {
@@ -54,16 +55,16 @@ public class Lexer {
 		punctuation.put('=', TokenType.ASSIGN);
 		//punctuation.put('-', TokenType.NEGATIVE);
 		punctuation.put('!', TokenType.NOT);
-                
-                
-                separator = new HashMap <Character, TokenType>();
-                separator.put('(', TokenType.LPAREN);
-		separator.put(')', TokenType.RPAREN);
+                 punctuation.put('(', TokenType.LPAREN);
+		punctuation.put(')', TokenType.RPAREN);
 		
-		separator.put('{', TokenType.LCURLY);
-		separator.put('}', TokenType.RCURLY);
-		separator.put(';', TokenType.SCLON);
-		separator.put(',', TokenType.COMMA);
+		punctuation.put('{', TokenType.LCURLY);
+		punctuation.put('}', TokenType.RCURLY);
+		punctuation.put(';', TokenType.SCLON);
+		punctuation.put(',', TokenType.COMMA);
+                
+               
+               
 
 		operators = new HashMap<String, TokenType>();
 		operators.put("&&", TokenType.AND);
@@ -80,6 +81,8 @@ public class Lexer {
 		operators.put("/", TokenType.MULDIV);
                 operators.put("^",TokenType.EXPON); 
 		
+                comment = new HashMap <String, TokenType>();
+                comment.put("@@", TokenType.COMMENT);
 	}
 
 	public Lexer(FileReader file) throws FileNotFoundException {
@@ -104,6 +107,7 @@ public class Lexer {
 
 	// detect and skip possible '\n', '\r' and '\rn' line breaks
 	private boolean skipNewline() {
+            
 		if (nextChar == '\n') {
 			lineNumber++;
 			columnNumber = 1;
@@ -191,7 +195,7 @@ public class Lexer {
 			String numString = Character.toString((char) nextChar);
 			columnNumber++;
 			nextChar = getChar();
-
+                       
 			// concatenate remaining sequence of digits
 			while (Character.isDigit(nextChar)) {
 				numString += (char) nextChar;
@@ -346,14 +350,19 @@ public class Lexer {
 			columnNumber++;
 			nextChar = getChar();
 			return new Token(TokenType.MULDIV, new TokenAttribute(), lineNumber, columnNumber - 1);
-
+                 
+               
+                        
 		}
 
 		// check for punctuation
 		TokenType type = punctuation.get((char) nextChar);
 		columnNumber++;
 		nextChar = getChar();
+                
+               
 
+                 
 		// found punctuation token
 		if (type != null)
 			return new Token(type, new TokenAttribute(), lineNumber, columnNumber - 1);

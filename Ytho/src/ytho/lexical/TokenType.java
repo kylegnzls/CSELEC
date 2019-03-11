@@ -38,25 +38,25 @@ public enum TokenType {
     IGNORE,
     // reserved words
     MAIN, // main - relegate as ID (?)
-    INT, // int
+    INTEGER, // int
     CHAR, // char
     BOOLEAN, // boolean
-    IF, // if
-    ELSE, // else
+    KUNG, // if
+    MAIBA, // else
     WHILE, // while
-    FOR, //for
-    SWITCH,//switch
-    CASE,//case
-    DEFAULT,//default
+    PARAIKOT, //for
+    LETPA,//switch
+    KHEYS,//case
+    DEPAWLT,//default
     BREAK,//break
-    START,
-    END,
-    TRUE,
-    FALSE,
-    PRINT,
-    SCAN,
+    SIMULA,
+    WAKAS,
+    OMSIM,
+    DEINS,
+    PAKITS,
+    PATINGS,
     CONST,
-    RETURN,
+    IBALIK,
     STRINGTHO,
     
     

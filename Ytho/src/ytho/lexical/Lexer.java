@@ -32,19 +32,19 @@ public class Lexer {
 
 	static {
 		reservedWords = new HashMap<String, TokenType>();
-                reservedWords.put("kung", TokenType.IF);
-                reservedWords.put("maiba", TokenType.ELSE);
-                reservedWords.put("paraikot",TokenType.FOR);
-                reservedWords.put("letpa", TokenType.SWITCH);
-                reservedWords.put("kheys",TokenType.CASE);
-                reservedWords.put("Simula",TokenType.START);
-                reservedWords.put("Wakas", TokenType.END);
+                reservedWords.put("kung", TokenType.KUNG);
+                reservedWords.put("maiba", TokenType.MAIBA);
+                reservedWords.put("paraikot",TokenType.PARAIKOT);
+                reservedWords.put("letpa", TokenType.LETPA);
+                reservedWords.put("kheys",TokenType.KHEYS);
+                reservedWords.put("Simula",TokenType.SIMULA);
+                reservedWords.put("Wakas", TokenType.WAKAS);
                 reservedWords.put("bool", TokenType.BOOLEAN);
-                reservedWords.put("omsim", TokenType.TRUE);
-                reservedWords.put("deins", TokenType.FALSE);
-		reservedWords.put("int", TokenType.INT);
-                reservedWords.put("pakits", TokenType.PRINT);
-                reservedWords.put("patings", TokenType.SCAN);
+                reservedWords.put("omsim", TokenType.OMSIM);
+                reservedWords.put("deins", TokenType.DEINS);
+		reservedWords.put("int", TokenType.INTEGER);
+                reservedWords.put("pakits", TokenType.PAKITS);
+                reservedWords.put("patings", TokenType.PATINGS);
                 reservedWords.put("char", TokenType.CHAR);
                   reservedWords.put("stringtho", TokenType.STRINGTHO);
                 reservedWords.put("const", TokenType.CONST);

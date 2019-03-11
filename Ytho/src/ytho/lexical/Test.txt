@@ -1,5 +1,5 @@
-Simula simpleEAdd{
-	int num1 = 1;
+Simula{
+	 int num1 = 1;
 	int nos2 = 2;
 	@@num1 and nos2 will be added depending on the condition 
 

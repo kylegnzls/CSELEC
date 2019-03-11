@@ -35,8 +35,7 @@ public class Lexer {
                 reservedWords.put("kung", TokenType.KUNG);
                 reservedWords.put("maiba", TokenType.MAIBA);
                 reservedWords.put("paraikot",TokenType.PARAIKOT);
-                reservedWords.put("letpa", TokenType.LETPA);
-                reservedWords.put("kheys",TokenType.KHEYS);
+              
                 reservedWords.put("Simula",TokenType.SIMULA);
                 reservedWords.put("Wakas", TokenType.WAKAS);
                 reservedWords.put("bool", TokenType.BOOLEAN);
@@ -286,10 +285,17 @@ public class Lexer {
 			nextChar = getChar();
 
 			// check if next char is '=' to match '==' binop
-			if (nextChar == '=') {
+			if (nextChar == '_') {
 				nextChar = getChar();
-				return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
-			}
+                                if (nextChar == '=') {
+                                        nextChar = getChar();
+                                        return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
+		
+                                }else{
+                                    				return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+
+                                }
+					}
 			else 
 				return new Token(TokenType.ASSIGN, new TokenAttribute(), lineNumber, columnNumber - 1);
 
@@ -328,14 +334,39 @@ public class Lexer {
 				return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
 
 		case '+':
+                    columnNumber++;
+			nextChar = getChar();
+
+			
+			if (nextChar == '+') {
+				nextChar = getChar();
+				return new Token(TokenType.INCREMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
+			} else
+				return new Token(TokenType.ADDSUB, new TokenAttribute(), lineNumber, columnNumber - 1);
+
+               case '#':
 			columnNumber++;
 			nextChar = getChar();
-			return new Token(TokenType.ADDSUB, new TokenAttribute(), lineNumber, columnNumber - 1);
 
+			// check if next char is '<' to match '<=' binop
+			if (nextChar == '>') {
+				nextChar = getChar();
+				return new Token(TokenType.INPUT, new TokenAttribute(), lineNumber, columnNumber - 2);
+			
+                        }
+                    
+			
 		case '-':
 			columnNumber++;
 			nextChar = getChar();
-			return new Token(TokenType.ADDSUB, new TokenAttribute(), lineNumber, columnNumber - 1);
+                        
+			if (nextChar == '-') {
+				nextChar = getChar();
+				return new Token(TokenType.DECREMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
+			} else
+				return new Token(TokenType.ADDSUB, new TokenAttribute(), lineNumber, columnNumber - 1);
+
+                  
                 case '^':
 			columnNumber++;
 			nextChar = getChar();
@@ -350,8 +381,28 @@ public class Lexer {
 			columnNumber++;
 			nextChar = getChar();
 			return new Token(TokenType.MULDIV, new TokenAttribute(), lineNumber, columnNumber - 1);
+                        
+                        
+                 case '“':
+			columnNumber++;
+			nextChar = getChar();
+			return new Token(TokenType.LQUOTE, new TokenAttribute(), lineNumber, columnNumber - 1);        
+                  case '"':
+			columnNumber++;
+			nextChar = getChar();
+			return new Token(TokenType.RQUOTE, new TokenAttribute(), lineNumber, columnNumber - 1);        
                  
-               
+               case '@':
+			columnNumber++;
+			nextChar = getChar();
+
+			// check if next char is '&' to match '&&' binop
+			if (nextChar == '@') {
+				nextChar = getChar();
+				return new Token(TokenType.COMMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
+			} else
+				return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+
                         
 		}
 

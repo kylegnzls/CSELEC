@@ -45,9 +45,8 @@ public enum TokenType {
     MAIBA, // else
     WHILE, // while
     PARAIKOT, //for
-    LETPA,//switch
-    KHEYS,//case
-    DEPAWLT,//default
+   
+   
     BREAK,//break
     SIMULA,
     WAKAS,

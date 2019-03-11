@@ -22,7 +22,7 @@ public class testLexer {
     private static String fileName;
 
     public static void main(String[] args) throws IOException {
-        String path = "C:\\Users\\Blank\\Desktop\\Sample codes\\Test.txt";
+        String path = "C:\\Users\\Blank\\Desktop\\Sample codes\\Test2.txt";
 
         FileReader file;
 
@@ -33,6 +33,7 @@ public class testLexer {
         // start tokenizing file
         long startTime = System.currentTimeMillis();
         int numTokens = 0;
+                int numError = 0;
         Token token;
         do {
             token = lexer.getToken();
@@ -43,11 +44,19 @@ public class testLexer {
             
                 System.err.print(" (" + token.getLineNumber() + "," + token.getColumnNumber() + ")");
                 System.out.println();
+                numError++;
                 continue;
             }
 
-            System.out.print(token.getType());
+            if(token.getType() == TokenType.LCURLY || token.getType() == TokenType.RCURLY
+            || token.getType() == TokenType.SCLON  
+            || token.getType() == TokenType.LPAREN  || token.getType() == TokenType.RPAREN        ){
+                
+            }else{
+                 System.out.print(token.getType());
             System.out.print(" (" + token.getLineNumber() + "," + token.getColumnNumber() + ")");
+            }
+           
 
             // print out semantic values for ID and INT_CONST tokens
             if (token.getType() == TokenType.ID) {
@@ -72,6 +81,7 @@ public class testLexer {
         // print out statistics
         System.out.println("---");
         System.out.println("Number of tokens: " + numTokens);
+        System.out.println("Number of Errors: " + numError);
         System.out.println("Execution time: " + (endTime - startTime) + "ms");
         System.out.println();
     }

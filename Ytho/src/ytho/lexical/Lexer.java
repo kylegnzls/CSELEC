@@ -391,19 +391,20 @@ public class Lexer {
 			columnNumber++;
 			nextChar = getChar();
 			return new Token(TokenType.RQUOTE, new TokenAttribute(), lineNumber, columnNumber - 1);        
-                 
                case '@':
 			columnNumber++;
 			nextChar = getChar();
 
 			// check if next char is '&' to match '&&' binop
 			if (nextChar == '@') {
-				nextChar = getChar();
+                            nextChar=getChar();
+                            while(nextChar!=' '){
+				nextChar += getChar();
+                            }
 				return new Token(TokenType.COMMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
 			} else
 				return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
 
-                        
 		}
 
 		// check for punctuation

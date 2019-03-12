@@ -397,13 +397,17 @@ public class Lexer {
 
 			// check if next char is '&' to match '&&' binop
 			if (nextChar == '@') {
+                            System.out.println("Comment Detected.");
+                            Token toks= new Token(TokenType.COMMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
                             nextChar=getChar();
-                            while(nextChar!=' '){
-				nextChar += getChar();
+                            while(getChar()!='\n'){
+                                columnNumber++;
                             }
-				return new Token(TokenType.COMMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
+                            columnNumber++;
+                            nextChar=getChar();
+                            return toks;
 			} else
-				return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+                            return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
 
 		}
 

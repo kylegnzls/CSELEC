@@ -266,7 +266,7 @@ public class Lexer {
 
             return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
         }
-       
+
         if (nextChar == '\'') {
             nextChar = getChar();
             columnNumber++;
@@ -369,24 +369,22 @@ public class Lexer {
                         columnNumber++;
                         nextChar = getChar();
                         return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
-                    }else if(nextChar =='&'){
+                    } else if (nextChar == '&') {
                         columnNumber++;
                         nextChar = getChar();
                         return new Token(TokenType.NAND, new TokenAttribute(), lineNumber, columnNumber - 2);
 
-                    }else if(nextChar =='|'){
+                    } else if (nextChar == '|') {
                         columnNumber++;
                         nextChar = getChar();
                         return new Token(TokenType.NOR, new TokenAttribute(), lineNumber, columnNumber - 2);
 
-                    }else if(nextChar =='!'){
+                    } else if (nextChar == '!') {
                         columnNumber++;
                         nextChar = getChar();
                         return new Token(TokenType.NOT, new TokenAttribute(), lineNumber, columnNumber - 2);
 
-                    }
-                    
-                    else {
+                    } else {
                         return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
                     }
                 }
@@ -395,14 +393,21 @@ public class Lexer {
                 columnNumber++;
                 nextChar = getChar();
                 if (nextChar == '_') {
+                    columnNumber++;
                     nextChar = getChar();
-                    // check if next char is '<' to match '<=' binop
                     if (nextChar == '=') {
+                        columnNumber++;
                         nextChar = getChar();
-                        return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
+                        return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 3);
                     } else {
-                        return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
+                        return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 2);
+
                     }
+                } else if (nextChar != '_'){
+                    return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+
+                }else {
+                    return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
                 }
 
             case '>':
@@ -410,16 +415,22 @@ public class Lexer {
                 nextChar = getChar();
 
                 // check if next char is '<' to match '<=' binop
-                if (nextChar == '_') {
+                 if (nextChar == '_') {
                     columnNumber++;
                     nextChar = getChar();
                     if (nextChar == '=') {
                         columnNumber++;
                         nextChar = getChar();
-                        return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
+                        return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 3);
                     } else {
-                        return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
+                        return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 2);
+
                     }
+                } else if (nextChar != '_'){
+                    return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+
+                }else {
+                    return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
                 }
 
             case '+':

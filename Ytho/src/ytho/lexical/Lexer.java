@@ -403,11 +403,12 @@ public class Lexer {
                         return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 2);
 
                     }
-                } else if (nextChar != '_'){
-                    return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+                } else if (nextChar == ' '){
+                    return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
+                   
 
                 }else {
-                    return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
+                     return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
                 }
 
             case '>':
@@ -510,7 +511,7 @@ public class Lexer {
                     columnNumber++;
                     nextChar=getChar();
                     if (nextChar == '-') {
-                        System.out.println((char)nextChar);
+                       // System.out.println((char)nextChar);
                         Token toks = new Token(TokenType.COMMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
                         while (true) {
                             columnNumber++;
@@ -519,15 +520,15 @@ public class Lexer {
                                 skipNewline();
                                 continue;
                             } else if (nextChar == '-') {
-                                System.out.println("Detected first dash");
-                                System.out.println(lineNumber);
-                                System.out.println((char)nextChar);
+                              //  System.out.println("Detected first dash");
+                               // System.out.println(lineNumber);
+                              //  System.out.println((char)nextChar);
                                 if (nextChar == '-') {
-                                    System.out.println("Detected second dash");
+                                 //   System.out.println("Detected second dash");
                                     columnNumber++;
                                     nextChar = getChar();
                                     if (nextChar == '@') {
-                                        System.out.println("Detected end multi");
+                                   //     System.out.println("Detected end multi");
                                         columnNumber++;
                                         nextChar = getChar();
                                         break;

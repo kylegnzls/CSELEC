@@ -22,7 +22,7 @@ public class testLexer {
     private static String fileName;
 
     public static void main(String[] args) throws IOException {
-        String path = "D:\\mywork\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test1.txt";
+        String path = "D:\\GitHub\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test1.txt";
 
         FileReader file;
 

@@ -506,20 +506,31 @@ public class Lexer {
                     nextChar = getChar();
 
                     return toks;
-                }/* else if (nextChar == '-') {
+                }else if (nextChar == '-') {
+                    columnNumber++;
+                    nextChar=getChar();
                     if (nextChar == '-') {
-                        boolean endmulti = false;
+                        System.out.println((char)nextChar);
                         Token toks = new Token(TokenType.COMMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
-                        while (!endmulti) {
+                        while (true) {
                             columnNumber++;
                             nextChar = getChar();
                             if (nextChar == '\n') {
-
                                 skipNewline();
+                                continue;
                             } else if (nextChar == '-') {
+                                System.out.println("Detected first dash");
+                                System.out.println(lineNumber);
+                                System.out.println((char)nextChar);
                                 if (nextChar == '-') {
+                                    System.out.println("Detected second dash");
+                                    columnNumber++;
+                                    nextChar = getChar();
                                     if (nextChar == '@') {
-                                        endmulti = true;
+                                        System.out.println("Detected end multi");
+                                        columnNumber++;
+                                        nextChar = getChar();
+                                        break;
                                     } else {
                                         continue;
                                     }
@@ -530,14 +541,12 @@ public class Lexer {
                                 continue;
                             }
                         }
-                        columnNumber++;
-                         lineNumber++;
-                        nextChar = getChar();
+                        //nextChar = getChar();
                         return toks;
                     } else {
                         return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
                     }
-                } */ else {
+                }  else {
                     return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - count);
                 }
 

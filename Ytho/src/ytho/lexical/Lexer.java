@@ -49,7 +49,7 @@ public class Lexer {
         reservedWords.put("char", TokenType.CHAR);
         reservedWords.put("stringtho", TokenType.STRINGTHO);
         reservedWords.put("const", TokenType.CONST);
-         reservedWords.put("lutangs", TokenType.LUTANGS);
+        reservedWords.put("lutangs", TokenType.LUTANGS);
 
         punctuation = new HashMap<Character, TokenType>();
 
@@ -65,10 +65,13 @@ public class Lexer {
         punctuation.put(',', TokenType.COMMA);
 
         operators = new HashMap<String, TokenType>();
-        operators.put("&&", TokenType.AND);
-        operators.put("||", TokenType.OR);
+        operators.put("&_&", TokenType.AND);
+        operators.put("|_|", TokenType.OR);
         operators.put("=_=", TokenType.RELOP);
         operators.put("!_=", TokenType.RELOP);
+        operators.put("!_&", TokenType.RELOP);
+        operators.put("!_|", TokenType.RELOP);
+        operators.put("!_!", TokenType.RELOP);
         operators.put("<", TokenType.RELOP);
         operators.put(">", TokenType.RELOP);
         operators.put("<_=", TokenType.RELOP);
@@ -79,7 +82,7 @@ public class Lexer {
         operators.put("/", TokenType.MULDIV);
         operators.put("^", TokenType.EXPON);
         operators.put("&+", TokenType.CONCAT);
-         operators.put("#>", TokenType.INPUT);
+        operators.put("#>", TokenType.INPUT);
 
         comment = new HashMap<String, TokenType>();
         comment.put("@@", TokenType.COMMENT);
@@ -236,43 +239,38 @@ public class Lexer {
             // return integer literal token
             return new Token(TokenType.INT_CONST, new TokenAttribute(Integer.parseInt(numString)), lineNumber, columnNumber - numString.length());
         }
-        
+
         if (nextChar == '"') {
             nextChar = getChar();
             columnNumber++;
-            String x = ""  ;
-            String symbol = "!@#$%^&*()+-/" ;
-            if (Character.isAlphabetic(nextChar)|| Character.isWhitespace(nextChar)|| symbol.contains((Character.toString((char) nextChar)))) {
-                
-                 
-                    
-                   x += (char) nextChar;
-                   nextChar = getChar();
-                    while (nextChar != '"') {
-                       
-                        
-                        columnNumber++;
-                         
-                        x += (char) nextChar;
-                        nextChar = getChar();
-                    }
-                    
-                    
+            String x = "";
+            String symbol = "!@#$%^&*()+-/";
+            if (Character.isAlphabetic(nextChar) || Character.isWhitespace(nextChar) || symbol.contains((Character.toString((char) nextChar)))) {
+
+                x += (char) nextChar;
+                nextChar = getChar();
+                while (nextChar != '"') {
+
                     columnNumber++;
-                    
+
+                    x += (char) nextChar;
                     nextChar = getChar();
-                    
-                    return new Token(TokenType.STRING_CONST, new TokenAttribute(x), lineNumber, columnNumber - x.length());
+                }
+
+                columnNumber++;
+
+                nextChar = getChar();
+
+                return new Token(TokenType.STRING_CONST, new TokenAttribute(x), lineNumber, columnNumber - x.length());
             }
 
             return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
         }
-        
-
+       
         if (nextChar == '\'') {
             nextChar = getChar();
             columnNumber++;
-            
+
             if (Character.isAlphabetic(nextChar)) {
                 char current = (char) nextChar;
                 stream.mark(0);
@@ -297,19 +295,27 @@ public class Lexer {
 
         // check for binops
         switch (nextChar) {
-            
+
             case '&':
                 columnNumber++;
                 nextChar = getChar();
 
                 // check if next char is '&' to match '&&' binop
-                if (nextChar == '&') {
+                if (nextChar == '_') {
                     nextChar = getChar();
-                    return new Token(TokenType.AND, new TokenAttribute(), lineNumber, columnNumber - 2);
-                }else if(nextChar =='+'){
+                    columnNumber++;
+                    if (nextChar == '&') {
+                        nextChar = getChar();
+                        columnNumber++;
+                        return new Token(TokenType.AND, new TokenAttribute(), lineNumber, columnNumber - 2);
+                    } else {
+                        return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+                    }
+                } else if (nextChar == '+') {
+                    columnNumber++;
                     nextChar = getChar();
                     return new Token(TokenType.CONCAT, new TokenAttribute(), lineNumber, columnNumber - 2);
-                }else {
+                } else {
                     return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
                 }
 
@@ -318,14 +324,17 @@ public class Lexer {
                 nextChar = getChar();
 
                 // check if next char is '|' to match '||' binop
-                 if (nextChar == '_') {
+                if (nextChar == '_') {
+                    columnNumber++;
                     nextChar = getChar();
-                if (nextChar == '|') {
-                    nextChar = getChar();
-                    return new Token(TokenType.OR, new TokenAttribute(), lineNumber, columnNumber - 2);
-                } else {
-                    return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
-                }}
+                    if (nextChar == '|') {
+                        columnNumber++;
+                        nextChar = getChar();
+                        return new Token(TokenType.OR, new TokenAttribute(), lineNumber, columnNumber - 2);
+                    } else {
+                        return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+                    }
+                }
 
             case '=':
                 columnNumber++;
@@ -333,8 +342,10 @@ public class Lexer {
 
                 // check if next char is '=' to match '==' binop
                 if (nextChar == '_') {
+                    columnNumber++;
                     nextChar = getChar();
                     if (nextChar == '=') {
+                        columnNumber++;
                         nextChar = getChar();
                         return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
 
@@ -351,23 +362,47 @@ public class Lexer {
                 nextChar = getChar();
 
                 // check if next char is '!' to match '!=' binop
-                if (nextChar == '=') {
+                if (nextChar == '_') {
                     nextChar = getChar();
-                    return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
-                } else {
-                    return new Token(TokenType.NOT, new TokenAttribute(), lineNumber, columnNumber - 1);
+                    columnNumber++;
+                    if (nextChar == '=') {
+                        columnNumber++;
+                        nextChar = getChar();
+                        return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
+                    }else if(nextChar =='&'){
+                        columnNumber++;
+                        nextChar = getChar();
+                        return new Token(TokenType.NAND, new TokenAttribute(), lineNumber, columnNumber - 2);
+
+                    }else if(nextChar =='|'){
+                        columnNumber++;
+                        nextChar = getChar();
+                        return new Token(TokenType.NOR, new TokenAttribute(), lineNumber, columnNumber - 2);
+
+                    }else if(nextChar =='!'){
+                        columnNumber++;
+                        nextChar = getChar();
+                        return new Token(TokenType.NOT, new TokenAttribute(), lineNumber, columnNumber - 2);
+
+                    }
+                    
+                    else {
+                        return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+                    }
                 }
 
             case '<':
                 columnNumber++;
                 nextChar = getChar();
-
-                // check if next char is '<' to match '<=' binop
-                if (nextChar == '=') {
+                if (nextChar == '_') {
                     nextChar = getChar();
-                    return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
-                } else {
-                    return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
+                    // check if next char is '<' to match '<=' binop
+                    if (nextChar == '=') {
+                        nextChar = getChar();
+                        return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
+                    } else {
+                        return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
+                    }
                 }
 
             case '>':
@@ -375,11 +410,16 @@ public class Lexer {
                 nextChar = getChar();
 
                 // check if next char is '<' to match '<=' binop
-                if (nextChar == '=') {
+                if (nextChar == '_') {
+                    columnNumber++;
                     nextChar = getChar();
-                    return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
-                } else {
-                    return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
+                    if (nextChar == '=') {
+                        columnNumber++;
+                        nextChar = getChar();
+                        return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
+                    } else {
+                        return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
+                    }
                 }
 
             case '+':
@@ -387,6 +427,7 @@ public class Lexer {
                 nextChar = getChar();
 
                 if (nextChar == '+') {
+                    columnNumber++;
                     nextChar = getChar();
                     return new Token(TokenType.INCREMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
                 } else {
@@ -397,8 +438,8 @@ public class Lexer {
                 columnNumber++;
                 nextChar = getChar();
 
-               
                 if (nextChar == '>') {
+                    columnNumber++;
                     nextChar = getChar();
                     return new Token(TokenType.INPUT, new TokenAttribute(), lineNumber, columnNumber - 2);
 
@@ -409,6 +450,7 @@ public class Lexer {
                 nextChar = getChar();
 
                 if (nextChar == '-') {
+                    columnNumber++;
                     nextChar = getChar();
                     return new Token(TokenType.DECREMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
                 } else {
@@ -430,7 +472,6 @@ public class Lexer {
                 nextChar = getChar();
                 return new Token(TokenType.MULDIV, new TokenAttribute(), lineNumber, columnNumber - 1);
 
-          
             case '"':
                 columnNumber++;
                 nextChar = getChar();
@@ -438,18 +479,21 @@ public class Lexer {
             case '@':
                 columnNumber++;
                 nextChar = getChar();
-
+                int count = 1;
                 //Single Line Comment
                 if (nextChar == '@') {
-
-                    Token toks = new Token(TokenType.COMMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
+                    count++;
+                    Token toks = new Token(TokenType.COMMENT, new TokenAttribute(), lineNumber, columnNumber - count);
                     nextChar = getChar();
+
                     while (getChar() != '\n') {
                         columnNumber++;
+                        count++;
                     }
                     columnNumber++;
-                    
+                    lineNumber++;
                     nextChar = getChar();
+
                     return toks;
                 }/* else if (nextChar == '-') {
                     if (nextChar == '-') {
@@ -482,8 +526,8 @@ public class Lexer {
                     } else {
                         return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
                     }
-                } */else {
-                    return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+                } */ else {
+                    return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - count);
                 }
 
         }

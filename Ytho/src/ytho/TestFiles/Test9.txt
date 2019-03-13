@@ -1,0 +1,6 @@
+Simula conCat {
+	stringtho x = "Hi";
+	stringtho y = " hello";
+	stringtho fin = x &+ y;
+	pakits fin;
+}Wakas

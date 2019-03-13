@@ -22,7 +22,7 @@ public class testLexer {
     private static String fileName;
 
     public static void main(String[] args) throws IOException {
-        String path = "D:\\Github\\CSELEC\\Ytho\\src\\ytho\\lexical\\Test3.txt";
+        String path = "D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test13.txt";
 
         FileReader file;
 
@@ -49,7 +49,7 @@ public class testLexer {
             }
 
             if(token.getType() == TokenType.LCURLY || token.getType() == TokenType.RCURLY
-            || token.getType() == TokenType.SCLON  || token.getType() == TokenType.COMMA
+            || token.getType() == TokenType.SCLON
             ||token.getType() == TokenType.COMMENT        
             || token.getType() == TokenType.LPAREN  || token.getType() == TokenType.RPAREN        ){
                 

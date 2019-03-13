@@ -1,0 +1,4 @@
+Simula conState {
+    	int oras = 10;
+kung (oras < 5){pakits "Musta";} maiba {pakits "Paalam\bpar";}
+}Wakas

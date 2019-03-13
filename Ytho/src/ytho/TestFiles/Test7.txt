@@ -1,0 +1,10 @@
+Simula toString {
+    int a = 1234;
+    int b = -1234;
+    stringtho str1 = a.toStringtho();
+    stringtho str2 = b.toStringtho();
+
+    pakits "String str1 = " &+ str1; 
+    pakits "String str2 = " &+ str2; 
+
+}Wakas

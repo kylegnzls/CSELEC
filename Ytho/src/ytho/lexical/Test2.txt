@@ -1,4 +1,4 @@
-Simula {
+Simula SimpleCalcu {
 int x = 0;
 	char y;
 int first;
@@ -14,7 +14,7 @@ paraikot(int x=0; x=_=3; x++){
 	pakits "B. Subtraction";
 	patings y #> "choose: ";
 
-	kung(y=_='B' |_| y=_='b'){
+	kung(y =_='B' |_| y=_='b'){
 	patings first #> "First Number: ";
 	patings second #> "Second Number: ";
 	sum = first-second;

@@ -17,11 +17,11 @@ public enum TokenType {
     BOOLEAN_CONST,
     EOF, // input stream has been consumed
     UNKNOWN, // character/token could not be processed
-
+    STRING_CONST,
     // binary operators
     AND, // &&
     OR, // ||
-    
+    LUTANGS,
     
    
     ADDSUB, // + AND -

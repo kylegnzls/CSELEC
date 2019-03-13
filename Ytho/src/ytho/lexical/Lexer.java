@@ -11,419 +11,494 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
 /**
  *
  * @author Blank
  */
 public class Lexer {
-    	private BufferedReader stream; //input stream reader
-	private Token nextToken;
-	private int nextChar;
-	private int lineNumber = 1; //current line number
-	private int columnNumber = 1; //current column number
 
-	private final static Map<String, TokenType> reservedWords; //reserved words dictionary
-	private final static Map<Character, TokenType> punctuation; //punctuation characters dictionary
-	private final static Map<String, TokenType> operators; //operator characters dictionary
-       
-	 private final static Map<String, TokenType> comment; //operator characters dictionary
-         
-	private int errors; //number of errors
+    private BufferedReader stream; //input stream reader
+    private Token nextToken;
+    private int nextChar;
+    private int lineNumber = 1; //current line number
+    private int columnNumber = 1; //current column number
 
-	static {
-		reservedWords = new HashMap<String, TokenType>();
-                reservedWords.put("kung", TokenType.KUNG);
-                reservedWords.put("maiba", TokenType.MAIBA);
-                reservedWords.put("paraikot",TokenType.PARAIKOT);
-              
-                reservedWords.put("Simula",TokenType.SIMULA);
-                reservedWords.put("Wakas", TokenType.WAKAS);
-                reservedWords.put("bool", TokenType.BOOLEAN);
-                reservedWords.put("omsim", TokenType.OMSIM);
-                reservedWords.put("deins", TokenType.DEINS);
-		reservedWords.put("int", TokenType.INTEGER);
-                reservedWords.put("pakits", TokenType.PAKITS);
-                reservedWords.put("patings", TokenType.PATINGS);
-                reservedWords.put("char", TokenType.CHAR);
-                  reservedWords.put("stringtho", TokenType.STRINGTHO);
-                reservedWords.put("const", TokenType.CONST);
-                
+    private final static Map<String, TokenType> reservedWords; //reserved words dictionary
+    private final static Map<Character, TokenType> punctuation; //punctuation characters dictionary
+    private final static Map<String, TokenType> operators; //operator characters dictionary
 
-		punctuation = new HashMap<Character, TokenType>();
-		
-		punctuation.put('=', TokenType.ASSIGN);
-		//punctuation.put('-', TokenType.NEGATIVE);
-		punctuation.put('!', TokenType.NOT);
-                 punctuation.put('(', TokenType.LPAREN);
-		punctuation.put(')', TokenType.RPAREN);
-		
-		punctuation.put('{', TokenType.LCURLY);
-		punctuation.put('}', TokenType.RCURLY);
-		punctuation.put(';', TokenType.SCLON);
-		punctuation.put(',', TokenType.COMMA);
-                
-               
-               
+    private final static Map<String, TokenType> comment; //operator characters dictionary
 
-		operators = new HashMap<String, TokenType>();
-		operators.put("&&", TokenType.AND);
-		operators.put("||", TokenType.OR);
-		operators.put("=_=", TokenType.RELOP);
-		operators.put("!_=", TokenType.RELOP);
-		operators.put("<", TokenType.RELOP);
-		operators.put(">", TokenType.RELOP);
-		operators.put("<_=", TokenType.RELOP);
-		operators.put(">_=", TokenType.RELOP);
-		operators.put("+", TokenType.ADDSUB);
-		operators.put("-", TokenType.ADDSUB);
-		operators.put("*", TokenType.MULDIV);
-		operators.put("/", TokenType.MULDIV);
-                operators.put("^",TokenType.EXPON); 
-		
-                comment = new HashMap <String, TokenType>();
-                comment.put("@@", TokenType.COMMENT);
-	}
+    private int errors; //number of errors
 
-	public Lexer(FileReader file) throws FileNotFoundException {
-		this.stream = new BufferedReader(file);
-		nextChar = getChar();
-	}
-	
-	public int getErrors() {
-		return errors;
-	}
+    static {
+        reservedWords = new HashMap<String, TokenType>();
+        reservedWords.put("kung", TokenType.KUNG);
+        reservedWords.put("maiba", TokenType.MAIBA);
+        reservedWords.put("paraikot", TokenType.PARAIKOT);
 
-	// handles I/O for char stream
-	private int getChar() {
-		try {
-			return stream.read();
-		} catch (IOException e) {
-			System.err.print(e.getMessage());
-			System.err.println("IOException occured in Lexer::getChar()");
-			return -1;
-		}
-	}
+        reservedWords.put("Simula", TokenType.SIMULA);
+        reservedWords.put("Wakas", TokenType.WAKAS);
+        reservedWords.put("bool", TokenType.BOOLEAN);
+        reservedWords.put("omsim", TokenType.OMSIM);
+        reservedWords.put("deins", TokenType.DEINS);
+        reservedWords.put("int", TokenType.INTEGER);
+        reservedWords.put("pakits", TokenType.PAKITS);
+        reservedWords.put("patings", TokenType.PATINGS);
+        reservedWords.put("char", TokenType.CHAR);
+        reservedWords.put("stringtho", TokenType.STRINGTHO);
+        reservedWords.put("const", TokenType.CONST);
+         reservedWords.put("lutangs", TokenType.LUTANGS);
 
-	// detect and skip possible '\n', '\r' and '\rn' line breaks
-	private boolean skipNewline() {
-            
-		if (nextChar == '\n') {
-			lineNumber++;
-			columnNumber = 1;
-			nextChar = getChar();
-			return true;
-		}
-		if (nextChar == '\r') {
-			lineNumber++;
-			columnNumber = 1;
-			nextChar = getChar();
+        punctuation = new HashMap<Character, TokenType>();
 
-			// skip over next char if '\n'
-			if (nextChar == '\n')
-				nextChar = getChar();
-			return true;
-		}
-		// newline char not found
-		return false;
-	}
+        punctuation.put('=', TokenType.ASSIGN);
+        //punctuation.put('-', TokenType.NEGATIVE);
+        punctuation.put('!', TokenType.NOT);
+        punctuation.put('(', TokenType.LPAREN);
+        punctuation.put(')', TokenType.RPAREN);
 
-	// return the next token without consuming it
-	public Token peek() throws IOException {
-		// advance token only if its been reset by getToken()
-		if (nextToken == null)
-			nextToken = getToken();
+        punctuation.put('{', TokenType.LCURLY);
+        punctuation.put('}', TokenType.RCURLY);
+        punctuation.put(';', TokenType.SCLON);
+        punctuation.put(',', TokenType.COMMA);
 
-		return nextToken;
-	}
+        operators = new HashMap<String, TokenType>();
+        operators.put("&&", TokenType.AND);
+        operators.put("||", TokenType.OR);
+        operators.put("=_=", TokenType.RELOP);
+        operators.put("!_=", TokenType.RELOP);
+        operators.put("<", TokenType.RELOP);
+        operators.put(">", TokenType.RELOP);
+        operators.put("<_=", TokenType.RELOP);
+        operators.put(">_=", TokenType.RELOP);
+        operators.put("+", TokenType.ADDSUB);
+        operators.put("-", TokenType.ADDSUB);
+        operators.put("*", TokenType.MULDIV);
+        operators.put("/", TokenType.MULDIV);
+        operators.put("^", TokenType.EXPON);
+        operators.put("&+", TokenType.CONCAT);
+         operators.put("#>", TokenType.INPUT);
 
-	// return the next token in the input stream (EOF signals end of input)
-	public Token getToken() throws IOException {
-		// check if peek() was called
-		if (nextToken != null) {
-			Token token = nextToken;
-			nextToken = null; // allow peek to call for next token
-			return token;
-		}
+        comment = new HashMap<String, TokenType>();
+        comment.put("@@", TokenType.COMMENT);
+    }
 
-		// skip whitespace character
-		while (Character.isWhitespace(nextChar)) {
-			// check if whitespace char is a newline
-			if (!skipNewline()) {
-				columnNumber++;
-				nextChar = getChar();
-			}
+    public Lexer(FileReader file) throws FileNotFoundException {
+        this.stream = new BufferedReader(file);
+        nextChar = getChar();
+    }
 
-			// offset colNum for tab chars
-			if (nextChar == '\t')
-				columnNumber += 3;
-		}
+    public int getErrors() {
+        return errors;
+    }
 
-		// identifier or reserved word ([a-zA-Z][a-zA-Z0-9_]*)
-		if (Character.isLetter(nextChar)) {
-			// create new idVal starting with first char of identifier
-			String current = Character.toString((char) nextChar);
-			columnNumber++;
-			nextChar = getChar();
+    // handles I/O for char stream
+    private int getChar() {
+        try {
+            return stream.read();
+        } catch (IOException e) {
+            System.err.print(e.getMessage());
+            System.err.println("IOException occured in Lexer::getChar()");
+            return -1;
+        }
+    }
 
-			// include remaining sequence of chars that are letters, digits, or _
-			while (Character.isLetterOrDigit(nextChar)) {
-				current += (char) nextChar;
-				columnNumber++;
-				nextChar = getChar();
-			}
+    // detect and skip possible '\n', '\r' and '\rn' line breaks
+    private boolean skipNewline() {
 
-			// check if identifier is a reserved word
-			TokenType type = reservedWords.get(current);
+        if (nextChar == '\n') {
+            lineNumber++;
+            columnNumber = 1;
+            nextChar = getChar();
+            return true;
+        }
+        if (nextChar == '\r') {
+            lineNumber++;
+            columnNumber = 1;
+            nextChar = getChar();
 
-			if (type != null)
-				return new Token(type, new TokenAttribute(), lineNumber, columnNumber - current.length());
+            // skip over next char if '\n'
+            if (nextChar == '\n') {
+                nextChar = getChar();
+            }
+            return true;
+        }
+        // newline char not found
+        return false;
+    }
 
-			if(current.equals("true")) 
-				return new Token(TokenType.BOOLEAN_CONST, new TokenAttribute(true), lineNumber, columnNumber - current.length());
-			else if(current.equals("false"))
-				return new Token(TokenType.BOOLEAN_CONST, new TokenAttribute(false), lineNumber, columnNumber - current.length());
+    // return the next token without consuming it
+    public Token peek() throws IOException {
+        // advance token only if its been reset by getToken()
+        if (nextToken == null) {
+            nextToken = getToken();
+        }
 
-			// token is an identifier
-			return new Token(TokenType.ID, new TokenAttribute(current), lineNumber, columnNumber - current.length());
-		}
+        return nextToken;
+    }
 
-		// integer literal ([0-9]+) OR float literal ([0-9]+.[0-9]+)
-		if (Character.isDigit(nextChar)) {
+    // return the next token in the input stream (EOF signals end of input)
+    public Token getToken() throws IOException {
+        // check if peek() was called
+        if (nextToken != null) {
+            Token token = nextToken;
+            nextToken = null; // allow peek to call for next token
+            return token;
+        }
 
-			// create string representation of number
-			String numString = Character.toString((char) nextChar);
-			columnNumber++;
-			nextChar = getChar();
-                       
-			// concatenate remaining sequence of digits
-			while (Character.isDigit(nextChar)) {
-				numString += (char) nextChar;
-				columnNumber++;
-				nextChar = getChar();
-			}
-			
-			if(nextChar == '.'){
-				//stream.mark(0);
-				nextChar = getChar();
-				columnNumber++;
-				
-				if(Character.isDigit(nextChar)){
-					numString += '.';
-					// concatenate remaining sequence of digits
-					while (Character.isDigit(nextChar)) {
-						numString += (char) nextChar;
-						columnNumber++;
-						nextChar = getChar();
-					}
-					
-					return new Token(TokenType.FLOAT_CONST, new TokenAttribute(Float.parseFloat(numString)), lineNumber, columnNumber - numString.length());
-				}
-				while(!Character.isWhitespace(nextChar)){
-					columnNumber++;
-					numString += nextChar;
-					nextChar = getChar();
-				}
-				
-				return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - numString.length() + 1);
-			}
+        // skip whitespace character
+        while (Character.isWhitespace(nextChar)) {
+            // check if whitespace char is a newline
+            if (!skipNewline()) {
+                columnNumber++;
+                nextChar = getChar();
+            }
 
-			// return integer literal token
-			return new Token(TokenType.INT_CONST, new TokenAttribute(Integer.parseInt(numString)), lineNumber, columnNumber - numString.length());
-		}
+            // offset colNum for tab chars
+            if (nextChar == '\t') {
+                columnNumber += 3;
+            }
+        }
 
-		if(nextChar == '\''){
-			nextChar = getChar();
-			columnNumber++;
-			if(Character.isAlphabetic(nextChar)){
-				char current = (char) nextChar;
-				stream.mark(0);
-				nextChar = getChar();
-				columnNumber++;
+        // identifier or reserved word ([a-zA-Z][a-zA-Z0-9_]*)
+        if (Character.isLetter(nextChar)) {
+            // create new idVal starting with first char of identifier
+            String current = Character.toString((char) nextChar);
+            columnNumber++;
+            nextChar = getChar();
 
-				if(nextChar == '\''){
-					nextChar = getChar();
-					columnNumber++;
-					return new Token(TokenType.CHAR_CONST, new TokenAttribute(current), lineNumber, columnNumber - 1);
-				}
-				stream.reset();
-			}
+            // include remaining sequence of chars that are letters, digits, or _
+            while (Character.isLetterOrDigit(nextChar)) {
+                current += (char) nextChar;
+                columnNumber++;
+                nextChar = getChar();
+            }
 
-			return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
-		}
+            // check if identifier is a reserved word
+            TokenType type = reservedWords.get(current);
 
-		// EOF reached
-		if (nextChar == -1)
-			return new Token(TokenType.EOF, new TokenAttribute(), lineNumber, columnNumber);
+            if (type != null) {
+                return new Token(type, new TokenAttribute(), lineNumber, columnNumber - current.length());
+            }
 
-		// check for binops
-		switch (nextChar) {
-		
-		case '&':
-			columnNumber++;
-			nextChar = getChar();
+            if (current.equals("true")) {
+                return new Token(TokenType.BOOLEAN_CONST, new TokenAttribute(true), lineNumber, columnNumber - current.length());
+            } else if (current.equals("false")) {
+                return new Token(TokenType.BOOLEAN_CONST, new TokenAttribute(false), lineNumber, columnNumber - current.length());
+            }
 
-			// check if next char is '&' to match '&&' binop
-			if (nextChar == '&') {
-				nextChar = getChar();
-				return new Token(TokenType.AND, new TokenAttribute(), lineNumber, columnNumber - 2);
-			} else
-				return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+            // token is an identifier
+            return new Token(TokenType.ID, new TokenAttribute(current), lineNumber, columnNumber - current.length());
+        }
 
-		case '|':
-			columnNumber++;
-			nextChar = getChar();
+        // integer literal ([0-9]+) OR float literal ([0-9]+.[0-9]+)
+        if (Character.isDigit(nextChar)) {
 
-			// check if next char is '|' to match '||' binop
-			if (nextChar == '|') {
-				nextChar = getChar();
-				return new Token(TokenType.OR, new TokenAttribute(), lineNumber, columnNumber - 2);
-			} else
-				return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+            // create string representation of number
+            String numString = Character.toString((char) nextChar);
+            columnNumber++;
+            nextChar = getChar();
 
-		case '=':
-			columnNumber++;
-			nextChar = getChar();
+            // concatenate remaining sequence of digits
+            while (Character.isDigit(nextChar)) {
+                numString += (char) nextChar;
+                columnNumber++;
+                nextChar = getChar();
+            }
 
-			// check if next char is '=' to match '==' binop
-			if (nextChar == '_') {
-				nextChar = getChar();
-                                if (nextChar == '=') {
-                                        nextChar = getChar();
-                                        return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
-		
-                                }else{
-                                    				return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+            if (nextChar == '.') {
+                //stream.mark(0);
+                nextChar = getChar();
+                columnNumber++;
 
-                                }
-					}
-			else 
-				return new Token(TokenType.ASSIGN, new TokenAttribute(), lineNumber, columnNumber - 1);
+                if (Character.isDigit(nextChar)) {
+                    numString += '.';
+                    // concatenate remaining sequence of digits
+                    while (Character.isDigit(nextChar)) {
+                        numString += (char) nextChar;
+                        columnNumber++;
+                        nextChar = getChar();
+                    }
 
-		case '!':
-			columnNumber++;
-			nextChar = getChar();
-
-			// check if next char is '!' to match '!=' binop
-			if (nextChar == '=') {
-				nextChar = getChar();
-				return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
-			}
-			else 
-				return new Token(TokenType.NOT, new TokenAttribute(), lineNumber, columnNumber - 1);
-
-		case '<':
-			columnNumber++;
-			nextChar = getChar();
-
-			// check if next char is '<' to match '<=' binop
-			if (nextChar == '=') {
-				nextChar = getChar();
-				return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
-			} else
-				return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
-
-		case '>':
-			columnNumber++;
-			nextChar = getChar();
-
-			// check if next char is '<' to match '<=' binop
-			if (nextChar == '=') {
-				nextChar = getChar();
-				return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
-			} else
-				return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
-
-		case '+':
+                    return new Token(TokenType.FLOAT_CONST, new TokenAttribute(Float.parseFloat(numString)), lineNumber, columnNumber - numString.length());
+                }
+                while (!Character.isWhitespace(nextChar)) {
                     columnNumber++;
-			nextChar = getChar();
+                    numString += nextChar;
+                    nextChar = getChar();
+                }
 
-			
-			if (nextChar == '+') {
-				nextChar = getChar();
-				return new Token(TokenType.INCREMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
-			} else
-				return new Token(TokenType.ADDSUB, new TokenAttribute(), lineNumber, columnNumber - 1);
+                return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - numString.length() + 1);
+            }
 
-               case '#':
-			columnNumber++;
-			nextChar = getChar();
-
-			// check if next char is '<' to match '<=' binop
-			if (nextChar == '>') {
-				nextChar = getChar();
-				return new Token(TokenType.INPUT, new TokenAttribute(), lineNumber, columnNumber - 2);
-			
-                        }
-                    
-			
-		case '-':
-			columnNumber++;
-			nextChar = getChar();
-                        
-			if (nextChar == '-') {
-				nextChar = getChar();
-				return new Token(TokenType.DECREMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
-			} else
-				return new Token(TokenType.ADDSUB, new TokenAttribute(), lineNumber, columnNumber - 1);
-
-                  
-                case '^':
-			columnNumber++;
-			nextChar = getChar();
-			return new Token(TokenType.EXPON, new TokenAttribute(), lineNumber, columnNumber - 1);
-
-		case '*':
-			columnNumber++;
-			nextChar = getChar();
-			return new Token(TokenType.MULDIV, new TokenAttribute(), lineNumber, columnNumber - 1);
-
-		case '/':
-			columnNumber++;
-			nextChar = getChar();
-			return new Token(TokenType.MULDIV, new TokenAttribute(), lineNumber, columnNumber - 1);
-                        
-                        
-                 case '“':
-			columnNumber++;
-			nextChar = getChar();
-			return new Token(TokenType.LQUOTE, new TokenAttribute(), lineNumber, columnNumber - 1);        
-                  case '"':
-			columnNumber++;
-			nextChar = getChar();
-			return new Token(TokenType.RQUOTE, new TokenAttribute(), lineNumber, columnNumber - 1);        
-               case '@':
-			columnNumber++;
-			nextChar = getChar();
-
-			// check if next char is '&' to match '&&' binop
-			if (nextChar == '@') {
-                            System.out.println("Comment Detected.");
-                            Token toks= new Token(TokenType.COMMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
-                            nextChar=getChar();
-                            while(getChar()!='\n'){
-                                columnNumber++;
-                            }
-                            columnNumber++;
-                            nextChar=getChar();
-                            return toks;
-			} else
-                            return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
-
-		}
-
-		// check for punctuation
-		TokenType type = punctuation.get((char) nextChar);
-		columnNumber++;
-		nextChar = getChar();
+            // return integer literal token
+            return new Token(TokenType.INT_CONST, new TokenAttribute(Integer.parseInt(numString)), lineNumber, columnNumber - numString.length());
+        }
+        
+        if (nextChar == '"') {
+            nextChar = getChar();
+            columnNumber++;
+            String x = ""  ;
+            String symbol = "!@#$%^&*()+-/" ;
+            if (Character.isAlphabetic(nextChar)|| Character.isWhitespace(nextChar)|| symbol.contains((Character.toString((char) nextChar)))) {
                 
-               
-
                  
-		// found punctuation token
-		if (type != null)
-			return new Token(type, new TokenAttribute(), lineNumber, columnNumber - 1);
+                    
+                   x += (char) nextChar;
+                   nextChar = getChar();
+                    while (nextChar != '"') {
+                       
+                        
+                        columnNumber++;
+                         
+                        x += (char) nextChar;
+                        nextChar = getChar();
+                    }
+                    
+                    
+                    columnNumber++;
+                    
+                    nextChar = getChar();
+                    
+                    return new Token(TokenType.STRING_CONST, new TokenAttribute(x), lineNumber, columnNumber - x.length());
+            }
 
-		// token type is unknown
-		return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
-	}
+            return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+        }
+        
+
+        if (nextChar == '\'') {
+            nextChar = getChar();
+            columnNumber++;
+            
+            if (Character.isAlphabetic(nextChar)) {
+                char current = (char) nextChar;
+                stream.mark(0);
+                nextChar = getChar();
+                columnNumber++;
+
+                if (nextChar == '\'') {
+                    nextChar = getChar();
+                    columnNumber++;
+                    return new Token(TokenType.CHAR_CONST, new TokenAttribute(current), lineNumber, columnNumber - 1);
+                }
+                stream.reset();
+            }
+
+            return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+        }
+
+        // EOF reached
+        if (nextChar == -1) {
+            return new Token(TokenType.EOF, new TokenAttribute(), lineNumber, columnNumber);
+        }
+
+        // check for binops
+        switch (nextChar) {
+            
+            case '&':
+                columnNumber++;
+                nextChar = getChar();
+
+                // check if next char is '&' to match '&&' binop
+                if (nextChar == '&') {
+                    nextChar = getChar();
+                    return new Token(TokenType.AND, new TokenAttribute(), lineNumber, columnNumber - 2);
+                }else if(nextChar =='+'){
+                    nextChar = getChar();
+                    return new Token(TokenType.CONCAT, new TokenAttribute(), lineNumber, columnNumber - 2);
+                }else {
+                    return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+                }
+
+            case '|':
+                columnNumber++;
+                nextChar = getChar();
+
+                // check if next char is '|' to match '||' binop
+                 if (nextChar == '_') {
+                    nextChar = getChar();
+                if (nextChar == '|') {
+                    nextChar = getChar();
+                    return new Token(TokenType.OR, new TokenAttribute(), lineNumber, columnNumber - 2);
+                } else {
+                    return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+                }}
+
+            case '=':
+                columnNumber++;
+                nextChar = getChar();
+
+                // check if next char is '=' to match '==' binop
+                if (nextChar == '_') {
+                    nextChar = getChar();
+                    if (nextChar == '=') {
+                        nextChar = getChar();
+                        return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
+
+                    } else {
+                        return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+
+                    }
+                } else {
+                    return new Token(TokenType.ASSIGN, new TokenAttribute(), lineNumber, columnNumber - 1);
+                }
+
+            case '!':
+                columnNumber++;
+                nextChar = getChar();
+
+                // check if next char is '!' to match '!=' binop
+                if (nextChar == '=') {
+                    nextChar = getChar();
+                    return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
+                } else {
+                    return new Token(TokenType.NOT, new TokenAttribute(), lineNumber, columnNumber - 1);
+                }
+
+            case '<':
+                columnNumber++;
+                nextChar = getChar();
+
+                // check if next char is '<' to match '<=' binop
+                if (nextChar == '=') {
+                    nextChar = getChar();
+                    return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
+                } else {
+                    return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
+                }
+
+            case '>':
+                columnNumber++;
+                nextChar = getChar();
+
+                // check if next char is '<' to match '<=' binop
+                if (nextChar == '=') {
+                    nextChar = getChar();
+                    return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
+                } else {
+                    return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
+                }
+
+            case '+':
+                columnNumber++;
+                nextChar = getChar();
+
+                if (nextChar == '+') {
+                    nextChar = getChar();
+                    return new Token(TokenType.INCREMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
+                } else {
+                    return new Token(TokenType.ADDSUB, new TokenAttribute(), lineNumber, columnNumber - 1);
+                }
+
+            case '#':
+                columnNumber++;
+                nextChar = getChar();
+
+               
+                if (nextChar == '>') {
+                    nextChar = getChar();
+                    return new Token(TokenType.INPUT, new TokenAttribute(), lineNumber, columnNumber - 2);
+
+                }
+
+            case '-':
+                columnNumber++;
+                nextChar = getChar();
+
+                if (nextChar == '-') {
+                    nextChar = getChar();
+                    return new Token(TokenType.DECREMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
+                } else {
+                    return new Token(TokenType.ADDSUB, new TokenAttribute(), lineNumber, columnNumber - 1);
+                }
+
+            case '^':
+                columnNumber++;
+                nextChar = getChar();
+                return new Token(TokenType.EXPON, new TokenAttribute(), lineNumber, columnNumber - 1);
+
+            case '*':
+                columnNumber++;
+                nextChar = getChar();
+                return new Token(TokenType.MULDIV, new TokenAttribute(), lineNumber, columnNumber - 1);
+
+            case '/':
+                columnNumber++;
+                nextChar = getChar();
+                return new Token(TokenType.MULDIV, new TokenAttribute(), lineNumber, columnNumber - 1);
+
+          
+            case '"':
+                columnNumber++;
+                nextChar = getChar();
+                return new Token(TokenType.LQUOTE, new TokenAttribute(), lineNumber, columnNumber - 1);
+            case '@':
+                columnNumber++;
+                nextChar = getChar();
+
+                //Single Line Comment
+                if (nextChar == '@') {
+
+                    Token toks = new Token(TokenType.COMMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
+                    nextChar = getChar();
+                    while (getChar() != '\n') {
+                        columnNumber++;
+                    }
+                    columnNumber++;
+                    
+                    nextChar = getChar();
+                    return toks;
+                }/* else if (nextChar == '-') {
+                    if (nextChar == '-') {
+                        boolean endmulti = false;
+                        Token toks = new Token(TokenType.COMMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
+                        while (!endmulti) {
+                            columnNumber++;
+                            nextChar = getChar();
+                            if (nextChar == '\n') {
+
+                                skipNewline();
+                            } else if (nextChar == '-') {
+                                if (nextChar == '-') {
+                                    if (nextChar == '@') {
+                                        endmulti = true;
+                                    } else {
+                                        continue;
+                                    }
+                                } else {
+                                    continue;
+                                }
+                            } else {
+                                continue;
+                            }
+                        }
+                        columnNumber++;
+                         lineNumber++;
+                        nextChar = getChar();
+                        return toks;
+                    } else {
+                        return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+                    }
+                } */else {
+                    return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+                }
+
+        }
+
+        // check for punctuation
+        TokenType type = punctuation.get((char) nextChar);
+        columnNumber++;
+        nextChar = getChar();
+
+        // found punctuation token
+        if (type != null) {
+            return new Token(type, new TokenAttribute(), lineNumber, columnNumber - 1);
+        }
+
+        // token type is unknown
+        return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+    }
 }

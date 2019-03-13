@@ -1,6 +1,8 @@
-Simula{
+Simula Test{
+        
 	 int num1 = 1;
 	int nos2 = 2;
+        stringtho x = "xadsf";
 	@@num1 and nos2 will be added depending on the condition 
 
 	kung(num1 < 3){
@@ -13,4 +15,7 @@ Simula{
 		pakits "wala eh!";
 		pakits summa;
 }
+@--
+adsf
+--@
 }Wakas

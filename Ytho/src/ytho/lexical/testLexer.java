@@ -22,7 +22,7 @@ public class testLexer {
     private static String fileName;
 
     public static void main(String[] args) throws IOException {
-        String path = "D:\\mywork\\CSELEC\\Ytho\\src\\ytho\\lexical\\Test.txt";
+        String path = "D:\\Github\\CSELEC\\Ytho\\src\\ytho\\lexical\\Test3.txt";
 
         FileReader file;
 
@@ -49,7 +49,8 @@ public class testLexer {
             }
 
             if(token.getType() == TokenType.LCURLY || token.getType() == TokenType.RCURLY
-            || token.getType() == TokenType.SCLON  
+            || token.getType() == TokenType.SCLON  || token.getType() == TokenType.COMMA
+            ||token.getType() == TokenType.COMMENT        
             || token.getType() == TokenType.LPAREN  || token.getType() == TokenType.RPAREN        ){
                 
             }else{
@@ -68,7 +69,10 @@ public class testLexer {
                 System.out.println(": " + token.getAttribute().getFloatVal());
             } else if (token.getType() == TokenType.CHAR_CONST) {
                 System.out.println(": " + token.getAttribute().getCharVal());
-            } else if (token.getType() == TokenType.BOOLEAN_CONST) {
+            }else if (token.getType() == TokenType.STRING_CONST) {
+                System.out.println(": " + token.getAttribute().getStringVal());
+            }
+            else if (token.getType() == TokenType.BOOLEAN_CONST) {
                 System.out.println(": " + token.getAttribute().getBooleanVal());
             } else {
                 System.out.println();

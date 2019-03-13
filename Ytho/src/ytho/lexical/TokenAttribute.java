@@ -15,7 +15,8 @@ public class TokenAttribute {
 	private char charVal; // char value of the token
 	private boolean booleanVal; // boolean value of the token
 	private String idVal; // id of the token
-
+        private String stringVal; // String value of the Token
+        
 	public TokenAttribute() {}
 
 	// construct TokenAttribute with an int value
@@ -41,7 +42,18 @@ public class TokenAttribute {
 	// construct TokenAttribute with an id
 	public TokenAttribute(String idVal){
 		this.idVal = idVal;
+                this.stringVal = idVal;
 	}
+
+    public String getStringVal() {
+        return stringVal;
+    }
+
+    public void setStringVal(String stringVal) {
+        this.stringVal = stringVal;
+    }
+        
+      
 
 	public int getIntVal() {
 		return intVal;

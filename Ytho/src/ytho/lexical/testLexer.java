@@ -42,10 +42,12 @@ public class testLexer {
             if (token.getType() == TokenType.UNKNOWN) {
                 // print token type and location
             
-                System.err.print(" (" + token.getLineNumber() + "," + token.getColumnNumber() + ")");
-                System.out.println();
-                numError++;
-                continue;
+                System.err.print("Error at Line"+" (" + token.getLineNumber() + "," + token.getColumnNumber() + ")");
+                System.exit(0);
+               // System.out.println();
+               // numError++;
+               
+               // continue;
             }
 
             if(token.getType() == TokenType.LCURLY || token.getType() == TokenType.RCURLY

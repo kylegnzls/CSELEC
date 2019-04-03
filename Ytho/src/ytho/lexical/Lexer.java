@@ -388,7 +388,7 @@ public class Lexer {
                         return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
                     }
                 }
-
+//DAPAT ERROR PAG <+ 
             case '<':
                 columnNumber++;
                 nextChar = getChar();
@@ -403,12 +403,8 @@ public class Lexer {
                         return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 2);
 
                     }
-                } else if (nextChar == ' '){
-                    return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
-                   
-
                 }else {
-                     return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+                     return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
                 }
 
             case '>':
@@ -427,13 +423,10 @@ public class Lexer {
                         return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 2);
 
                     }
-                } else if (nextChar != '_'){
-                    return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
-
-                }else {
-                    return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
-                }
-
+                } else{
+                      return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
+                 }
+                 
             case '+':
                 columnNumber++;
                 nextChar = getChar();

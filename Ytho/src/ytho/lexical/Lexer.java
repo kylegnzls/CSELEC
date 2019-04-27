@@ -347,10 +347,10 @@ public class Lexer {
                     if (nextChar == '=') {
                         columnNumber++;
                         nextChar = getChar();
-                        return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
+                        return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 3);
 
                     } else {
-                        return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+                        return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 2);
 
                     }
                 } else {
@@ -368,31 +368,39 @@ public class Lexer {
                     if (nextChar == '=') {
                         columnNumber++;
                         nextChar = getChar();
-                        return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 2);
+                        return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 3);
                     } else if (nextChar == '&') {
                         columnNumber++;
                         nextChar = getChar();
-                        return new Token(TokenType.NAND, new TokenAttribute(), lineNumber, columnNumber - 2);
+                        return new Token(TokenType.NAND, new TokenAttribute(), lineNumber, columnNumber - 3);
 
                     } else if (nextChar == '|') {
                         columnNumber++;
                         nextChar = getChar();
-                        return new Token(TokenType.NOR, new TokenAttribute(), lineNumber, columnNumber - 2);
+                        return new Token(TokenType.NOR, new TokenAttribute(), lineNumber, columnNumber - 3);
 
                     } else if (nextChar == '!') {
                         columnNumber++;
                         nextChar = getChar();
-                        return new Token(TokenType.NOT, new TokenAttribute(), lineNumber, columnNumber - 2);
+                        return new Token(TokenType.NOT, new TokenAttribute(), lineNumber, columnNumber - 3);
 
                     } else {
+                        return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 2);
+                    }
+                }else {
                         return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
                     }
-                }
 //DAPAT ERROR PAG <+ 
             case '<':
                 columnNumber++;
                 nextChar = getChar();
-                if (nextChar == '_') {
+
+                // check if next char is '<' to match '<_=' binop
+                if (Character.isWhitespace(nextChar)) {
+                    return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
+                }
+
+                else if (nextChar == '_') {
                     columnNumber++;
                     nextChar = getChar();
                     if (nextChar == '=') {
@@ -400,19 +408,24 @@ public class Lexer {
                         nextChar = getChar();
                         return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 3);
                     } else {
+                        
                         return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 2);
 
                     }
-                }else {
-                     return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
+                } else {
+                    return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber );
                 }
 
             case '>':
                 columnNumber++;
                 nextChar = getChar();
 
-                // check if next char is '<' to match '<=' binop
-                 if (nextChar == '_') {
+                // check if next char is '<' to match '<_=' binop
+                if (Character.isWhitespace(nextChar)) {
+                    return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber );
+                }
+
+                else if (nextChar == '_') {
                     columnNumber++;
                     nextChar = getChar();
                     if (nextChar == '=') {
@@ -423,10 +436,10 @@ public class Lexer {
                         return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 2);
 
                     }
-                } else{
-                      return new Token(TokenType.RELOP, new TokenAttribute(), lineNumber, columnNumber - 1);
-                 }
-                 
+                } else {
+                    return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
+                }
+
             case '+':
                 columnNumber++;
                 nextChar = getChar();
@@ -500,11 +513,11 @@ public class Lexer {
                     nextChar = getChar();
 
                     return toks;
-                }else if (nextChar == '-') {
+                } else if (nextChar == '-') {
                     columnNumber++;
-                    nextChar=getChar();
+                    nextChar = getChar();
                     if (nextChar == '-') {
-                       // System.out.println((char)nextChar);
+                        // System.out.println((char)nextChar);
                         Token toks = new Token(TokenType.COMMENT, new TokenAttribute(), lineNumber, columnNumber - 2);
                         while (true) {
                             columnNumber++;
@@ -513,15 +526,15 @@ public class Lexer {
                                 skipNewline();
                                 continue;
                             } else if (nextChar == '-') {
-                              //  System.out.println("Detected first dash");
-                               // System.out.println(lineNumber);
-                              //  System.out.println((char)nextChar);
+                                //  System.out.println("Detected first dash");
+                                // System.out.println(lineNumber);
+                                //  System.out.println((char)nextChar);
                                 if (nextChar == '-') {
-                                 //   System.out.println("Detected second dash");
+                                    //   System.out.println("Detected second dash");
                                     columnNumber++;
                                     nextChar = getChar();
                                     if (nextChar == '@') {
-                                   //     System.out.println("Detected end multi");
+                                        //     System.out.println("Detected end multi");
                                         columnNumber++;
                                         nextChar = getChar();
                                         break;
@@ -540,7 +553,7 @@ public class Lexer {
                     } else {
                         return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - 1);
                     }
-                }  else {
+                } else {
                     return new Token(TokenType.UNKNOWN, new TokenAttribute(), lineNumber, columnNumber - count);
                 }
 

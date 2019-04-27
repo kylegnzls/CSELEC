@@ -16,12 +16,7 @@ Simula Test{
 		pakits summa;
 
                     
->_=
-<_=
-a < 3
-a > 3
-<+
-&_2
+
 }
 @--
 adsf

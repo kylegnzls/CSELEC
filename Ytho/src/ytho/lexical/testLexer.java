@@ -21,7 +21,7 @@ public class testLexer {
 
     private static String fileName;
 
-    public static void main(String[] args) throws IOException {
+    public testLexer() throws FileNotFoundException, IOException {
         String path = "D:\\GitHub\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test1.txt";
 
         FileReader file;
@@ -90,5 +90,10 @@ public class testLexer {
         System.out.println("Number of Errors: " + numError);
         System.out.println("Execution time: " + (endTime - startTime) + "ms");
         System.out.println();
+    }
+
+    public static void main(String[] args) throws IOException {
+         testLexer test = new  testLexer() ;
+         
     }
 }

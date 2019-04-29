@@ -10,8 +10,9 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import ytho.lexical.Lexer;
-import ytho.lexical.Token;
-import ytho.lexical.TokenType;
+import TokenLib.Token;
+import TokenLib.TokenType;
+import parser.Parser;
 
 /**
  *
@@ -93,7 +94,9 @@ public class testLexer {
     }
 
     public static void main(String[] args) throws IOException {
+        //to be fixed
          testLexer test = new  testLexer() ;
-         
+         Parser parse = new Parser();
+         parse.startParse();
     }
 }

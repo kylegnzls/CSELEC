@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ytho.lexical;
+package TokenLib;
 
 /**
  *
@@ -15,12 +15,17 @@ public class Token {
     private TokenAttribute attribute; //token attribute 
     private int lineNumber; //token line number
     private int columnNumber; //token column number
+    public TokenType TokenType;
 
     public Token(TokenType type, TokenAttribute attribute, int lineNumber, int columnNumber) {
         this.type = type;
         this.attribute = attribute;
         this.lineNumber = lineNumber;
         this.columnNumber = columnNumber;
+    }
+
+    public Token(TokenType TokenType) {
+     this.TokenType = TokenType;
     }
 
     public TokenType getType() {
@@ -37,5 +42,8 @@ public class Token {
 
     public int getColumnNumber() {
         return columnNumber;
+    }
+    public TokenType getTokenType(){
+        return TokenType;
     }
 }

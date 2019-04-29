@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ytho.lexical;
+package TokenLib;
 
 /**
  *
@@ -83,5 +83,6 @@ public enum TokenType {
     STATEMENT,
     EXPRESSION,
     OPERATOR,
-    TYPE
+    TYPE,
+    DOLLAR, DECLARATION, DECLARATOR, ARITH_EXPRESSION, TERM, FACTOR, EXPOW, LOGIC_EXPRESSION, LOGIC_OPERATOR, REL_EXPRESSION, CAST_EXPRESSION, LIT_EXPRESSION, STMNT_BLK, CONDITION, LOOP, LOOP_CONDITION, INIT, UPDOWN, INOUT, IN, OUT, STRING_PAT, DTYPE
 }

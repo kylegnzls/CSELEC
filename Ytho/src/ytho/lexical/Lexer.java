@@ -5,6 +5,9 @@
  */
 package ytho.lexical;
 
+import TokenLib.TokenType;
+import TokenLib.Token;
+import TokenLib.TokenAttribute;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

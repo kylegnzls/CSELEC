@@ -96,7 +96,7 @@ public class testLexer {
     public static void main(String[] args) throws IOException {
         //to be fixed
          testLexer test = new  testLexer() ;
-         Parser parse = new Parser();
+         
          parse.startParse();
     }
 }

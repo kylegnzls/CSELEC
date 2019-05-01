@@ -9,11 +9,12 @@ package TokenLib;
  *
  * @author Blank
  */
-public class TokenID extends Token{
-     public String idName = "";
+public class TokenNum extends Token{
+     public int num = 0;
 
-    public TokenID(String name){
-        super(TokenLib.TokenType.ID);
-        idName = name;
+   
+    public TokenNum(int num){
+        super(TokenLib.TokenType.INT_CONST);
+        this.num = num;
 }
 }

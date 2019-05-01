@@ -1,3 +1,5 @@
+package parser;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -50,7 +52,7 @@ public class Inhale{
         PushbackInputStream fr = null;
         byte[] syntax;
 
-        Path path = Paths.get("C:\\Users\\Personal\\Desktop\\Weary.txt");
+        Path path = Paths.get("D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test2.txt");
         try {
             syntax = Files.readAllBytes(path);
             ByteArrayInputStream array = new ByteArrayInputStream(syntax);

@@ -1,24 +1,21 @@
-Simula Test{
-        
-	 int num1 = 1;
+Simula{
+ int num1 = 1;
 	int nos2 = 2;
         stringtho x = "xadsf";
 	@@num1 and nos2 will be added depending on the condition 
 
-	kung(num1 < 3){
+	kung( num1 < 3){
 		int summa = num1 + nos2;
-		pakits "sagot: ";
-		pakits summa;
+		pakits " sagot: " ;
+		pakits summa ;
 	}
 	maiba{
 		int summa = num1 + 3;
-		pakits "wala eh!";
+		pakits " wala eh! ";
 		pakits summa;
-
-                    
-
 }
 @--
 adsf
 --@
-}Wakas
+}
+Wakas

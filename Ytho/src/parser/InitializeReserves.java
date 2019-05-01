@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ytho.lexical;
+package parser;
 import java.util.Hashtable;
 import TokenLib.TokenType;
 /**

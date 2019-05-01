@@ -11,16 +11,13 @@ package TokenLib;
  */
 public class Token {
 
-  
     public TokenType TokenType;
 
-   
-
-      public Token(TokenType tokenType){
+    public Token(TokenType tokenType) {
         this.TokenType = tokenType;
     }
 
-    public TokenType getTokenType(){
+    public TokenType getTokenType() {
         return TokenType;
-}
+    }
 }

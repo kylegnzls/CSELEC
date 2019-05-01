@@ -5,17 +5,12 @@
  */
 package TokenLib;
 
-/**
- *
- * @author Blank
- */
 public class TokenChar extends Token{
 
     public char literal = 0;
 
     public TokenChar(char name){
-        super(TokenType.LETTERLITERAL);
-        
+        super(TokenLib.TokenType.LETTERLITERAL);
         literal = name;
     }
 

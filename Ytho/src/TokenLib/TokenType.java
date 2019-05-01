@@ -10,20 +10,22 @@ package TokenLib;
  * @author Blank
  */
 public enum TokenType {
+    SIMULA,
     ID, // [a-zA-Z][a-zA-Z0-9_]*
     INT_CONST, // [0-9]+
+    NUMCONSTANTS,
     FLOAT_CONST,
     CHAR_CONST, //'ASCII Char'
     BOOLEAN_CONST,
     EOF, // input stream has been consumed
-    UNKNOWN, // character/token could not be processed
+    ERROR, // character/token could not be processed
     STRING_CONST,
     // binary operators
     AND, // &&
     OR, // ||
     LUTANGS,
-    
-   
+    WHITESPACE,
+   END_PROGRAM,
     ADDSUB, // + AND -
     MULDIV, //* AND /
     EXPON, //^
@@ -45,10 +47,10 @@ public enum TokenType {
     MAIBA, // else
     WHILE, // while
     PARAIKOT, //for
-   
+   NEWLINE,
    
     BREAK,//break
-    SIMULA,
+    
     WAKAS,
     OMSIM,
     DEINS,
@@ -72,7 +74,7 @@ public enum TokenType {
     LBRACKET, // [
     RBRACKET, // ]
     
-    
+    ENDLINE,
     ASSIGN, // =
     NEGATIVE, // -
     NOT, // !

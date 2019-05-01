@@ -9,11 +9,11 @@ package TokenLib;
  *
  * @author Blank
  */
-public class TokenData {
+public class TokenData extends Token{
      public String dataType;
 
     public TokenData(String dataType) {
-        super(TokenType.TYPE);
+        super(TokenLib.TokenType.TYPE);
         this.dataType = dataType;
 }
 }

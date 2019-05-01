@@ -1,20 +1,20 @@
-Simula SimpleCalcu {
+Simula {
 int x = 0;
 	char y;
 int first;
 int second;
 int sum;
 
-paraikot(int x=0; x=_=3; x++){
+paraikot(int x = 0; x =_= 3 ; x ++){
 	pakits " Calculator " ;
-	pakits "---------------";
+	pakits " --------------- " ;
 
-	pakits "Choose";
-	pakits "A. Addition";
-	pakits "B. Subtraction";
-	patings y #> "choose: ";
+	pakits " Choose " ;
+	pakits " A. Addition " ;
+	pakits " B. Subtraction ";
+	patings y #> " choose: ";
 
-	kung(y =_='B' |_| y=_='b'){
+	kung(y =_= 'B' |_| y =_= ' b '){
 	patings first #> "First Number: ";
 	patings second #> "Second Number: ";
 	sum = first-second;

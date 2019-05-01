@@ -1,9 +1,9 @@
-Simula arithOp {    	
-      lutangs num1 = 4, num2 = 2, result;
+Simula x{    	
+      lutangs num1 = 4 , num2 = 2 , result;
     	
     	@@ Using addition operator
     	result = num1 + num2;
-    	pakits "num1 + num2 = " &+ result;
+    	pakits " num1 + num2 = " &+ result ;
 	
     	@@ Using subtraction operator
     	result = num1 - num2;
@@ -20,4 +20,5 @@ Simula arithOp {
 @@ Using exponent operator
     	result = num1 ^ num2;
     	pakits "num1 ^ num2 = " &+ result;
-}Wakas
+}
+Wakas

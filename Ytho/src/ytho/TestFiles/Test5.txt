@@ -1,5 +1,5 @@
-Simula logicalOp {    	
-  	int num1 = 1, num2 = 2, num3 = 9;
+Simula  {    	
+  	int num1 = 1, num2 = 2 , num3 = 9 ;
     	bool result;
     	
     	@@ OR - At least one expression needs to be true for result to be true
@@ -18,7 +18,7 @@ pakits result;
 
     	@@ result will be false because (num1 > num2) is false
     	
-    	pakita result;
+    	pakits result;
 
 @@NOT - If the expression is true the result will be false
 	
@@ -45,4 +45,5 @@ pakits result;
     	@@ result will be true because (num1 > num2) is false
 
 pakits result;
-}Wakas
+}
+Wakas

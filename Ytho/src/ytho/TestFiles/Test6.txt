@@ -1,10 +1,11 @@
 Simula relationalOp {
-    	int num1 = 6, num2 = 6;
+    	int num1 = 6 , num2 = 6;
 
-    	kung (num1 >_= num2){
-    		pakita "num1 is greater than or equal to num2.";
+    	kung ( num1 >_= num2 ) {
+    		pakits " num1 is greater than or equal to num2.";
     	}
     	maiba{
-    		pakita "num2 is greater than or equal to num1.";
+    		pakits " num2 is greater than or equal to num1.";
     	}
-}Wakas
+}
+Wakas

@@ -9,9 +9,8 @@ package parser;
  *
  * @author Blank
  */
-
 import TokenLib.*;
-
+import parser.Parser;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,10 +21,9 @@ public class Test {
 
     public static void main(String[] args) {
 
-
         Hashtable<String, TokenType> reservedWords = new Hashtable<String, TokenType>();
         Hashtable<String, TokenID> identifiers = new Hashtable<String, TokenID>();
-  Hashtable<Integer, TokenNum> numeric = new Hashtable<Integer,TokenNum>();
+        Hashtable<Integer, TokenNum> numeric = new Hashtable<Integer, TokenNum>();
         reservedWords = Inhale.ExhaleReserves();
         Scanner scan = new Scanner(reservedWords, identifiers,numeric, "‪D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test2.txt");
 
@@ -66,10 +64,20 @@ public class Test {
                         System.out.print("[" + currentToken.getTokenType() + "] ");
                 }
             }
+            
         }
+        Scanner scan2 = new Scanner(reservedWords, identifiers, numeric, "‪D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test2.txt");
+        ParseTab p = new ParseTab();
+        System.out.println(p.getParseTable());
+        Parser parse = new Parser(scan2);
+        Node root = parse.startParse();
 
+        if (root != null) {
+            System.out.println("STARTING SEARCH");
+            String treeSyntax = parse.DepthFirstTraversal(root);
+            System.out.println(treeSyntax);
 
-        
-        
-    }}
+        }
+    }
 
+}

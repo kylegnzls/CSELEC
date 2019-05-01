@@ -3,4 +3,5 @@ Simula toOther {
 int num = nums.toInt();
     	pakita numS;
 
-}Wakas
+}
+Wakas

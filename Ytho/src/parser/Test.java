@@ -37,7 +37,7 @@ public class Test {
                 switch (currentToken.getTokenType()) {
                     case WHITESPACE:
                     case COMMENT:
-                    
+                    case ENDLINE:
                         break;
                     case NEWLINE:
                         System.out.println();

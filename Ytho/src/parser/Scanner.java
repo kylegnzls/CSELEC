@@ -60,7 +60,7 @@ public class Scanner {
             char c = Consume();
             tokenS += c;
             //System.out.println(c);
-            System.out.println(c);
+           // System.out.println(c);
             switch (CURRENT_STATE) {
                 case 0:
 
@@ -380,7 +380,7 @@ public class Scanner {
                     break;
                 case 25:
                     if (c == '|') {
-                        Pushback();
+                        
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.OR);
                     } else {
@@ -395,15 +395,15 @@ public class Scanner {
                     break;
                 case 27:
                     if (c == '!') {
-                        Pushback();
+                       
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.NOT);
                     } else if (c == '&') {
-                        Pushback();
+                       
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.NAND);
                     } else if (c == '|') {
-                        Pushback();
+                        
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.NOR);
                     } else {
@@ -668,7 +668,7 @@ public class Scanner {
                         CURRENT_STATE = 58;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 58:
@@ -676,7 +676,7 @@ public class Scanner {
                         CURRENT_STATE = 59;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 59:
@@ -684,7 +684,7 @@ public class Scanner {
                         CURRENT_STATE = 60;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                         CURRENT_STATE = 8;
                     }
                     break;
                 case 60:
@@ -692,7 +692,7 @@ public class Scanner {
                         CURRENT_STATE = 61;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                      CURRENT_STATE = 8;    
                     }
                     break;
                 case 61:
@@ -725,7 +725,7 @@ public class Scanner {
                         CURRENT_STATE = 65;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                         CURRENT_STATE = 8;
                     }
                     break;
                 case 65:
@@ -741,7 +741,7 @@ public class Scanner {
                         CURRENT_STATE = 67;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                         CURRENT_STATE = 8;
                     }
                     break;
                 case 67:
@@ -749,7 +749,7 @@ public class Scanner {
                         CURRENT_STATE = 68;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 68:
@@ -773,7 +773,7 @@ public class Scanner {
                         CURRENT_STATE = 71;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 71:
@@ -781,7 +781,7 @@ public class Scanner {
                         CURRENT_STATE = 72;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                         CURRENT_STATE = 8;
                     }
                     break;
                 case 72:
@@ -789,7 +789,7 @@ public class Scanner {
                         CURRENT_STATE = 73;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 73:
@@ -797,7 +797,7 @@ public class Scanner {
                         CURRENT_STATE = 74;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                      CURRENT_STATE = 8;
                     }
                     break;
                 case 74:
@@ -805,7 +805,7 @@ public class Scanner {
                         CURRENT_STATE = 75;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 75:
@@ -831,7 +831,7 @@ public class Scanner {
                         CURRENT_STATE = 78;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 78:
@@ -839,7 +839,7 @@ public class Scanner {
                         CURRENT_STATE = 79;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 79:
@@ -855,7 +855,7 @@ public class Scanner {
                         CURRENT_STATE = 81;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                         CURRENT_STATE = 8;
                     }
                     break;
                 case 81:
@@ -863,7 +863,7 @@ public class Scanner {
                         CURRENT_STATE = 82;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 82:
@@ -871,7 +871,7 @@ public class Scanner {
                         CURRENT_STATE = 83;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                         CURRENT_STATE = 8;
                     }
                     break;
                 case 83:
@@ -880,7 +880,7 @@ public class Scanner {
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.CHAR);
                     } else {
-                        return new Token(TokenType.ERROR);
+                         CURRENT_STATE = 8;
                     }
                 case 84:
                     if (c == 't') {
@@ -895,7 +895,7 @@ public class Scanner {
                         CURRENT_STATE = 86;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 86:
@@ -903,7 +903,7 @@ public class Scanner {
                         CURRENT_STATE = 87;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 87:
@@ -911,7 +911,7 @@ public class Scanner {
                         CURRENT_STATE = 88;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                       CURRENT_STATE = 8;
                     }
                     break;
                 case 88:
@@ -919,7 +919,7 @@ public class Scanner {
                         CURRENT_STATE = 89;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 89:
@@ -927,7 +927,7 @@ public class Scanner {
                         CURRENT_STATE = 90;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                         CURRENT_STATE = 8;
                     }
                     break;
                 case 90:
@@ -935,7 +935,7 @@ public class Scanner {
                         CURRENT_STATE = 91;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                         CURRENT_STATE = 8;
                     }
                     break;
                 case 91:
@@ -943,7 +943,7 @@ public class Scanner {
                         CURRENT_STATE = 92;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 92:
@@ -959,7 +959,7 @@ public class Scanner {
                         CURRENT_STATE = 94;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 94:

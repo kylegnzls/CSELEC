@@ -55,13 +55,12 @@ public class Scanner {
         int CURRENT_STATE = 0;
         boolean returnString = false;
         String tokenS = "";
-
+ String sym = "!@#$%^&*()_+[{}]|:'<>?,./";
         while (!returnString) {
             char c = Consume();
             tokenS += c;
-
-            String sym = "!@#$%^&*()_+[{}]|:'<>?,./";
-            // System.out.println(c);
+            //System.out.println(c);
+            System.out.println(c);
             switch (CURRENT_STATE) {
                 case 0:
 
@@ -81,11 +80,11 @@ public class Scanner {
                     } //R CURLY  
                     //PAG MALI PUSHBACK TO TOKENS
                     else if (c == '{') {
-                        Pushback();
+
                         return new Token(TokenType.RCURLY);
                     }//L CURLY  PAG MALI PUSHBACK TO TOKENS
                     else if (c == '}') {
-                        Pushback();
+
                         return new Token(TokenType.LCURLY);
                     } //WAKAS 10 - 14
                     else if (c == 'W') {
@@ -123,19 +122,19 @@ public class Scanner {
                         return new Token(TokenType.MULDIV);
                     } // EXPONENT
                     else if (c == '^') {
-                        Pushback();
+                        
                         return new Token(TokenType.EXPON);
                     } //RPAREN
                     else if (c == '(') {
-                        Pushback();
+                        
                         return new Token(TokenType.RPAREN);
                     }//LPAREN
                     else if (c == ')') {
-                        Pushback();
+                       
                         return new Token(TokenType.LPAREN);
                     } // INTLIT 21
                     else if (IsDigit(c)) {
-                        CURRENT_STATE = 21;
+                        CURRENT_STATE = 105;
                     } // or , and 22-23
                     else if (c == '&') {
                         CURRENT_STATE = 22;
@@ -147,7 +146,7 @@ public class Scanner {
                         CURRENT_STATE = 26;
                     } //KUNG 33 - 37
                     else if (c == 'k') {
-                        CURRENT_STATE = 33;
+                        CURRENT_STATE = 34;
                     } //MAIBA 38 -42
                     else if (c == 'm') {
                         CURRENT_STATE = 38;
@@ -168,10 +167,16 @@ public class Scanner {
                     }//stringtho 
                     else if (c == 's') {
                         CURRENT_STATE = 84;
-                    }//IDENTIFIER 8-9
+                    } else if (c == '~') {
+                        CURRENT_STATE = 93;
+                    } else if (c == '"') {
+                        CURRENT_STATE = 95;
+                    } else if (c == '@') {
+                        CURRENT_STATE = 97;
+                    } //IDENTIFIER 8-9
                     else if (IsAlphabet(c)) {
                         CURRENT_STATE = 8;
-                    } else {
+                    }  else {
                         if (currBit != 13 && currBit != 255) {
                             System.out.println(c + " " + currBit);
                             return new Token(TokenType.ERROR);
@@ -187,7 +192,7 @@ public class Scanner {
                     if (c == 'i') {
                         CURRENT_STATE = 2;
                     } else {
-                        CURRENT_STATE = 108;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 2:
@@ -195,7 +200,7 @@ public class Scanner {
                         CURRENT_STATE = 3;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                       CURRENT_STATE = 8;
                     }
 
                     break;
@@ -204,7 +209,7 @@ public class Scanner {
                         CURRENT_STATE = 4;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 4:
@@ -212,7 +217,7 @@ public class Scanner {
                         CURRENT_STATE = 5;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                       CURRENT_STATE = 8;
                     }
                     break;
                 case 5:
@@ -220,7 +225,7 @@ public class Scanner {
                         CURRENT_STATE = 6;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
 
                     break;
@@ -244,46 +249,56 @@ public class Scanner {
                     break;
                 //IDENTIFIER
                 case 8:
-                    if (AlphaOrDigit(c)) {
-                        CURRENT_STATE = 9;
+                     if (AlphaOrDigit(c) || currBit == 58 || c == '-' || c == ':' || currBit == 58 || sym.indexOf(c) != -1) {
+
+                        CURRENT_STATE = 8;
+
                     } else {
-                        return new Token(TokenType.ERROR);
+                        Pushback();
+                        tokenS = Remove(tokenS);
+                        if (!identifiers.containsKey(tokenS)) {
+                            identifiers.put(tokenS, new TokenID(tokenS));
+                        }
+
+                        return new TokenID(tokenS);
                     }
                     break;
                 case 9:
                     if (AlphaOrDigit(c)) {
                         CURRENT_STATE = 9;
                     } else {
-                        Pushback();
-                        return new Token(TokenType.ID);
+                        if (!identifiers.containsKey(tokenS)) {
+                            identifiers.put(tokenS, new TokenID(tokenS));
+                        }
+                        return new TokenID(tokenS);
                     }
                     break;
                 case 10:
                     if (c == 'a') {
                         CURRENT_STATE = 11;
                     } else {
-                        return new Token(TokenType.ERROR);
+                      CURRENT_STATE = 8;
                     }
                     break;
                 case 11:
                     if (c == 'k') {
                         CURRENT_STATE = 12;
                     } else {
-                        return new Token(TokenType.ERROR);
+                       CURRENT_STATE = 8;
                     }
                     break;
                 case 12:
                     if (c == 'a') {
                         CURRENT_STATE = 13;
                     } else {
-                        return new Token(TokenType.ERROR);
+                       CURRENT_STATE = 8;
                     }
                     break;
                 case 13:
                     if (c == 's') {
                         CURRENT_STATE = 14;
                     } else {
-                        return new Token(TokenType.ERROR);
+                       CURRENT_STATE = 8;
                     }
                     break;
                 case 14:
@@ -303,28 +318,28 @@ public class Scanner {
                     } else if (c == 'o') {
                         CURRENT_STATE = 66;
                     } else {
-                        return new Token(TokenType.ERROR);
+                       CURRENT_STATE = 8;
                     }
                     break;
                 case 17:
                     if (c == 's') {
                         CURRENT_STATE = 18;
                     } else {
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 18:
                     if (c == 'a') {
                         CURRENT_STATE = 19;
                     } else {
-                        return new Token(TokenType.ERROR);
+                       CURRENT_STATE = 8;
                     }
                     break;
                 case 19:
                     if (c == 'g') {
                         CURRENT_STATE = 20;
                     } else {
-                        return new Token(TokenType.ERROR);
+                       CURRENT_STATE = 8;
                     }
                     break;
                 case 20:
@@ -335,16 +350,7 @@ public class Scanner {
                     } else {
                         return new Token(TokenType.ERROR);
                     }
-                case 21: // integer
-                    if (IsDigit(c)) {
-                        CURRENT_STATE = 21;
-                        break;
-                    } else if (!IsAlphabet(c)/*c == ' ' || currBit == 13 || c == '$' ||*/) {
-                        Pushback();
-                        return new TokenNum(Integer.parseInt(tokenS));
-                    } else if (!IsDigit(c)) {
-                        return new Token(TokenType.ERROR);
-                    }
+               
                 case 22:
                     if (c == '_') {
                         CURRENT_STATE = 23;
@@ -462,7 +468,7 @@ public class Scanner {
                         CURRENT_STATE = 35;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                       CURRENT_STATE = 8;
                     }
                     break;
                 case 35:
@@ -470,7 +476,7 @@ public class Scanner {
                         CURRENT_STATE = 36;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 36:
@@ -478,7 +484,7 @@ public class Scanner {
                         CURRENT_STATE = 37;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
 
                     break;
@@ -495,7 +501,7 @@ public class Scanner {
                         CURRENT_STATE = 39;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                    CURRENT_STATE = 8;
                     }
                     break;
                 case 39:
@@ -503,7 +509,7 @@ public class Scanner {
                         CURRENT_STATE = 40;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                       CURRENT_STATE = 8;
                     }
                     break;
                 case 40:
@@ -511,7 +517,7 @@ public class Scanner {
                         CURRENT_STATE = 41;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 41:
@@ -519,7 +525,7 @@ public class Scanner {
                         CURRENT_STATE = 42;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                       CURRENT_STATE = 8;
                     }
                     break;
                 case 42:
@@ -528,7 +534,7 @@ public class Scanner {
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.MAIBA);
                     } else {
-                        return new Token(TokenType.ERROR);
+                       CURRENT_STATE = 8;
                     }
                 //paraikot
                 case 43:
@@ -536,7 +542,7 @@ public class Scanner {
                         CURRENT_STATE = 44;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                         CURRENT_STATE = 8;
                     }
                     break;
                 case 44:
@@ -548,7 +554,7 @@ public class Scanner {
                         CURRENT_STATE = 57;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                       CURRENT_STATE = 8;
                     }
                     break;
                 case 45:
@@ -556,7 +562,7 @@ public class Scanner {
                         CURRENT_STATE = 46;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 46:
@@ -564,7 +570,7 @@ public class Scanner {
                         CURRENT_STATE = 47;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 47:
@@ -572,7 +578,7 @@ public class Scanner {
                         CURRENT_STATE = 48;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 48:
@@ -580,7 +586,7 @@ public class Scanner {
                         CURRENT_STATE = 49;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                       CURRENT_STATE = 8;
                     }
                     break;
                 case 49:
@@ -588,7 +594,7 @@ public class Scanner {
                         CURRENT_STATE = 50;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                     CURRENT_STATE = 8;
                     }
                     break;
                 case 50:
@@ -628,7 +634,7 @@ public class Scanner {
                         CURRENT_STATE = 54;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                      CURRENT_STATE = 8;
                     }
                     break;
                 case 54:
@@ -636,7 +642,7 @@ public class Scanner {
                         CURRENT_STATE = 55;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 55:
@@ -644,7 +650,7 @@ public class Scanner {
                         CURRENT_STATE = 56;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 56:
@@ -711,7 +717,7 @@ public class Scanner {
                         CURRENT_STATE = 64;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 64:
@@ -759,7 +765,7 @@ public class Scanner {
                         CURRENT_STATE = 70;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 70:
@@ -817,7 +823,7 @@ public class Scanner {
                         CURRENT_STATE = 80;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 77:
@@ -881,7 +887,7 @@ public class Scanner {
                         CURRENT_STATE = 85;
                     } else {
 
-                        return new Token(TokenType.ERROR);
+                         CURRENT_STATE = 8;
                     }
                     break;
                 case 85:
@@ -948,6 +954,118 @@ public class Scanner {
                     } else {
                         return new Token(TokenType.ERROR);
                     }
+                case 93:
+                    if (c == '"') {
+                        CURRENT_STATE = 94;
+                    } else {
+
+                        return new Token(TokenType.ERROR);
+                    }
+                    break;
+                case 94:
+                    if (!IsAlphabet(c)/*c == ' ' || c == '$' || c == '.'*/) { // Line enders //If its alphabets, bad, if not, good
+                        Pushback();
+                        tokenS = Remove(tokenS);
+                        return new Token(TokenType.LQUOTE);
+                    } else {
+                        return new Token(TokenType.ERROR);
+                    }
+                case 95:
+                    if (c == '~') {
+                        CURRENT_STATE = 96;
+                    } else {
+
+                        return new Token(TokenType.ERROR);
+                    }
+                    break;
+                case 96:
+                    if (!IsAlphabet(c)/*c == ' ' || c == '$' || c == '.'*/) { // Line enders //If its alphabets, bad, if not, good
+                        Pushback();
+                        tokenS = Remove(tokenS);
+                        return new Token(TokenType.RQUOTE);
+                    } else {
+                        return new Token(TokenType.ERROR);
+                    }
+                case 97: //single line
+                    if (c == '@') {
+                        CURRENT_STATE = 98;
+                    } else {
+                        return new Token(TokenType.ERROR);
+                    }
+                    break;
+                case 98:
+                  
+                    if (currBit == 10) {
+                        
+                        tokenS = Remove(tokenS);
+                        return new Token(TokenType.COMMENT);
+                    } else {
+                        CURRENT_STATE = 98;
+                    }
+                    break;//MULTI LINEbreak;
+                case 99:
+                    if (c == '-') {
+                        CURRENT_STATE = 100;
+                    } else {
+                        return new Token(TokenType.ERROR);
+
+                    }
+                    break;
+                case 100:
+                    if (c == '-') {
+                        CURRENT_STATE = 101;
+                    } else {
+                        return new Token(TokenType.ERROR);
+
+                    }
+                    break;
+                case 101:
+                    if (c == '-') {
+                        CURRENT_STATE = 102;
+                    } else {
+                        CURRENT_STATE = 101;
+                    }
+                    break;
+                case 102:
+                    if (c == '-') {
+                        CURRENT_STATE = 103;
+                    } else {
+                        CURRENT_STATE = 101;
+                    }
+                    break;
+                case 103:
+                    if (c == '@') {
+                        CURRENT_STATE = 104;
+                    } else {
+                        CURRENT_STATE = 101;
+                    }
+                    break;
+                case 104:
+                    if (!IsAlphabet(c)/*c == ' ' || c == '$' || c == '.'*/) { // Line enders //If its alphabets, bad, if not, good
+                        Pushback();
+                        tokenS = Remove(tokenS);
+                        return new Token(TokenType.WHITESPACE);
+                    } else {
+                        return new Token(TokenType.ERROR);
+                    }
+                case 105:
+                    
+                    if (IsDigit(c)) {
+                        CURRENT_STATE = 105;
+                    } else if (c == '.') {//float di pa tapos
+                        CURRENT_STATE = 107;
+                    } else if (c == ' ' || c == ';') {
+                        tokenS = Remove(tokenS);
+                       
+                        if (!numeric.containsKey(Integer.parseInt(tokenS))) {
+                            numeric.put(Integer.parseInt(tokenS), new TokenNum(Integer.parseInt(tokenS)));
+                        }
+                        return new TokenID(tokenS);
+                    } else {
+                        return new Token(TokenType.ERROR);
+                    }
+                    break;
+               
             }
 
         }

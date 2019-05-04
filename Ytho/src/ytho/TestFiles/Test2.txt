@@ -1,34 +1,34 @@
 Simula x {
-int x = 0;
-	char y;
-int first;
-int second;
-int sum;
+int x = 0 ;
+	char y ;
+int first ;
+int second ;
+int sum ;
 
-paraikot ( int x = 0; x =_= 3 ; x ++){
-	pakits " Calculator " ;
-	pakits " --------------- " ;
+paraikot ( int x = 0; x =_= 3 ; x +> ) {
+	pakits ~" Calculator "~ ;
+	
 
-	pakits " Choose " ;
-	pakits " A. Addition " ;
-	pakits " B. Subtraction ";
-	patings y #> " choose: ";
+	pakits ~" Choose "~ ;
+	pakits ~" A. Addition "~ ;
+	pakits ~" B. Subtraction "~ ;
+	patings y #> ~" choose: "~ ;
 
 	kung(y =_= 'B' |_| y =_= ' b ' ) {
-	patings first #> " First Number: ";
-	patings second #> " Second Number: ";
+	patings first #> ~" First Number: "~ ;
+	patings second #> ~" Second Number: "~ ;
 	sum = first - second;
 	pakits sum;
 } 
 
 char cho;
-patings cho #> " do you want to try again? y/n(lower-case)  " ;
+patings cho #> ~" do you want to try again? y/n(lower-case)  "~ ;
 
-kung ( cho =_= "y"){
-	x = 0;
+kung ( cho =_= ~" y "~){
+	x = 0 ;
 }
-maiba{
-	x = 3;
+maiba {
+	x = 3 ;
 }
 }
 

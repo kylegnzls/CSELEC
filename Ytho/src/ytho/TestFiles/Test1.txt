@@ -1,8 +1,8 @@
 Simula{
  int num1 = 1;
 	int nos2 = 2;
-        stringtho x = "xadsf";
-	@@num1 and nos2 will be added depending on the condition 
+        stringtho x = ~" xadsf "~ ;
+	@@ num1 and nos2 will be added depending on the condition 
 
 	kung( num1 < 3){
 		int summa = num1 + nos2;

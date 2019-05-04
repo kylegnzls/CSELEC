@@ -252,97 +252,95 @@ Scanner scan;
     public Parser(Scanner scan) {
         this.scan = scan;
 
-        rules.put("R1", new ReductionRule(TokenType.SIMULA, 6, "<Keyword Begin> := SIMULA ID BLOCKSTART <Statements> BLOCKEND WAKAS"));
+        rules.put("r1", new ReductionRule(TokenType.SIMULA, 6, "<Keyword Begin> := SIMULA ID BLOCKSTART <Statements> BLOCKEND WAKAS"));
 
-        rules.put("R2", new ReductionRule(TokenType.STATEMENT, 1, "<Statements> := <Statements>"));
-        rules.put("R3", new ReductionRule(TokenType.STATEMENT, 1, "<Statements> := ;"));
-        rules.put("R4", new ReductionRule(TokenType.STATEMENT, 2, "<Statements> := <Decln> ;"));
-        rules.put("R5", new ReductionRule(TokenType.STATEMENT, 2, "<Statements> := <Exp> ;"));
-        rules.put("R6", new ReductionRule(TokenType.STATEMENT, 2, "<Statements> := <Decln> ;"));
-        rules.put("R7", new ReductionRule(TokenType.STATEMENT, 1, "<Statements> := <StmntBlk>"));
-        rules.put("R8", new ReductionRule(TokenType.STATEMENT, 1, "<Statements> := <Cond>"));
-        rules.put("R9", new ReductionRule(TokenType.STATEMENT, 1, "<Statements> := <Loop>"));
-        rules.put("R10", new ReductionRule(TokenType.STATEMENT, 2, "<Statements> := <InOut> ;"));
-        rules.put("R11", new ReductionRule(TokenType.STATEMENT, 2, "<Statements> := BASAG ;"));
-        rules.put("R12", new ReductionRule(TokenType.STATEMENT, 1, "<Statements> := '' "));
+        rules.put("r2", new ReductionRule(TokenType.STATEMENT, 1, "<Statements> := <Statements>"));
+        rules.put("r3", new ReductionRule(TokenType.STATEMENT, 1, "<Statements> := ;"));
+        rules.put("r4", new ReductionRule(TokenType.STATEMENT, 2, "<Statements> := <Decln> ;"));
+        rules.put("r5", new ReductionRule(TokenType.STATEMENT, 2, "<Statements> := <Exp> ;"));
+        rules.put("r6", new ReductionRule(TokenType.STATEMENT, 2, "<Statements> := <Decln> ;"));
+        rules.put("r7", new ReductionRule(TokenType.STATEMENT, 1, "<Statements> := <StmntBlk>"));
+        rules.put("r8", new ReductionRule(TokenType.STATEMENT, 1, "<Statements> := <Cond>"));
+        rules.put("r9", new ReductionRule(TokenType.STATEMENT, 1, "<Statements> := <Loop>"));
+        rules.put("r10", new ReductionRule(TokenType.STATEMENT, 2, "<Statements> := <InOut> ;"));
+        rules.put("r11", new ReductionRule(TokenType.STATEMENT, 2, "<Statements> := BASAG ;"));
+        rules.put("r12", new ReductionRule(TokenType.STATEMENT, 1, "<Statements> := '' "));
 
-        rules.put("R13", new ReductionRule(TokenType.DECLARATION, 3, "<Decln> := <DType> <Declr> ; "));
-        rules.put("R14", new ReductionRule(TokenType.DECLARATION, 5, "<Decln> := <DType> <Declr> ,<Declr>; "));
+        rules.put("r13", new ReductionRule(TokenType.DECLARATION, 3, "<Decln> := <DType> <Declr> ; "));
+        rules.put("r14", new ReductionRule(TokenType.DECLARATION, 5, "<Decln> := <DType> <Declr> ,<Declr>; "));
 
-        rules.put("R15", new ReductionRule(TokenType.DECLARATOR, 1, "<Declr> := ID "));
-        rules.put("R16", new ReductionRule(TokenType.DECLARATOR, 3, "<Statements> := ID = <VarInit> "));
+        rules.put("r15", new ReductionRule(TokenType.DECLARATOR, 1, "<Declr> := ID "));
+        rules.put("r16", new ReductionRule(TokenType.DECLARATOR, 3, "<Statements> := ID = <VarInit> "));
+        rules.put("r17", new ReductionRule(TokenType.DECLARATOR, 1, "<VarInit> := <Exp> "));
 
-        rules.put("R17", new ReductionRule(TokenType.DECLARATOR, 3, "<VarInit> := <Exp> "));
+        rules.put("r18", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := <ArithExp> "));
+        rules.put("r19", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := <LogicExp> "));
+        rules.put("r20", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := <RelExp> "));
+        rules.put("r21", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := <CastExp> "));
+        rules.put("r22", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := <LitExp> "));
+        rules.put("r23", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := ID "));
 
-        rules.put("R18", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := <ArithExp> "));
-        rules.put("R19", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := <LogicExp> "));
-        rules.put("R20", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := <RelExp> "));
-        rules.put("R21", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := <CastExp> "));
-        rules.put("R22", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := <LitExp> "));
-        rules.put("R23", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := ID "));
+        rules.put("r24", new ReductionRule(TokenType.ARITH_EXPRESSION, 3, "<ArithExp> := <ArithExp> ADDSUB <Term>"));
+        rules.put("r25", new ReductionRule(TokenType.ARITH_EXPRESSION, 1, "<ArithExp> := <Term> "));
 
-        rules.put("R24", new ReductionRule(TokenType.ARITH_EXPRESSION, 3, "<ArithExp> := <ArithExp> ADDSUB <Term>"));
-        rules.put("R25", new ReductionRule(TokenType.ARITH_EXPRESSION, 1, "<ArithExp> := <Term> "));
+        rules.put("r26", new ReductionRule(TokenType.TERM, 3, "<Term> := <Term> MULDIV <Factor>"));
+        rules.put("r27", new ReductionRule(TokenType.TERM, 1, "<Term> := <Factor>"));
 
-        rules.put("R26", new ReductionRule(TokenType.TERM, 3, "<Term> := <Term> MULDIV <Factor>"));
-        rules.put("R27", new ReductionRule(TokenType.TERM, 1, "<Term> := <Factor>"));
+        rules.put("r28", new ReductionRule(TokenType.FACTOR, 3, "<Factor> := <Factor> ^ <Expow>"));
+        rules.put("r29", new ReductionRule(TokenType.FACTOR, 1, "<Factor> := <Expow>"));
 
-        rules.put("R28", new ReductionRule(TokenType.FACTOR, 3, "<Factor> := <Factor> ^ <Expow>"));
-        rules.put("R29", new ReductionRule(TokenType.FACTOR, 1, "<Factor> := <Expow>"));
+        rules.put("r30", new ReductionRule(TokenType.EXPOW, 3, "<Expow> := (<Exp>)"));
+        rules.put("r31", new ReductionRule(TokenType.EXPOW, 1, "<Expow> := INTLIT"));
 
-        rules.put("R30", new ReductionRule(TokenType.EXPOW, 3, "<Expow> := (<Exp>)"));
-        rules.put("R31", new ReductionRule(TokenType.EXPOW, 3, "<Expow> := INTLIT"));
+        rules.put("r32", new ReductionRule(TokenType.LOGIC_EXPRESSION, 3, "<LogicExp> := <LogicExp> <Logop> <RelExp>"));
+        rules.put("r33", new ReductionRule(TokenType.LOGIC_EXPRESSION, 1, "<LogicExp> := <RelExp>"));
+        rules.put("r34", new ReductionRule(TokenType.LOGIC_EXPRESSION, 1, "<LogicExp> := BOOLCONST"));
+        
+        rules.put("r35", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := AND"));
+        rules.put("r36", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := IR"));
+        rules.put("r37", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := NOT"));
+        rules.put("r38", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := NAND"));
+        rules.put("r39", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := NOR"));
 
-        rules.put("R32", new ReductionRule(TokenType.LOGIC_EXPRESSION, 3, "<LogicExp> := <LogicExp> <Logop> <RelExp>"));
-        rules.put("R33", new ReductionRule(TokenType.LOGIC_EXPRESSION, 1, "<LogicExp> := <RelExp>"));
-        rules.put("R34", new ReductionRule(TokenType.LOGIC_EXPRESSION, 1, "<LogicExp> := BOOLCONST"));
+        rules.put("r40", new ReductionRule(TokenType.REL_EXPRESSION, 3, "<RelExp> := <RelExp> RELOP <ArithExp>"));
+        rules.put("r41", new ReductionRule(TokenType.REL_EXPRESSION, 1, "<RelExp> := <ArithExp>"));
 
-        rules.put("R35", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := AND"));
-        rules.put("R36", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := IR"));
-        rules.put("R37", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := NOT"));
-        rules.put("R38", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := NAND"));
-        rules.put("R39", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := NOR"));
+        rules.put("r42", new ReductionRule(TokenType.CAST_EXPRESSION, 4, "<CastExp> := ( <Dtype> ) <Exp>"));
 
-        rules.put("R40", new ReductionRule(TokenType.REL_EXPRESSION, 3, "<RelExp> := <RelExp> RELOP <ArithExp>"));
-        rules.put("R41", new ReductionRule(TokenType.REL_EXPRESSION, 1, "<RelExp> := <ArithExp>"));
+        rules.put("r43", new ReductionRule(TokenType.LIT_EXPRESSION, 1, "<LitExp> := INTLIT"));
+        rules.put("r44", new ReductionRule(TokenType.LIT_EXPRESSION, 1, "<LitExp> := STRINGLIT"));
+        rules.put("r45", new ReductionRule(TokenType.LIT_EXPRESSION, 1, "<LitExp> := FLOATLIT"));
 
-        rules.put("R42", new ReductionRule(TokenType.CAST_EXPRESSION, 4, "<CastExp> := ( <Dtype> ) <Exp>"));
+        rules.put("r46", new ReductionRule(TokenType.STMNT_BLK, 3, "<StmntBlk> := { <Stmnt> }"));
 
-        rules.put("R43", new ReductionRule(TokenType.LIT_EXPRESSION, 1, "<LitExp> := INTLIT"));
-        rules.put("R44", new ReductionRule(TokenType.LIT_EXPRESSION, 1, "<LitExp> := STRINGLIT"));
-        rules.put("R45", new ReductionRule(TokenType.LIT_EXPRESSION, 1, "<LitExp> := FLOATLIT"));
+        rules.put("r47", new ReductionRule(TokenType.CONDITION, 7, "<Cond> := KUNG ( <Exp> ) { <Stmnt> } "));
+        rules.put("r48", new ReductionRule(TokenType.CONDITION, 11, "<Cond> := KUNG ( <Exp> ) { <Stmnt> } MAIBA { <Stmnt> } "));
 
-        rules.put("R46", new ReductionRule(TokenType.STMNT_BLK, 3, "<StmntBlk> := { <Stmnt> }"));
+        rules.put("r49", new ReductionRule(TokenType.LOOP, 7, "<Loop> := PARAIKOT ( <LoopCond> ) { <Stmnt> } "));
 
-        rules.put("R47", new ReductionRule(TokenType.CONDITION, 7, "<Cond> := KUNG ( <Exp> ) { <Stmnt> } "));
-        rules.put("R48", new ReductionRule(TokenType.CONDITION, 11, "<Cond> := KUNG ( <Exp> ) { <Stmnt> } MAIBA { <Stmnt> } "));
+        rules.put("r50", new ReductionRule(TokenType.LOOP_CONDITION, 5, "<LoopCond> := <Init> ; <Exp> ; <UpDown> "));
 
-        rules.put("R49", new ReductionRule(TokenType.LOOP, 7, "<Loop> := PARAIKOT ( <LoopCond> ) { <Stmnt> } "));
+        rules.put("r51", new ReductionRule(TokenType.INIT, 4, "<Init> := <Dtype> ID = INTLIT "));
 
-        rules.put("R50", new ReductionRule(TokenType.LOOP_CONDITION, 5, "<LoopCond> := <Init> ; <Exp> ; <UpDown> "));
+        rules.put("r52", new ReductionRule(TokenType.UPDOWN, 2, "<UpDown> := ID INCREMENT"));
+        rules.put("r53", new ReductionRule(TokenType.UPDOWN, 2, "<UpDown> := ID DECREMENT"));
 
-        rules.put("R51", new ReductionRule(TokenType.INIT, 4, "<Init> := <Dtype> ID = INTLIT "));
+        rules.put("r54", new ReductionRule(TokenType.INOUT, 1, "<InOut> := <In>"));
+        rules.put("r55", new ReductionRule(TokenType.INOUT, 1, "<InOut> := <Out>"));
 
-        rules.put("R52", new ReductionRule(TokenType.UPDOWN, 2, "<UpDown> := ID INCREMENT"));
-        rules.put("R53", new ReductionRule(TokenType.UPDOWN, 2, "<UpDown> := ID DECREMENT"));
+        rules.put("r56", new ReductionRule(TokenType.IN, 3, "<In> := PATINGS ID INPUT"));
+        rules.put("r57", new ReductionRule(TokenType.OUT, 2, "<UpDown> := PAKITS  <StrPat>"));
 
-        rules.put("R54", new ReductionRule(TokenType.INOUT, 1, "<InOut> := <In>"));
-        rules.put("R55", new ReductionRule(TokenType.INOUT, 1, "<InOut> := <Out>"));
+        rules.put("r58", new ReductionRule(TokenType.STRING_PAT, 3, "<StrPat> := LPAREN STRINGLIT RPAREN "));
+        rules.put("r59", new ReductionRule(TokenType.STRING_PAT, 1, "<StrPat> := ID "));
+        rules.put("r60", new ReductionRule(TokenType.STRING_PAT, 5, "<StrPat> := LPAREN STRINGLIT RPAREN CONCAT <StrPat> "));
 
-        rules.put("R56", new ReductionRule(TokenType.IN, 3, "<In> := PATINGS ID INPUT"));
-        rules.put("R57", new ReductionRule(TokenType.OUT, 2, "<UpDown> := PAKITS  <StrPat>"));
-
-        rules.put("R58", new ReductionRule(TokenType.STRING_PAT, 3, "<StrPat> := LPAREN STRINGLIT RPAREN "));
-        rules.put("R59", new ReductionRule(TokenType.STRING_PAT, 1, "<StrPat> := ID "));
-        rules.put("R60", new ReductionRule(TokenType.STRING_PAT, 5, "<StrPat> := LPAREN STRINGLIT RPAREN CONCAT <StrPat> "));
-
-        rules.put("R61", new ReductionRule(TokenType.DTYPE, 1, "<StrPat> := INT "));
-        rules.put("R62", new ReductionRule(TokenType.DTYPE, 1, "<StrPat> := BOOL "));
-        rules.put("R63", new ReductionRule(TokenType.DTYPE, 1, "<StrPat> := LUTANGS "));
-        rules.put("R64", new ReductionRule(TokenType.DTYPE, 1, "<StrPat> := CHAR "));
-        rules.put("R65", new ReductionRule(TokenType.DTYPE, 1, "<StrPat> := CONST "));
-        rules.put("R66", new ReductionRule(TokenType.DTYPE, 1, "<StrPat> := STRINGTHO "));
-
+        rules.put("r61", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := INT "));
+        rules.put("r62", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := BOOL "));
+        rules.put("r63", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := LUTANGS "));
+        rules.put("r64", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := CHAR "));
+        rules.put("r65", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := CONST "));
+        rules.put("r66", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := STRINGTHO "));
     }
 
  String parseTable[][];
@@ -356,32 +354,35 @@ Scanner scan;
         stack.add(new Node(new Token(TokenType.DOLLAR), 0));
 
         Token currentInputToken = scan.ConsumeNextToken();
-        System.out.println(currentInputToken.getTokenType());
+       
         boolean repeat = true;
         boolean endoftheline = false;
 
         while (repeat) {
             int state = stack.peek().nodeState;
             int ordinal = currentInputToken.TokenType.ordinal();
-            
-            if (ordinal < 26) {
+             System.out.println(currentInputToken.getTokenType());
+            if (ordinal < 42) {
                 String action = parseTable[state][ordinal];
-
+               System.out.println(ordinal+"state" + state);
+                    System.out.println(currentInputToken.getTokenType());
+                    System.out.println(action);
                 if (action.equals("")) {
                     System.out.println("==========ERROR IN THE PARSING==========");
                     System.out.println("CANNOT PARSE : " + currentInputToken.getTokenType());
                     System.out.println("State : " + state);
                     System.out.println("Ordinal : " + ordinal);
                     return null;
-                } else if (action == "Accept") {
+                } else if (action == "acc") {
                     System.out.println("PROGRAM ACCEPTED");
                     return stack.pop();
                 }
+                
 
                 switch (action.charAt(0)) {
-                    case 'S':
+                    case 's':
                         System.out.println("Action : " + action + " Shifting " + currentInputToken.getTokenType() + " with State " + action.substring(1));
-                        //System.out.println(action.substring(1));
+                        System.out.println(action.substring(1));
                         Node n = new Node(currentInputToken, Integer.parseInt(action.substring(1)));
                         stack.push(n);
                         currentInputToken = scan.ConsumeNextToken();
@@ -393,17 +394,19 @@ Scanner scan;
                         }
 
                         break;
-                    case 'R':
+                    case 'r':
+//                         System.out.println(stack.peek().nodeState + "hello");
                         ReductionRule rr = rules.get(action);
+                        System.out.println(rr);
                         System.out.println("REDUCING BY " + action + " | " + rr.reductionGrammar);
                         Node m = new Node(new Token(rr.production), -1);
 
                         for (int i = 0; i < rr.popAmount; i++) {
                             m.nodeChildren.addFirst(stack.pop());
-                        }
-                        System.out.println(rr.production + " ORDINAL " + rr.production.ordinal());
-                        String newState = gotoTable[stack.peek().nodeState][rr.production.ordinal() - 32];
-
+                        }System.out.println(rr.production.ordinal());
+                        System.out.println(rr.production + " ORDINAL " + (rr.production.ordinal()-61));
+                        String newState = gotoTable[stack.peek().nodeState][rr.production.ordinal()-54];
+                 
                         if (newState == "") {
                             System.out.println("GOTO TABLE ERROR");
                             return null;
@@ -415,7 +418,7 @@ Scanner scan;
 
                     default:
                        
-                        System.out.println(stack.size());
+                       // System.out.println(stack.size());
                         System.out.println("PARSING ERROR WEW LAD");
                         return null;
                 }

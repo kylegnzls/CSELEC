@@ -1,0 +1,9 @@
+Simula omsimDeins {
+    	boolol weh = omsim;
+	kung(weh =_+= deins){
+		pakits "true";
+	}maiba{
+		pakits "false";
+	}
+	
+}Wakas

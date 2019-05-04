@@ -25,7 +25,7 @@ public class Test {
         Hashtable<String, TokenID> identifiers = new Hashtable<String, TokenID>();
         Hashtable<Integer, TokenNum> numeric = new Hashtable<Integer, TokenNum>();
         reservedWords = Inhale.ExhaleReserves();
-        Scanner scan = new Scanner(reservedWords, identifiers,numeric, "‪D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test2.txt");
+        Scanner scan = new Scanner(reservedWords, identifiers,numeric, "‪D:\\MIGGY\\UST\\3rd Year\\2nd Semester\\CS-ELEC1A (Compiler Design)\\Programming Language Project\\YTHO\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test2.txt");
 
         while (Scanner.IsInputEnd()) {
             Token currentToken = scan.ConsumeNextToken();
@@ -66,18 +66,18 @@ public class Test {
             }
             
         }
-        Scanner scan2 = new Scanner(reservedWords, identifiers, numeric, "‪D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test2.txt");
-        ParseTab p = new ParseTab();
-        System.out.println(p.getParseTable());
+        Scanner scan2 = new Scanner(reservedWords, identifiers, numeric, "‪D:\\MIGGY\\UST\\3rd Year\\2nd Semester\\CS-ELEC1A (Compiler Design)\\Programming Language Project\\YTHO\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test2.txt");
+       
+       
         Parser parse = new Parser(scan2);
         Node root = parse.startParse();
-
+/*
         if (root != null) {
             System.out.println("STARTING SEARCH");
             String treeSyntax = parse.DepthFirstTraversal(root);
             System.out.println(treeSyntax);
 
-        }
+        }*/
     }
 
 }

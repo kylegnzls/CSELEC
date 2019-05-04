@@ -5,7 +5,7 @@ int first;
 int second;
 int sum;
 
-paraikot(int x = 0; x =_= 3 ; x ++){
+paraikot ( int x = 0; x =_= 3 ; x ++){
 	pakits " Calculator " ;
 	pakits " --------------- " ;
 
@@ -24,7 +24,7 @@ paraikot(int x = 0; x =_= 3 ; x ++){
 char cho;
 patings cho #> " do you want to try again? y/n(lower-case)  " ;
 
-kung(cho =_= "y"){
+kung ( cho =_= "y"){
 	x = 0;
 }
 maiba{

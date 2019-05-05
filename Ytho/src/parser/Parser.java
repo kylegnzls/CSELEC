@@ -15,8 +15,9 @@ import java.util.*;
  * @author Blank
  */
 public class Parser {
-Scanner scan;
-    
+
+    Scanner scan;
+
     HashMap<String, ReductionRule> rules = new HashMap<>();
     String gotoTable[][] = {
         {"", "1", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""},
@@ -247,8 +248,6 @@ Scanner scan;
         {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""},
         {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""},};
 
-    
-    
     public Parser(Scanner scan) {
         this.scan = scan;
 
@@ -295,7 +294,7 @@ Scanner scan;
         rules.put("r32", new ReductionRule(TokenType.LOGIC_EXPRESSION, 3, "<LogicExp> := <LogicExp> <Logop> <RelExp>"));
         rules.put("r33", new ReductionRule(TokenType.LOGIC_EXPRESSION, 1, "<LogicExp> := <RelExp>"));
         rules.put("r34", new ReductionRule(TokenType.LOGIC_EXPRESSION, 1, "<LogicExp> := BOOLCONST"));
-        
+
         rules.put("r35", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := AND"));
         rules.put("r36", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := IR"));
         rules.put("r37", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := NOT"));
@@ -343,30 +342,31 @@ Scanner scan;
         rules.put("r66", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := STRINGTHO "));
     }
 
- String parseTable[][];
+    String parseTable[][];
+
     public Node startParse() {
-       ParseTab par = new ParseTab();
-       this.parseTable = par.parseTable.clone();
-       
+        ParseTab par = new ParseTab();
+        this.parseTable = par.parseTable.clone();
+
         System.out.println(" ==================================================STARTING PARSER PHASE ==================================================");
         Stack<Node> stack = new Stack<Node>();
         Node root = new Node();
         stack.add(new Node(new Token(TokenType.DOLLAR), 0));
 
         Token currentInputToken = scan.ConsumeNextToken();
-       
+
         boolean repeat = true;
         boolean endoftheline = false;
 
         while (repeat) {
             int state = stack.peek().nodeState;
             int ordinal = currentInputToken.TokenType.ordinal();
-             System.out.println(currentInputToken.getTokenType());
+            //  System.out.println(currentInputToken.getTokenType());
             if (ordinal < 42) {
                 String action = parseTable[state][ordinal];
-               System.out.println(ordinal+"state" + state);
-                    System.out.println(currentInputToken.getTokenType());
-                    System.out.println(action);
+                //System.out.println(ordinal+"state" + state);
+                //System.out.println(currentInputToken.getTokenType());
+                //System.out.println(action);
                 if (action.equals("")) {
                     System.out.println("==========ERROR IN THE PARSING==========");
                     System.out.println("CANNOT PARSE : " + currentInputToken.getTokenType());
@@ -377,16 +377,15 @@ Scanner scan;
                     System.out.println("PROGRAM ACCEPTED");
                     return stack.pop();
                 }
-                
 
                 switch (action.charAt(0)) {
                     case 's':
                         System.out.println("Action : " + action + " Shifting " + currentInputToken.getTokenType() + " with State " + action.substring(1));
-                        System.out.println(action.substring(1));
+                       // System.out.println(action.substring(1));
                         Node n = new Node(currentInputToken, Integer.parseInt(action.substring(1)));
                         stack.push(n);
                         currentInputToken = scan.ConsumeNextToken();
-                        
+
                         if (!Scanner.IsInputEnd()) {
                             System.out.println("END OF SCANNER REACHED");
                             endoftheline = true;
@@ -403,10 +402,11 @@ Scanner scan;
 
                         for (int i = 0; i < rr.popAmount; i++) {
                             m.nodeChildren.addFirst(stack.pop());
-                        }System.out.println(rr.production.ordinal());
-                        System.out.println(rr.production + " ORDINAL " + (rr.production.ordinal()-61));
-                        String newState = gotoTable[stack.peek().nodeState][rr.production.ordinal()-54];
-                 
+                        }
+                        System.out.println(rr.production.ordinal());
+                        System.out.println(rr.production + " ORDINAL " + (rr.production.ordinal() - 61));
+                        String newState = gotoTable[stack.peek().nodeState][rr.production.ordinal() - 54];
+
                         if (newState == "") {
                             System.out.println("GOTO TABLE ERROR");
                             return null;
@@ -417,8 +417,8 @@ Scanner scan;
                         break;
 
                     default:
-                       
-                       // System.out.println(stack.size());
+
+                        // System.out.println(stack.size());
                         System.out.println("PARSING ERROR WEW LAD");
                         return null;
                 }

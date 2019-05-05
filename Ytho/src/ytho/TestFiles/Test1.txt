@@ -1,4 +1,4 @@
-Simula{
+Simula x{
  int num1 = 1;
 	int nos2 = 2;
         stringtho x = ~" xadsf "~ ;

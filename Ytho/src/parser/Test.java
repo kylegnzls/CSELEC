@@ -66,18 +66,18 @@ public class Test {
             }
             
         }
-        Scanner scan2 = new Scanner(reservedWords, identifiers, numeric, "D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test2.txt");
+       Scanner scan2 = new Scanner(reservedWords, identifiers, numeric, "D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test2.txt");
        
        
-     //   Parser parse = new Parser(scan2);
-       // Node root = parse.startParse();
-/*
+        Parser parse = new Parser(scan2);
+        Node root = parse.startParse();
+
         if (root != null) {
             System.out.println("STARTING SEARCH");
             String treeSyntax = parse.DepthFirstTraversal(root);
             System.out.println(treeSyntax);
 
-        }*/
+        }
     }
 
 }

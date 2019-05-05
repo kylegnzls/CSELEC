@@ -10,7 +10,7 @@ package TokenLib;
  * @author Blank
  */
 public class TokenString extends Token{
-public String literal = "";
+public String literal ;
     public TokenString(String name) {
         super(TokenLib.TokenType.STRINGLITERAL);
         literal = name;

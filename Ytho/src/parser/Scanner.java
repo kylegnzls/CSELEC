@@ -60,7 +60,7 @@ public class Scanner {
             char c = Consume();
             tokenS += c;
             //System.out.println(c);
-           // System.out.println(c);
+            //System.out.println(c);
             switch (CURRENT_STATE) {
                 case 0:
 
@@ -75,17 +75,24 @@ public class Scanner {
                     else if (c == 'S') {
                         CURRENT_STATE = 1;
                     }//Whitespace 7 
+                   else if (c == '~') {
+                        CURRENT_STATE = 93;
+                    } else if (c == '"') {
+                      tokenS =  Remove(tokenS);
+                      
+                        CURRENT_STATE = 95;
+                    }
                     else if (c == ' ' || currBit == 9) {
                         CURRENT_STATE = 7;
                     } //R CURLY  
                     //PAG MALI PUSHBACK TO TOKENS
                     else if (c == '{') {
 
-                        return new Token(TokenType.RCURLY);
+                        return new Token(TokenType.LCURLY);
                     }//L CURLY  PAG MALI PUSHBACK TO TOKENS
                     else if (c == '}') {
 
-                        return new Token(TokenType.LCURLY);
+                        return new Token(TokenType.RCURLY);
                     } //WAKAS 10 - 14
                     else if (c == 'W') {
                         CURRENT_STATE = 10;
@@ -96,7 +103,7 @@ public class Scanner {
                         CURRENT_STATE = 16;
 
                     } else if (c == ',') {
-                        Pushback();
+                        
                         return new Token(TokenType.COMMA);
 
                     } //asign or relop 29-30
@@ -105,7 +112,7 @@ public class Scanner {
 
                     }//asign or relop 29-30
                     else if (c == '<') {
-                        CURRENT_STATE = 29;
+                        CURRENT_STATE = 28;
 
                     } //
                     else if (c == '>') {
@@ -118,7 +125,7 @@ public class Scanner {
                         CURRENT_STATE = 52;
                     } // MULDIV
                     else if (c == '*' || c == '/') {
-                        Pushback();
+                        
                         return new Token(TokenType.MULDIV);
                     } // EXPONENT
                     else if (c == '^') {
@@ -127,11 +134,11 @@ public class Scanner {
                     } //RPAREN
                     else if (c == '(') {
                         
-                        return new Token(TokenType.RPAREN);
+                        return new Token(TokenType.LPAREN);
                     }//LPAREN
                     else if (c == ')') {
                        
-                        return new Token(TokenType.LPAREN);
+                        return new Token(TokenType.RPAREN);
                     } // INTLIT 21
                     else if (IsDigit(c)) {
                         CURRENT_STATE = 105;
@@ -167,11 +174,7 @@ public class Scanner {
                     }//stringtho 
                     else if (c == 's') {
                         CURRENT_STATE = 84;
-                    } else if (c == '~') {
-                        CURRENT_STATE = 93;
-                    } else if (c == '"') {
-                        CURRENT_STATE = 95;
-                    } else if (c == '@') {
+                    }  else if (c == '@') {
                         CURRENT_STATE = 97;
                     } //IDENTIFIER 8-9
                     else if (IsAlphabet(c)) {
@@ -303,7 +306,7 @@ public class Scanner {
                     break;
                 case 14:
                     if (!IsAlphabet(c)/*c == ' ' || c == '$' || c == '.'*/) { // Line enders //If its alphabets, bad, if not, good
-                        Pushback();
+                        
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.WAKAS);
                     } else {
@@ -364,7 +367,7 @@ public class Scanner {
                     break;
                 case 23:
                     if (c == '&') {
-                        Pushback();
+                        
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.AND);
                     } else {
@@ -409,6 +412,7 @@ public class Scanner {
                     } else {
                         return new Token(TokenType.ERROR);
                     }
+                    
                 case 28:
                     if (c == '_') {
                         CURRENT_STATE = 29;
@@ -425,7 +429,9 @@ public class Scanner {
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.RELOP);
                     } else {
-                        return new Token(TokenType.ERROR);
+                        
+                       tokenS = Remove(tokenS);
+                        return new Token(TokenType.RELOP);
                     }
                 case 30:
                     if (c == '_') {
@@ -452,7 +458,8 @@ public class Scanner {
                         Pushback();
                         return new Token(TokenType.RELOP);
                     } else {
-                        return new Token(TokenType.ERROR);
+                       tokenS = Remove(tokenS);
+                        return new Token(TokenType.RELOP);
                     }
                     break;
                 case 33:
@@ -956,24 +963,23 @@ public class Scanner {
                     }
                 case 93:
                     if (c == '"') {
-                        CURRENT_STATE = 94;
+                     Pushback();
+                        tokenS = Remove(tokenS);
+                        return new Token(TokenType.LQUOTE);
                     } else {
 
                         CURRENT_STATE = 8;
                     }
                     break;
-                case 94:
-                    if (!IsAlphabet(c)/*c == ' ' || c == '$' || c == '.'*/) { // Line enders //If its alphabets, bad, if not, good
-                        Pushback();
-                        tokenS = Remove(tokenS);
-                        return new Token(TokenType.LQUOTE);
-                    } else {
-                        return new Token(TokenType.ERROR);
-                    }
+            
                 case 95:
+                    
                     if (c == '~') {
                         CURRENT_STATE = 96;
-                    } else {
+                    } else if (AlphaOrDigit(c) || c == ' '){
+                        
+                        CURRENT_STATE = 106;
+                    }else {
 
                         return new Token(TokenType.ERROR);
                     }
@@ -1055,17 +1061,25 @@ public class Scanner {
                     } else if (c == '.') {//float di pa tapos
                         CURRENT_STATE = 107;
                     } else if (c == ' ' || c == ';') {
+                        Pushback();
                         tokenS = Remove(tokenS);
                        
                         if (!numeric.containsKey(Integer.parseInt(tokenS))) {
                             numeric.put(Integer.parseInt(tokenS), new TokenNum(Integer.parseInt(tokenS)));
                         }
-                        return new TokenID(tokenS);
+                        return new TokenNum(Integer.parseInt(tokenS));
                     } else {
                         return new Token(TokenType.ERROR);
                     }
                     break;
-               
+                case 106: if(c != '"'){
+                    CURRENT_STATE = 106;
+                }else {
+                    Pushback();
+                 tokenS = Remove(tokenS);
+                    
+                        return new TokenString(tokenS);
+                }
             }
 
         }

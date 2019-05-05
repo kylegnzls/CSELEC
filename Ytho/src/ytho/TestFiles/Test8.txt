@@ -1,5 +1,5 @@
 Simula toOther {
-    	stringtho nums = "3";
+    	stringtho nums = ~" 3 "~ ;
 int num = nums.toInt();
     	pakita numS;
 

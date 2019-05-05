@@ -1,5 +1,5 @@
 Simula  {    	
-  	int num1 = 1, num2 = 2 , num3 = 9 ;
+  	int num1 = 1 , num2 = 2 , num3 = 9 ;
     	bool result;
     	
     	@@ OR - At least one expression needs to be true for result to be true
@@ -14,35 +14,35 @@ pakits result;
 
     	@@AND - All expression must be true from result to be true	
 
-    	result = (num1 > num2) &_& (num3 > num1);
+    	result = ( num1 > num2 ) &_& ( num3 > num1 );
 
-    	@@ result will be false because (num1 > num2) is false
+    	@@ result will be false because ( num1 > num2 ) is false
     	
     	pakits result;
 
 @@NOT - If the expression is true the result will be false
 	
-    	result = !_!(num1 > num2);
+    	result = !_!( num1 > num2 );
 
-    	@@ result will be true because (num1 > num2) is false
+    	@@ result will be true because ( num1 > num2 ) is false
 
 pakits result;
 
 
     	@@NOR - At least one expression needs to be true for result to be false 
 
-   	@@result = (num1 > num2) !_| (num3 > num1);
+   	@@result = ( num1 > num2 ) !_| ( num3 > num1 );
 
-    	@@result will be false because (num3 > num1) is true
+    	@@result will be false because ( num3 > num1 ) is true
 
 pakits result;
 
 
 @@NAND - All expression must be true from result to be false	
 
-    	result = (num1 > num2) !_& (num3 > num1);
+    	result = ( num1 > num2 ) !_& ( num3 > num1 );
 
-    	@@ result will be true because (num1 > num2) is false
+    	@@ result will be true because ( num1 > num2 ) is false
 
 pakits result;
 }

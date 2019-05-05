@@ -1,7 +1,7 @@
 Simula inOut {
     	int x;
-pakits " Enter a number: ";
+pakits ~" Enter a number: "~;
 patings x #> Input statement ;
-pakits " Your number is = " &+ x;
+pakits ~" Your number is = "~ &+ x;
 
 }Wakas

@@ -14,7 +14,7 @@ public class TokenNum extends Token{
 
    
     public TokenNum(int num){
-        super(TokenLib.TokenType.INT_CONST);
+        super(TokenLib.TokenType.INTLIT);
         this.num = num;
 }
 }

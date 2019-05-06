@@ -79,9 +79,11 @@ public enum TokenType {
     
     //58
     START,
+    STATEMENTS,
     STATEMENT, //non terminals
     DECLARATION,
     DECLARATOR,
+    VARINIT,
     ARITH_EXPRESSION,
     TERM,
     FACTOR,
@@ -106,6 +108,6 @@ public enum TokenType {
     OPERATOR,
     TYPE,
     LETTERLITERAL,
-    STRINGLITERAL,
+    STRINGLITERAL,  
 
 }

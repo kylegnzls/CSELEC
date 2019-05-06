@@ -52,33 +52,14 @@ public enum TokenType {
     CHAR,
     CONST,//
     STRINGTHO,
-    OMSIM,// 40
-    DEINS,
-    IBALIK,
-    NUMCONSTANTS,
-    FLOAT_CONST,
-    CHAR_CONST, //'ASCII Char'
-    BOOLEAN_CONST,
-    LBRACKET, // [
-    RBRACKET, // ]
     DOLLAR,// [0-9]+
 
-    //50
-    EOF, // input stream has been consumed
     ERROR, // character/token could not be processed // binary operators
-    INT_CONST,
     WHITESPACE,
-    IGNORE,   // reserved words
-    //MAIN, // main - relegate as ID (?)
     NEWLINE,
-    //break
-    
-    //SCLON, // ;
-    NEGATIVE, // -
     COMMENT, // for error reporting
-    
-    //58
-    START,
+
+    START,//58
     STATEMENTS,
     STATEMENT, //non terminals
     DECLARATION,
@@ -108,6 +89,5 @@ public enum TokenType {
     OPERATOR,
     TYPE,
     LETTERLITERAL,
-    STRINGLITERAL,  
-
+    STRINGLITERAL,
 }

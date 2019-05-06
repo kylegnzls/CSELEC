@@ -20,7 +20,7 @@ public enum TokenType {
     BASAG,
     COMMA,
     ASSIGN,
-    ADDSUB,//10 // + AND -
+    ADDSUB,//9 // + AND -
     MULDIV, //* AND /
     EXPON,
     LPAREN,
@@ -30,8 +30,8 @@ public enum TokenType {
     AND,
     OR,
     NOT,
-    NAND,//20
-    NOR,//^
+    NAND,//
+    NOR,//20^
     RELOP,
     STRINGLIT,
     FLOATLIT,
@@ -40,8 +40,8 @@ public enum TokenType {
     PARAIKOT,
     INCREMENT,
     DECREMENT,
-    PATINGS,//30
-    INPUT,
+    PATINGS,//
+    INPUT,// 30
     PAKITS,
     LQUOTE,
     RQUOTE,
@@ -50,17 +50,20 @@ public enum TokenType {
     BOOL,
     LUTANGS,
     CHAR,
-    CONST,//40
+    CONST,//
     STRINGTHO,
-    DOLLAR,// [0-9]+
-
+    OMSIM,// 40
+    DEINS,
+    IBALIK,
     NUMCONSTANTS,
     FLOAT_CONST,
     CHAR_CONST, //'ASCII Char'
     BOOLEAN_CONST,
     LBRACKET, // [
     RBRACKET, // ]
+    DOLLAR,// [0-9]+
 
+    //50
     EOF, // input stream has been consumed
     ERROR, // character/token could not be processed // binary operators
     INT_CONST,
@@ -69,12 +72,13 @@ public enum TokenType {
     //MAIN, // main - relegate as ID (?)
     NEWLINE,
     //break
-    OMSIM,
-    DEINS,
-    IBALIK,
+    
     //SCLON, // ;
     NEGATIVE, // -
     COMMENT, // for error reporting
+    
+    //58
+    START,
     STATEMENT, //non terminals
     DECLARATION,
     DECLARATOR,

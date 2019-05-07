@@ -20,8 +20,8 @@ public enum TokenType {
     BASAG,
     COMMA,
     ASSIGN,
-    ADDSUB,//9 // + AND -
-    MULDIV, //* AND / 10
+    ADDSUB,
+    MULDIV, //10
     EXPON,
     LPAREN,
     RPAREN,
@@ -30,8 +30,8 @@ public enum TokenType {
     AND,
     OR,
     NOT,
-    NAND,//
-    NOR,//20^
+    NAND,
+    NOR,//20
     RELOP,
     STRINGLIT,
     FLOATLIT,
@@ -40,7 +40,7 @@ public enum TokenType {
     PARAIKOT,
     INCREMENT,
     DECREMENT,
-    PATINGS,//
+    PATINGS,
     INPUT,// 30
     PAKITS,
     LQUOTE,
@@ -50,23 +50,22 @@ public enum TokenType {
     BOOL,
     LUTANGS,
     CHAR,
-    CONST,//
+    CONST,
     STRINGTHO,//40
-    DOLLAR,// [0-9]+
-
-    ERROR, // character/token could not be processed // binary operators
+    DOLLAR,
+    //42
+    ERROR,
     WHITESPACE,
     NEWLINE,
-    COMMENT, // for error reporting
-
+    COMMENT,
     START,//46
     STATEMENTS,
     STATEMENT, //non terminals
     DECLARATION,
     DECLARATOR,
     VARINIT,
-   ARITH_EXPRESSION,
-     EXPRESSION,
+    ARITH_EXPRESSION,
+    EXPRESSION,
     TERM,
     FACTOR,
     EXPOW,
@@ -86,8 +85,8 @@ public enum TokenType {
     OUT,
     STRING_PAT,
     DTYPE,
-CHARLITERAL,
-TYPE,
-STRINGLITERAL
-    
+    CHARLITERAL,
+    TYPE,
+    STRINGLITERAL
+
 }

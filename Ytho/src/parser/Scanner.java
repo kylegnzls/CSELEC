@@ -55,12 +55,12 @@ public class Scanner {
         int CURRENT_STATE = 0;
         boolean returnString = false;
         String tokenS = "";
- String sym = "!@#$%^&*()_+[{}]|:'<>?,./";
+        String sym = "!@#$%^&*()_+[{}]|:'<>?,./";
         while (!returnString) {
             char c = Consume();
             tokenS += c;
             //System.out.println(c);
-          //  System.out.println(tokenS);
+            //  System.out.println(tokenS);
             switch (CURRENT_STATE) {
                 case 0:
 
@@ -75,14 +75,13 @@ public class Scanner {
                     else if (c == 'S') {
                         CURRENT_STATE = 1;
                     }//Whitespace 7 
-                   else if (c == '~') {
+                    else if (c == '~') {
                         CURRENT_STATE = 93;
                     } else if (c == '"') {
-                      tokenS =  Remove(tokenS);
-                      
+                        tokenS = Remove(tokenS);
+
                         CURRENT_STATE = 95;
-                    }
-                    else if (c == ' ' || currBit == 9) {
+                    } else if (c == ' ' || currBit == 9) {
                         CURRENT_STATE = 7;
                     } //R CURLY  
                     //PAG MALI PUSHBACK TO TOKENS
@@ -91,7 +90,7 @@ public class Scanner {
                         return new Token(TokenType.LCURLY);
                     }//L CURLY  PAG MALI PUSHBACK TO TOKENS
                     else if (c == '}') {
-                        
+
                         return new Token(TokenType.RCURLY);
                     } //WAKAS 10 - 14
                     else if (c == 'W') {
@@ -102,8 +101,12 @@ public class Scanner {
                     } else if (c == 'b') {//basag 16 - 20
                         CURRENT_STATE = 16;
 
+                    } else if (c == 'd') {
+                        CURRENT_STATE = 107;
+                    } else if (c == 'o') {
+                        CURRENT_STATE = 112;
                     } else if (c == ',') {
-                        
+
                         return new Token(TokenType.COMMA);
 
                     } //asign or relop 29-30
@@ -125,19 +128,19 @@ public class Scanner {
                         CURRENT_STATE = 52;
                     } // MULDIV
                     else if (c == '*' || c == '/') {
-                        
+
                         return new Token(TokenType.MULDIV);
                     } // EXPONENT
                     else if (c == '^') {
-                        
+
                         return new Token(TokenType.EXPON);
                     } //RPAREN
                     else if (c == '(') {
-                        
+
                         return new Token(TokenType.LPAREN);
                     }//LPAREN
                     else if (c == ')') {
-                       
+
                         return new Token(TokenType.RPAREN);
                     } // INTLIT 21
                     else if (IsDigit(c)) {
@@ -174,12 +177,12 @@ public class Scanner {
                     }//stringtho 
                     else if (c == 's') {
                         CURRENT_STATE = 84;
-                    }  else if (c == '@') {
+                    } else if (c == '@') {
                         CURRENT_STATE = 97;
                     } //IDENTIFIER 8-9
                     else if (IsAlphabet(c)) {
                         CURRENT_STATE = 8;
-                    }  else {
+                    } else {
                         if (currBit != 13 && currBit != 255) {
                             System.out.println(c + " " + currBit);
                             return new Token(TokenType.ERROR);
@@ -203,7 +206,7 @@ public class Scanner {
                         CURRENT_STATE = 3;
                     } else {
 
-                       CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
 
                     break;
@@ -220,7 +223,7 @@ public class Scanner {
                         CURRENT_STATE = 5;
                     } else {
 
-                       CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 5:
@@ -252,7 +255,7 @@ public class Scanner {
                     break;
                 //IDENTIFIER
                 case 8:
-                     if (AlphaOrDigit(c) || currBit == 58 || c == '-' || c == ':' || currBit == 58 || sym.indexOf(c) != -1) {
+                    if (AlphaOrDigit(c) || currBit == 58 || c == '-' || c == ':' || currBit == 58 || sym.indexOf(c) != -1) {
 
                         CURRENT_STATE = 8;
 
@@ -280,33 +283,33 @@ public class Scanner {
                     if (c == 'a') {
                         CURRENT_STATE = 11;
                     } else {
-                      CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 11:
                     if (c == 'k') {
                         CURRENT_STATE = 12;
                     } else {
-                       CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 12:
                     if (c == 'a') {
                         CURRENT_STATE = 13;
                     } else {
-                       CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 13:
                     if (c == 's') {
                         CURRENT_STATE = 14;
                     } else {
-                       CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 14:
                     if (!IsAlphabet(c)/*c == ' ' || c == '$' || c == '.'*/) { // Line enders //If its alphabets, bad, if not, good
-                        
+
                         return new Token(TokenType.WAKAS);
                     } else {
                         return new Token(TokenType.ERROR);
@@ -314,14 +317,14 @@ public class Scanner {
                 case 15://end line
                     Pushback();
                     return new Token(TokenType.ENDLINE);
-                    
+
                 case 16:
                     if (c == 'a') {
                         CURRENT_STATE = 17;
                     } else if (c == 'o') {
                         CURRENT_STATE = 66;
                     } else {
-                       CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 17:
@@ -335,14 +338,14 @@ public class Scanner {
                     if (c == 'a') {
                         CURRENT_STATE = 19;
                     } else {
-                       CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 19:
                     if (c == 'g') {
                         CURRENT_STATE = 20;
                     } else {
-                       CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 20:
@@ -353,7 +356,7 @@ public class Scanner {
                     } else {
                         return new Token(TokenType.ERROR);
                     }
-               
+
                 case 22:
                     if (c == '_') {
                         CURRENT_STATE = 23;
@@ -367,7 +370,7 @@ public class Scanner {
                     break;
                 case 23:
                     if (c == '&') {
-                        
+
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.AND);
                     } else {
@@ -383,7 +386,7 @@ public class Scanner {
                     break;
                 case 25:
                     if (c == '|') {
-                        
+
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.OR);
                     } else {
@@ -398,27 +401,27 @@ public class Scanner {
                     break;
                 case 27:
                     if (c == '!') {
-                       
+
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.NOT);
                     } else if (c == '&') {
-                       
+
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.NAND);
                     } else if (c == '|') {
-                        
+
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.NOR);
                     } else {
                         return new Token(TokenType.ERROR);
                     }
-                    
+
                 case 28:
                     if (c == '_') {
                         CURRENT_STATE = 29;
                     } else if (c == ' ') {
-                        Pushback();
-                        return new Token(TokenType.RELOP);
+                        System.out.println(tokenS);
+                        return new Token(TokenType.ASSIGN);
                     } else {
                         return new Token(TokenType.ERROR);
                     }
@@ -429,8 +432,8 @@ public class Scanner {
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.RELOP);
                     } else {
-                        
-                       tokenS = Remove(tokenS);
+
+                        tokenS = Remove(tokenS);
                         return new Token(TokenType.RELOP);
                     }
                 case 30:
@@ -458,7 +461,7 @@ public class Scanner {
                         Pushback();
                         return new Token(TokenType.RELOP);
                     } else {
-                       tokenS = Remove(tokenS);
+                        tokenS = Remove(tokenS);
                         return new Token(TokenType.RELOP);
                     }
                     break;
@@ -475,7 +478,7 @@ public class Scanner {
                         CURRENT_STATE = 35;
                     } else {
 
-                       CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 35:
@@ -508,7 +511,7 @@ public class Scanner {
                         CURRENT_STATE = 39;
                     } else {
 
-                    CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 39:
@@ -516,7 +519,7 @@ public class Scanner {
                         CURRENT_STATE = 40;
                     } else {
 
-                       CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 40:
@@ -532,7 +535,7 @@ public class Scanner {
                         CURRENT_STATE = 42;
                     } else {
 
-                       CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 42:
@@ -541,7 +544,7 @@ public class Scanner {
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.MAIBA);
                     } else {
-                       CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                 //paraikot
                 case 43:
@@ -549,7 +552,7 @@ public class Scanner {
                         CURRENT_STATE = 44;
                     } else {
 
-                         CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 44:
@@ -561,7 +564,7 @@ public class Scanner {
                         CURRENT_STATE = 57;
                     } else {
 
-                       CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 45:
@@ -593,7 +596,7 @@ public class Scanner {
                         CURRENT_STATE = 49;
                     } else {
 
-                       CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 49:
@@ -601,12 +604,12 @@ public class Scanner {
                         CURRENT_STATE = 50;
                     } else {
 
-                     CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 50:
                     if (!IsAlphabet(c)/*c == ' ' || c == '$' || c == '.'*/) { // Line enders //If its alphabets, bad, if not, good
-                       
+
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.PARAIKOT);
                     } else {
@@ -614,7 +617,7 @@ public class Scanner {
                     }
                 case 51:
                     if (c == '>') {
-                       
+
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.INCREMENT);
                     } else if (c == ' ') {
@@ -641,7 +644,7 @@ public class Scanner {
                         CURRENT_STATE = 54;
                     } else {
 
-                      CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 54:
@@ -691,7 +694,7 @@ public class Scanner {
                         CURRENT_STATE = 60;
                     } else {
 
-                         CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 60:
@@ -699,7 +702,7 @@ public class Scanner {
                         CURRENT_STATE = 61;
                     } else {
 
-                      CURRENT_STATE = 8;    
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 61:
@@ -732,7 +735,7 @@ public class Scanner {
                         CURRENT_STATE = 65;
                     } else {
 
-                         CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 65:
@@ -748,7 +751,7 @@ public class Scanner {
                         CURRENT_STATE = 67;
                     } else {
 
-                         CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 67:
@@ -788,7 +791,7 @@ public class Scanner {
                         CURRENT_STATE = 72;
                     } else {
 
-                         CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 72:
@@ -804,7 +807,7 @@ public class Scanner {
                         CURRENT_STATE = 74;
                     } else {
 
-                      CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 74:
@@ -862,7 +865,7 @@ public class Scanner {
                         CURRENT_STATE = 81;
                     } else {
 
-                         CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 81:
@@ -878,7 +881,7 @@ public class Scanner {
                         CURRENT_STATE = 83;
                     } else {
 
-                         CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 83:
@@ -887,14 +890,14 @@ public class Scanner {
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.CHAR);
                     } else {
-                         CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                 case 84:
                     if (c == 't') {
                         CURRENT_STATE = 85;
                     } else {
 
-                         CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 85:
@@ -918,7 +921,7 @@ public class Scanner {
                         CURRENT_STATE = 88;
                     } else {
 
-                       CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 88:
@@ -934,7 +937,7 @@ public class Scanner {
                         CURRENT_STATE = 90;
                     } else {
 
-                         CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 90:
@@ -942,7 +945,7 @@ public class Scanner {
                         CURRENT_STATE = 91;
                     } else {
 
-                         CURRENT_STATE = 8;
+                        CURRENT_STATE = 8;
                     }
                     break;
                 case 91:
@@ -963,7 +966,7 @@ public class Scanner {
                     }
                 case 93:
                     if (c == '"') {
-                     Pushback();
+                        Pushback();
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.LQUOTE);
                     } else {
@@ -971,15 +974,15 @@ public class Scanner {
                         CURRENT_STATE = 8;
                     }
                     break;
-            
+
                 case 95:
-                    
+
                     if (c == '~') {
                         CURRENT_STATE = 96;
-                    } else if (AlphaOrDigit(c) || c == ' '){
-                        
+                    } else if (AlphaOrDigit(c) || c == ' ') {
+
                         CURRENT_STATE = 106;
-                    }else {
+                    } else {
 
                         return new Token(TokenType.ERROR);
                     }
@@ -1000,9 +1003,9 @@ public class Scanner {
                     }
                     break;
                 case 98:
-                  
+
                     if (currBit == 10) {
-                        
+
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.COMMENT);
                     } else {
@@ -1055,7 +1058,7 @@ public class Scanner {
                         return new Token(TokenType.ERROR);
                     }
                 case 105:
-                    
+
                     if (IsDigit(c)) {
                         CURRENT_STATE = 105;
                     } else if (c == '.') {//float di pa tapos
@@ -1063,7 +1066,7 @@ public class Scanner {
                     } else if (c == ' ' || c == ';') {
                         Pushback();
                         tokenS = Remove(tokenS);
-                       
+
                         if (!numeric.containsKey(Integer.parseInt(tokenS))) {
                             numeric.put(Integer.parseInt(tokenS), new TokenNum(Integer.parseInt(tokenS)));
                         }
@@ -1072,14 +1075,89 @@ public class Scanner {
                         return new Token(TokenType.ERROR);
                     }
                     break;
-                case 106: if(c != '"'){
-                    CURRENT_STATE = 106;
-                }else {
-                    Pushback();
-                 tokenS = Remove(tokenS);
-                    
+                case 106:
+                    if (c != '"') {
+                        CURRENT_STATE = 106;
+                    } else {
+                        Pushback();
+                        tokenS = Remove(tokenS);
+
                         return new TokenString(tokenS);
-                }
+                    }
+                    break;
+                case 107:
+                    if (c == 'e') {
+                        CURRENT_STATE = 108;
+                    } else {
+                        CURRENT_STATE = 8;
+                    }
+                    break;
+                case 108:
+                    if (c == 'i') {
+                        CURRENT_STATE = 109;
+                    } else {
+                        CURRENT_STATE = 8;
+                    }
+                    break;
+                case 109:
+                    if (c == 'n') {
+                        CURRENT_STATE = 110;
+                    } else {
+                        CURRENT_STATE = 8;
+                    }
+                    break;
+                case 110:
+                    if (c == 's') {
+                        CURRENT_STATE = 111;
+                    } else {
+                        CURRENT_STATE = 8;
+                    }
+                    break;
+                case 111:
+                    if (!IsAlphabet(c)/*c == ' ' || c == '$' || c == '.'*/) { // Line enders //If its alphabets, bad, if not, good
+
+                        tokenS = Remove(tokenS);
+                        return new Token(TokenType.BOOLCONST);
+                    } else {
+                        return new Token(TokenType.ERROR);
+                    }
+                case 112:
+                    if (c == 'm') {
+                        CURRENT_STATE = 113;
+                    } else {
+                        CURRENT_STATE = 8;
+                    }
+                    break;
+                case 113:
+                    if (c == 's') {
+                        CURRENT_STATE = 114;
+                    } else {
+                        CURRENT_STATE = 8;
+                    }
+                    break;
+                case 114:
+                    if (c == 'i') {
+                        CURRENT_STATE = 115;
+                    } else {
+                        CURRENT_STATE = 8;
+                    }
+                    break;
+                    case 115:
+                    if (c == 'm') {
+                        CURRENT_STATE = 116;
+                    } else {
+                        CURRENT_STATE = 8;
+                    }
+                    break;
+                case 116:
+                    if (!IsAlphabet(c)/*c == ' ' || c == '$' || c == '.'*/) { // Line enders //If its alphabets, bad, if not, good
+
+                        tokenS = Remove(tokenS);
+                        return new Token(TokenType.BOOLCONST);
+                    } else {
+                        return new Token(TokenType.ERROR);
+                    }
+
             }
 
         }

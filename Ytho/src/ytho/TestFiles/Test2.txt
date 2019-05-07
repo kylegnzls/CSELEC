@@ -1,6 +1,6 @@
 Simula x {
 int x = 0 ;
-	char y ;
+	
 int first ;
 int second ;
 int sum ;

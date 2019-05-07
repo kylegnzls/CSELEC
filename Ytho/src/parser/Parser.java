@@ -309,9 +309,9 @@ public class Parser {
         rules.put("r43", new ReductionRule(TokenType.CONDITION, 7, "<Cond> := KUNG ( <Exp> ) { <Stmnt> } "));
         rules.put("r44", new ReductionRule(TokenType.CONDITION, 11, "<Cond> := KUNG ( <Exp> ) { <Stmnt> } MAIBA { <Stmnt> } "));
 
-        rules.put("r45", new ReductionRule(TokenType.LOOP, 7, "<Loop> := PARAIKOT ( <LoopCond> ) { <Stmnt> } "));
+        rules.put("r45", new ReductionRule(TokenType.LOOP, 7, "<Loop> := PARAIKOT ( <LoopCond> ) { <Stmnts> } "));
 
-        rules.put("r46", new ReductionRule(TokenType.LOOP_CONDITION, 5, "<LoopCond> := <Init> ; <Exp> ; <UpDown> "));
+        rules.put("r46", new ReductionRule(TokenType.LOOP_CONDITION, 5, "<LoopCond> := < Decln > ; <Exp> ; <UpDown> "));
 
      
 
@@ -364,7 +364,7 @@ public class Parser {
                 //System.out.println(currentInputToken.getTokenType());
                 //System.out.println(action);
                  // System.out.println(Scanner.IsInputEnd());
-                       System.out.println(currentInputToken.TokenType);
+                       System.out.println("======" + currentInputToken.TokenType);
                 if (action.equals("")) {
                     System.out.println("==========ERROR IN THE PARSING==========");
                     System.out.println("CANNOT PARSE : " + currentInputToken.getTokenType());

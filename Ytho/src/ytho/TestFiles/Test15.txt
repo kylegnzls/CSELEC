@@ -1,6 +1,4 @@
 Simula x {
- paraikot ( int num1 = 1; x < 3 ; x +> )
-{
-}
+bool x = deins;
 }
 Wakas Wakas

@@ -25,7 +25,7 @@ public class Test {
         Hashtable<String, TokenID> identifiers = new Hashtable<String, TokenID>();
         Hashtable<Integer, TokenNum> numeric = new Hashtable<Integer, TokenNum>();
         reservedWords = Inhale.ExhaleReserves();
-        Scanner scan = new Scanner(reservedWords, identifiers,numeric, "‪D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test1.txt");
+        Scanner scan = new Scanner(reservedWords, identifiers,numeric, "‪D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test12.txt");
 
         while (Scanner.IsInputEnd()) {
             Token currentToken = scan.ConsumeNextToken();
@@ -42,13 +42,13 @@ public class Test {
                     case NEWLINE:
                         System.out.println();
                         break;
-                    case STRINGLITERAL:
+                    case STRINGLIT:
                         //System.out.println(currentToken.tokenType);
                         TokenString strT = (TokenString) currentToken;
                         
                         System.out.print("[" + currentToken.getTokenType() + " = " + strT.literal + "] " );
                         break;
-                    case LETTERLITERAL:
+                    case CHAR:
                         TokenChar lit = (TokenChar) currentToken;
                         System.out.print("[" + currentToken.getTokenType() + " = " + lit.literal + "] " );
                         break;
@@ -66,7 +66,7 @@ public class Test {
             }
             
         }
-       Scanner scan2 = new Scanner(reservedWords, identifiers, numeric, "D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test1.txt");
+       Scanner scan2 = new Scanner(reservedWords, identifiers, numeric, "D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test12.txt");
        
        
         Parser parse = new Parser(scan2);

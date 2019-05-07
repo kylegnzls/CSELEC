@@ -12,7 +12,7 @@ package TokenLib;
 public class TokenString extends Token{
 public String literal ;
     public TokenString(String name) {
-        super(TokenLib.TokenType.STRINGLITERAL);
+        super(TokenLib.TokenType.STRINGLIT);
         literal = name;
     }
     

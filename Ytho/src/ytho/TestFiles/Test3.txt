@@ -1,5 +1,5 @@
 Simula x {    	
-      lutangs num1 = 4, num2 = 2 , result;
+      int num1 = 4, num2 = 2 , result;
     	
     	@@ Using addition operator
     	result = num1 + num2;

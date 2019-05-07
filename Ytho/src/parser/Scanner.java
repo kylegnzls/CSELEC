@@ -60,7 +60,7 @@ public class Scanner {
             char c = Consume();
             tokenS += c;
             //System.out.println(c);
-            //System.out.println(c);
+          //  System.out.println(tokenS);
             switch (CURRENT_STATE) {
                 case 0:
 
@@ -91,7 +91,7 @@ public class Scanner {
                         return new Token(TokenType.LCURLY);
                     }//L CURLY  PAG MALI PUSHBACK TO TOKENS
                     else if (c == '}') {
-
+                        
                         return new Token(TokenType.RCURLY);
                     } //WAKAS 10 - 14
                     else if (c == 'W') {
@@ -307,7 +307,6 @@ public class Scanner {
                 case 14:
                     if (!IsAlphabet(c)/*c == ' ' || c == '$' || c == '.'*/) { // Line enders //If its alphabets, bad, if not, good
                         
-                        tokenS = Remove(tokenS);
                         return new Token(TokenType.WAKAS);
                     } else {
                         return new Token(TokenType.ERROR);

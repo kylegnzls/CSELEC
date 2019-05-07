@@ -79,7 +79,7 @@ public enum TokenType {
     CONDITION,
     LOOP,
     LOOP_CONDITION,
-    INIT,
+    //INIT,
     UPDOWN,
     INOUT,
     IN,

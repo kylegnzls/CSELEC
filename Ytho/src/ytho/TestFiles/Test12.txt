@@ -1,2 +1,1 @@
-Simula loopConstr {
- } Wakas
+Simula loopConstr { ; } Wakas Wakas

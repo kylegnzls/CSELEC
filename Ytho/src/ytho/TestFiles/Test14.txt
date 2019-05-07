@@ -1,5 +1,5 @@
 Simula omsimDeins {
-    	boolol weh = omsim;
+    	bool weh = omsim;
 	kung(weh =_+= deins){
 		pakits "true";
 	}maiba{

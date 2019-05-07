@@ -21,7 +21,7 @@ public enum TokenType {
     COMMA,
     ASSIGN,
     ADDSUB,//9 // + AND -
-    MULDIV, //* AND /
+    MULDIV, //* AND / 10
     EXPON,
     LPAREN,
     RPAREN,
@@ -51,7 +51,7 @@ public enum TokenType {
     LUTANGS,
     CHAR,
     CONST,//
-    STRINGTHO,
+    STRINGTHO,//40
     DOLLAR,// [0-9]+
 
     ERROR, // character/token could not be processed // binary operators
@@ -59,14 +59,14 @@ public enum TokenType {
     NEWLINE,
     COMMENT, // for error reporting
 
-    START,//58
+    START,//46
     STATEMENTS,
     STATEMENT, //non terminals
     DECLARATION,
     DECLARATOR,
     VARINIT,
+   ARITH_EXPRESSION,
      EXPRESSION,
-    ARITH_EXPRESSION,
     TERM,
     FACTOR,
     EXPOW,
@@ -86,6 +86,8 @@ public enum TokenType {
     OUT,
     STRING_PAT,
     DTYPE,
-
+CHARLITERAL,
+TYPE,
+STRINGLITERAL
     
 }

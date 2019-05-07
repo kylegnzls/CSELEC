@@ -247,12 +247,14 @@ public class Parser {
 {"","","","","","","","","","","","","","","","","","","","","","","","","","",""},
 };
 
+
+
     public Parser(Scanner scan) {
         this.scan = scan;
 
         rules.put("r1", new ReductionRule(TokenType.START, 6, "<Program> := SIMULA ID BLOCKSTART <Statements> BLOCKEND WAKAS"));
 
-        rules.put("r2", new ReductionRule(TokenType.STATEMENTS, 1, "<Statements> := <Statement>"));
+        rules.put("r2", new ReductionRule(TokenType.STATEMENTS, 1, "<Statements> := <Statement> <Statements>"));
         rules.put("r3", new ReductionRule(TokenType.STATEMENTS, 1, "<Statements> := ;"));
 
         rules.put("r4", new ReductionRule(TokenType.STATEMENT, 2, "<Statement> := <Decln> ;"));
@@ -263,8 +265,8 @@ public class Parser {
         rules.put("r9", new ReductionRule(TokenType.STATEMENT, 2, "<Statement> := <InOut> ;"));
         rules.put("r10", new ReductionRule(TokenType.STATEMENT, 2, "<Statement> := BASAG ;"));
 
-        rules.put("r11", new ReductionRule(TokenType.DECLARATION, 3, "<Decln> := <DType> <Declr> ; "));
-        rules.put("r12", new ReductionRule(TokenType.DECLARATION, 5, "<Decln> := <DType> <Declr> ,<Declr>; "));
+        rules.put("r11", new ReductionRule(TokenType.DECLARATION, 2, "<Decln> := <DType> <Declr>  "));
+        rules.put("r12", new ReductionRule(TokenType.DECLARATION, 4, "<Decln> := <DType> <Declr> ,<Declr> "));
 
         rules.put("r13", new ReductionRule(TokenType.DECLARATOR, 1, "<Declr> := ID "));
         rules.put("r14", new ReductionRule(TokenType.DECLARATOR, 3, "<Declr> := ID = <VarInit> "));
@@ -295,7 +297,7 @@ public class Parser {
         rules.put("r32", new ReductionRule(TokenType.LOGIC_EXPRESSION, 1, "<LogicExp> := BOOLCONST"));
 
         rules.put("r33", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := AND"));
-        rules.put("r34", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := IR"));
+        rules.put("r34", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := OR"));
         rules.put("r35", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := NOT"));
         rules.put("r36", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := NAND"));
         rules.put("r37", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := NOR"));
@@ -346,8 +348,8 @@ public class Parser {
     public Node startParse() {
         ParseTab par = new ParseTab();
         this.parseTable = par.parseTable.clone();
-
-        System.out.println(" \n==================================================STARTING PARSER PHASE ==================================================");
+        
+        System.out.println(" \n================================================== STARTING PARSER PHASE ==================================================");
         Stack<Node> stack = new Stack<Node>();
         Node root = new Node();
         stack.add(new Node(new Token(TokenType.DOLLAR), 0));
@@ -361,8 +363,8 @@ public class Parser {
             int state = stack.peek().nodeState;
             
             int ordinal = currentInputToken.TokenType.ordinal();
+//            System.out.println("TOKEN TYPE IS " + currentInputToken.TokenType);
             
-            //  System.out.println(currentInputToken.getTokenType());
             if (ordinal < 42) {
                 String action = parseTable[state][ordinal];
                 //System.out.println(ordinal+"state" + state);
@@ -390,7 +392,7 @@ public class Parser {
                         currentInputToken = scan.ConsumeNextToken();
                          
                          //debug
-                          System.out.println("Scanner :" + Scanner.IsInputEnd());
+                       System.out.println("Scanner :" + Scanner.IsInputEnd());
                        System.out.println("Current Input Token:" + currentInputToken.TokenType);
                        
                         
@@ -415,13 +417,14 @@ public class Parser {
                             m.nodeChildren.addFirst(stack.pop());
                         }
 
-                        System.out.println(rr.production + " ORDINAL " +(rr.production.ordinal()-62));
-                        String newState = gotoTable[stack.peek().nodeState][rr.production.ordinal() - 42];
-
+                        System.out.println(rr.production + " ORDINAL " +(rr.production.ordinal()-46));
+                        String newState = gotoTable[stack.peek().nodeState][rr.production.ordinal() - 46];
+                        
                         if (newState.equals("")) {
                             System.out.println("GOTO TABLE ERROR");
                             return null;
                         }
+                        
                         m.nodeState = Integer.parseInt(newState);
                        
                         stack.push(m);
@@ -429,9 +432,9 @@ public class Parser {
                         break;
 
                     default:
-
+                       
                         // System.out.println(stack.size());
-                        System.out.println("PARSING ERROR WEW LAD");
+                        System.out.println("ERROR IN THE PARSING!!");
                         return null;
                 }
 

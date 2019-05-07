@@ -314,6 +314,7 @@ public class Scanner {
                 case 15://end line
                     Pushback();
                     return new Token(TokenType.ENDLINE);
+                    
                 case 16:
                     if (c == 'a') {
                         CURRENT_STATE = 17;
@@ -417,7 +418,7 @@ public class Scanner {
                         CURRENT_STATE = 29;
                     } else if (c == ' ') {
                         Pushback();
-                        return new Token(TokenType.ASSIGN);
+                        return new Token(TokenType.RELOP);
                     } else {
                         return new Token(TokenType.ERROR);
                     }
@@ -605,7 +606,7 @@ public class Scanner {
                     break;
                 case 50:
                     if (!IsAlphabet(c)/*c == ' ' || c == '$' || c == '.'*/) { // Line enders //If its alphabets, bad, if not, good
-                        Pushback();
+                       
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.PARAIKOT);
                     } else {
@@ -613,7 +614,7 @@ public class Scanner {
                     }
                 case 51:
                     if (c == '>') {
-                        Pushback();
+                       
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.INCREMENT);
                     } else if (c == ' ') {

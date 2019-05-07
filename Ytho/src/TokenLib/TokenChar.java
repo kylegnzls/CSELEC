@@ -10,7 +10,7 @@ public class TokenChar extends Token{
     public char literal = 0;
 
     public TokenChar(char name){
-        super(TokenLib.TokenType.CHAR);
+        super(TokenLib.TokenType.CHARLITERAL);
         literal = name;
     }
 

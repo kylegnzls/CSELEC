@@ -1,0 +1,6 @@
+Simula x {
+ paraikot ( int num1 = 1; x < 3 ; x +> )
+{
+}
+}
+Wakas Wakas

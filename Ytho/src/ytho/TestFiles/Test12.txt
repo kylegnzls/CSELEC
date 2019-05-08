@@ -1,1 +1,1 @@
-Simula loopConstr { ; } Wakas Wakas
+Simula loopConstr { int x = 0; }Wakas 

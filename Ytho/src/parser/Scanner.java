@@ -111,7 +111,7 @@ public class Scanner {
 
                     } //asign or relop 29-30
                     else if (c == '=') {
-                        CURRENT_STATE = 28;
+                        CURRENT_STATE = 117;
 
                     }//asign or relop 29-30
                     else if (c == '<') {
@@ -420,15 +420,15 @@ public class Scanner {
                     if (c == '_') {
                         CURRENT_STATE = 29;
                     } else if (c == ' ') {
-                        System.out.println(tokenS);
-                        return new Token(TokenType.ASSIGN);
+
+                        return new Token(TokenType.RELOP);
                     } else {
                         return new Token(TokenType.ERROR);
                     }
                     break;
                 case 29:
                     if (c == '=') {
-                        Pushback();
+
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.RELOP);
                     } else {
@@ -448,7 +448,7 @@ public class Scanner {
                     break;
                 case 31:
                     if (c == '=') {
-                        Pushback();
+
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.RELOP);
                     } else {
@@ -467,7 +467,7 @@ public class Scanner {
                     break;
                 case 33:
                     if (c == '=') {
-                        Pushback();
+
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.RELOP);
                     } else {
@@ -1079,10 +1079,9 @@ public class Scanner {
                     if (c != '"') {
                         CURRENT_STATE = 106;
                     } else {
-                       // System.out.println(tokenS);
                         Pushback();
                         tokenS = Remove(tokenS);
-                       // System.out.println(tokenS);
+
                         return new TokenString(tokenS);
                     }
                     break;
@@ -1143,7 +1142,7 @@ public class Scanner {
                         CURRENT_STATE = 8;
                     }
                     break;
-                    case 115:
+                case 115:
                     if (c == 'm') {
                         CURRENT_STATE = 116;
                     } else {
@@ -1158,6 +1157,16 @@ public class Scanner {
                     } else {
                         return new Token(TokenType.ERROR);
                     }
+
+                case 117:
+                    if (c == ' ') {
+                        return new Token(TokenType.ASSIGN);
+                    } else if (c == '_') {
+                        CURRENT_STATE = 29;
+                    } else {
+                        return new Token(TokenType.ERROR);
+                    }
+                    break;
 
             }
 

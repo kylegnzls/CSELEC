@@ -324,7 +324,7 @@ public class Parser {
         rules.put("r51", new ReductionRule(TokenType.IN, 3, "<In> := PATINGS ID INPUT"));
         rules.put("r52", new ReductionRule(TokenType.OUT, 2, "<UpDown> := PAKITS  <StrPat>"));
 
-        rules.put("r53", new ReductionRule(TokenType.STRING_PAT, 3, "<StrPat> := LPAREN STRINGLIT RPAREN "));
+        rules.put("r53", new ReductionRule(TokenType.STRING_PAT, 3, "<StrPat> := LQUOTE STRINGLIT RQUOTE "));
         rules.put("r54", new ReductionRule(TokenType.STRING_PAT, 1, "<StrPat> := ID "));
         rules.put("r55", new ReductionRule(TokenType.STRING_PAT, 5, "<StrPat> := LPAREN STRINGLIT RPAREN CONCAT <StrPat> "));
 
@@ -354,17 +354,17 @@ public class Parser {
 
         while (repeat) {
             int state = stack.peek().nodeState;
-            
+            //System.out.println(stack.size());
             int ordinal = currentInputToken.TokenType.ordinal();
 //            System.out.println("TOKEN TYPE IS " + currentInputToken.TokenType);
             
-            if (ordinal < 40) {
+            if (ordinal < 42) {
                 String action = parseTable[state][ordinal];
                 //System.out.println(ordinal+"state" + state);
                 //System.out.println(currentInputToken.getTokenType());
                 //System.out.println(action);
                  // System.out.println(Scanner.IsInputEnd());
-                       System.out.println("======" + currentInputToken.TokenType);
+                 //      System.out.println("======" + currentInputToken.TokenType);
                 if (action.equals("")) {
                     System.out.println("==========ERROR IN THE PARSING==========");
                     System.out.println("CANNOT PARSE : " + currentInputToken.getTokenType());
@@ -410,8 +410,8 @@ public class Parser {
                             m.nodeChildren.addFirst(stack.pop());
                         }
 
-                        System.out.println(rr.production + " ORDINAL " +(rr.production.ordinal()-45));
-                        String newState = gotoTable[stack.peek().nodeState][rr.production.ordinal() - 44];
+                        System.out.println(rr.production + " ORDINAL " +(rr.production.ordinal()-46));
+                        String newState = gotoTable[stack.peek().nodeState][rr.production.ordinal() - 46];
                         
                         if (newState.equals("")) {
                             System.out.println("GOTO TABLE ERROR");

@@ -20,8 +20,8 @@ public enum TokenType {
     BASAG,
     COMMA,
     ASSIGN,
-    ADDSUB,
-    MULDIV, //10
+    ADDSUB,// 10
+    MULDIV, 
     EXPON,
     LPAREN,
     RPAREN,
@@ -30,8 +30,8 @@ public enum TokenType {
     AND,
     OR,
     NOT,
-    NAND,
-    NOR,//20
+    NAND, //20
+    NOR,
     RELOP,
     STRINGLIT,
     FLOATLIT,
@@ -40,8 +40,8 @@ public enum TokenType {
     PARAIKOT,
     INCREMENT,
     DECREMENT,
-    PATINGS,
-  INPUT,
+    PATINGS,//30
+    INPUT,
     PAKITS,
     LQUOTE,
     RQUOTE,
@@ -50,15 +50,16 @@ public enum TokenType {
     BOOL,
     LUTANGS,
     CHAR,
-    CONST,
-    STRINGTHO,//40
-    
+    CONST, //40
+    STRINGTHO,
     DOLLAR,
     //42
+    
     ERROR,
     WHITESPACE,
     NEWLINE,
     COMMENT,
+    
     START,//46
     STATEMENTS,
     STATEMENT, //non terminals

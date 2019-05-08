@@ -41,7 +41,7 @@ public enum TokenType {
     INCREMENT,
     DECREMENT,
     PATINGS,
-    INPUT,// 30
+  INPUT,
     PAKITS,
     LQUOTE,
     RQUOTE,
@@ -52,6 +52,7 @@ public enum TokenType {
     CHAR,
     CONST,
     STRINGTHO,//40
+    
     DOLLAR,
     //42
     ERROR,

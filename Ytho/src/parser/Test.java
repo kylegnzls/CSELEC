@@ -10,6 +10,7 @@ package parser;
  * @author Blank
  */
 import TokenLib.*;
+import grtree.NPLviewer;
 import parser.Parser;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -19,13 +20,13 @@ import java.util.*;
 
 public class Test {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Hashtable<String, TokenType> reservedWords = new Hashtable<String, TokenType>();
         Hashtable<String, TokenID> identifiers = new Hashtable<String, TokenID>();
         Hashtable<Integer, TokenNum> numeric = new Hashtable<Integer, TokenNum>();
         reservedWords = Inhale.ExhaleReserves();
-        Scanner scan = new Scanner(reservedWords, identifiers,numeric, "‪D:\\MIGGY\\UST\\3rd Year\\2nd Semester\\CS-ELEC1A (Compiler Design)\\Programming Language Project\\YTHO\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test12.txt");
+        Scanner scan = new Scanner(reservedWords, identifiers,numeric, "‪D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test12.txt");
 
         while (Scanner.IsInputEnd()) {
             Token currentToken = scan.ConsumeNextToken();
@@ -66,7 +67,7 @@ public class Test {
             }
             
         }
-       Scanner scan2 = new Scanner(reservedWords, identifiers, numeric, "D:\\MIGGY\\UST\\3rd Year\\2nd Semester\\CS-ELEC1A (Compiler Design)\\Programming Language Project\\YTHO\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test12.txt");
+       Scanner scan2 = new Scanner(reservedWords, identifiers, numeric, "D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test12.txt");
        
        
         Parser parse = new Parser(scan2);
@@ -76,8 +77,12 @@ public class Test {
             System.out.println("STARTING SEARCH");
             String treeSyntax = parse.DepthFirstTraversal(root);
             System.out.println(treeSyntax);
-
+            try (FileWriter fw = new FileWriter("D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\grtree.txt")) {
+                fw.write(treeSyntax);
+            }
+            new NPLviewer("D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\grtree.txt");
         }
+        
     }
 
 }

@@ -1079,9 +1079,10 @@ public class Scanner {
                     if (c != '"') {
                         CURRENT_STATE = 106;
                     } else {
+                       // System.out.println(tokenS);
                         Pushback();
                         tokenS = Remove(tokenS);
-
+                       // System.out.println(tokenS);
                         return new TokenString(tokenS);
                     }
                     break;

@@ -52,7 +52,7 @@ public class Inhale{
         PushbackInputStream fr = null;
         byte[] syntax;
 
-        Path path = Paths.get("D:\\MIGGY\\UST\\3rd Year\\2nd Semester\\CS-ELEC1A (Compiler Design)\\Programming Language Project\\YTHO\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test2.txt");
+        Path path = Paths.get("D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test12.txt");
         try {
             syntax = Files.readAllBytes(path);
             ByteArrayInputStream array = new ByteArrayInputStream(syntax);

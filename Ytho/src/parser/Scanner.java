@@ -15,14 +15,15 @@ public class Scanner {
     Hashtable<String, TokenType> reservedWords;
     Hashtable<String, TokenID> identifiers;
     Hashtable<Integer, TokenNum> numeric;
+    Hashtable<Float, TokenFloat> floatie;
     int currBit = 0;
     static int line = 1;
 
-    public Scanner(Hashtable<String, TokenType> reservedWords, Hashtable<String, TokenID> identifiers, Hashtable<Integer, TokenNum> numeric, String fileNameUrl) {
+    public Scanner(Hashtable<String, TokenType> reservedWords, Hashtable<String, TokenID> identifiers, Hashtable<Integer, TokenNum> numeric, Hashtable<Float, TokenFloat> floatie, String fileNameUrl) {
         this.reservedWords = reservedWords;
         this.identifiers = identifiers;
         this.numeric = numeric;
-
+        this.floatie = floatie;
         try {
             bitSyntax = Inhale.ExhaleText(fileNameUrl);
         } catch (Exception e) {
@@ -361,7 +362,7 @@ public class Scanner {
                     if (c == '_') {
                         CURRENT_STATE = 23;
                     } else if (c == '+') {
-                        Pushback();
+                       
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.CONCAT);
                     } else {
@@ -715,7 +716,7 @@ public class Scanner {
                     }
                 case 62:
                     if (c == '>') {
-                        Pushback();
+                       
                         tokenS = Remove(tokenS);
                         return new Token(TokenType.INPUT);
                     } else {
@@ -888,7 +889,7 @@ public class Scanner {
                     if (!IsAlphabet(c)/*c == ' ' || c == '$' || c == '.'*/) { // Line enders //If its alphabets, bad, if not, good
                         Pushback();
                         tokenS = Remove(tokenS);
-                        return new Token(TokenType.CHAR);
+                        return new Token(TokenType.CONST);
                     } else {
                         CURRENT_STATE = 8;
                     }
@@ -1062,7 +1063,7 @@ public class Scanner {
                     if (IsDigit(c)) {
                         CURRENT_STATE = 105;
                     } else if (c == '.') {//float di pa tapos
-                        CURRENT_STATE = 107;
+                        CURRENT_STATE = 118;
                     } else if (c == ' ' || c == ';') {
                         Pushback();
                         tokenS = Remove(tokenS);
@@ -1167,7 +1168,23 @@ public class Scanner {
                         return new Token(TokenType.ERROR);
                     }
                     break;
+                case 118:
+                    if (IsDigit(c)) {
+                        CURRENT_STATE = 118;
+                    } else if (c == ' ' || c == ';') {
+                        System.out.println(tokenS);
+                        Pushback();
+                        tokenS = Remove(tokenS);
+                        
+                        if (!floatie.containsKey(Float.parseFloat(tokenS))) {
 
+                            floatie.put(Float.parseFloat(tokenS), new TokenFloat(Float.parseFloat(tokenS)));
+                        }
+                        return new TokenFloat(Float.parseFloat(tokenS));
+                    } else {
+                        return new Token(TokenType.ERROR);
+                    }
+                    break;
             }
 
         }

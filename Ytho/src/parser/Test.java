@@ -25,12 +25,13 @@ public class Test {
         Hashtable<String, TokenType> reservedWords = new Hashtable<String, TokenType>();
         Hashtable<String, TokenID> identifiers = new Hashtable<String, TokenID>();
         Hashtable<Integer, TokenNum> numeric = new Hashtable<Integer, TokenNum>();
+        Hashtable<Float, TokenFloat> floatie = new Hashtable<Float, TokenFloat>();
         reservedWords = Inhale.ExhaleReserves();
-        Scanner scan = new Scanner(reservedWords, identifiers,numeric, "‪D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test12.txt");
+        Scanner scan = new Scanner(reservedWords, identifiers, numeric, floatie, "‪D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test12.txt");
 
         while (Scanner.IsInputEnd()) {
             Token currentToken = scan.ConsumeNextToken();
-            
+
             if (currentToken.getTokenType() == TokenType.ERROR) {
                 System.out.println("ERROR IN THE SYNTAX AT LINE " + Scanner.line);
                 break;
@@ -46,30 +47,33 @@ public class Test {
                     case STRINGLIT:
                         //System.out.println(currentToken.tokenType);
                         TokenString strT = (TokenString) currentToken;
-                        
-                        System.out.print("[" + currentToken.getTokenType() + " = " + strT.literal + "] " );
+
+                        System.out.print("[" + currentToken.getTokenType() + " = " + strT.literal + "] ");
                         break;
                     case CHARLITERAL:
                         TokenChar lit = (TokenChar) currentToken;
-                        System.out.print("[" + currentToken.getTokenType() + " = " + lit.literal + "] " );
+                        System.out.print("[" + currentToken.getTokenType() + " = " + lit.literal + "] ");
                         break;
-                     case INTLIT:
+                    case INTLIT:
                         TokenNum num = (TokenNum) currentToken;
-                        System.out.print("[" + currentToken.getTokenType() + " = " + num.num + "] " );
+                        System.out.print("[" + currentToken.getTokenType() + " = " + num.num + "] ");
+                        break;
+                    case FLOATLIT:
+                        TokenFloat floati = (TokenFloat) currentToken;
+                        System.out.print("[" + currentToken.getTokenType() + " = " + floati.num + "] ");
                         break;
                     case ID:
                         TokenID tid = (TokenID) currentToken;
-                        System.out.print("[" + currentToken.getTokenType() + " = " + tid.idName + "] " );
+                        System.out.print("[" + currentToken.getTokenType() + " = " + tid.idName + "] ");
                         break;
                     default:
                         System.out.print("[" + currentToken.getTokenType() + "] ");
                 }
             }
-            
+
         }
-       Scanner scan2 = new Scanner(reservedWords, identifiers, numeric, "D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test12.txt");
-       
-       
+        Scanner scan2 = new Scanner(reservedWords, identifiers, numeric, floatie, "D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test12.txt");
+
         Parser parse = new Parser(scan2);
         Node root = parse.startParse();
 
@@ -82,7 +86,7 @@ public class Test {
             }
             new NPLviewer("D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\grtree.txt");
         }
-        
+
     }
 
 }

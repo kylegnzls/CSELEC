@@ -66,8 +66,8 @@ public enum TokenType {
     DECLARATION,
     DECLARATOR,
     VARINIT,
+     EXPRESSION,
     ARITH_EXPRESSION,
-    EXPRESSION,
     TERM,
     FACTOR,
     EXPOW,
@@ -87,6 +87,7 @@ public enum TokenType {
     OUT,
     STRING_PAT,
     DTYPE,
+    
     CHARLITERAL,
     TYPE,
     STRINGLITERAL

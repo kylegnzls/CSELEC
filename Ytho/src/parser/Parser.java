@@ -166,7 +166,7 @@ public class Parser {
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","159",""},
+{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 {"","","","","","160","161","39","40","41","42","16","","31","17","18","","","","","","","","","",""},
 {"","","","","","","","129","130","131","132","","","162","","","","","","","","","","","",""},
 {"","","","","","","","165","130","131","132","","","","","","","","","","","","","","",""},
@@ -179,30 +179,21 @@ public class Parser {
 {"","172","6","8","","","9","39","40","41","42","16","","31","17","18","10","11","12","","","13","23","24","","15"},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
+{"","","","","","","","","","","","","","","","","","","","","","","","","174",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 {"","","","","","","151","79","80","81","82","69","","73","70","71","","","","","","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","174","129","130","131","132","119","","123","120","121","","","","","","","","","",""},
+{"","","","","","","175","129","130","131","132","119","","123","120","121","","","","","","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","177","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","183","184","","","185","39","40","41","42","16","","31","17","18","186","187","188","","","189","23","24","","15"},
+{"","","","","","","","","","","","","","","","","","","","","178","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
@@ -211,33 +202,12 @@ public class Parser {
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","199","6","8","","","9","39","40","41","42","16","","31","17","18","10","11","12","","","13","23","24","","15"},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","203","79","80","81","82","69","","73","70","71","","","","","","","","","",""},
-{"","","","99","","","","","","","","","","","","","","","","204","","","","","","15"},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","209","6","8","","","9","39","40","41","42","16","","31","17","18","10","11","12","","","13","23","24","","15"},
-{"","210","6","8","","","9","39","40","41","42","16","","31","17","18","10","11","12","","","13","23","24","","15"},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-{"","","215","184","","","185","39","40","41","42","16","","31","17","18","186","187","188","","","189","23","24","","15"},
+{"","184","6","8","","","9","39","40","41","42","16","","31","17","18","10","11","12","","","13","23","24","","15"},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
 };
+
 
 
 
@@ -250,90 +220,91 @@ public class Parser {
 
         rules.put("r2", new ReductionRule(TokenType.STATEMENTS, 2, "<Statements> := <Statement> <Statements>"));
         rules.put("r3", new ReductionRule(TokenType.STATEMENTS, 1, "<Statements> := ;"));
+         rules.put("r4", new ReductionRule(TokenType.STATEMENTS, 1, "<Statements> := \""));
 
-        rules.put("r4", new ReductionRule(TokenType.STATEMENT, 2, "<Statement> := <Decln> ;"));
-        rules.put("r5", new ReductionRule(TokenType.STATEMENT, 2, "<Statement> := <Exp> ;"));
-        rules.put("r6", new ReductionRule(TokenType.STATEMENT, 1, "<Statement> := <StmntBlk>"));
-        rules.put("r7", new ReductionRule(TokenType.STATEMENT, 1, "<Statement> := <Cond>"));
-        rules.put("r8", new ReductionRule(TokenType.STATEMENT, 1, "<Statement> := <Loop>"));
-        rules.put("r9", new ReductionRule(TokenType.STATEMENT, 2, "<Statement> := <InOut> ;"));
-        rules.put("r10", new ReductionRule(TokenType.STATEMENT, 2, "<Statement> := BASAG ;"));
+        rules.put("r5", new ReductionRule(TokenType.STATEMENT, 2, "<Statement> := <Decln> ;"));
+        rules.put("r6", new ReductionRule(TokenType.STATEMENT, 2, "<Statement> := <Exp> ;"));
+        rules.put("r7", new ReductionRule(TokenType.STATEMENT, 1, "<Statement> := <StmntBlk>"));
+        rules.put("r8", new ReductionRule(TokenType.STATEMENT, 1, "<Statement> := <Cond>"));
+        rules.put("r9", new ReductionRule(TokenType.STATEMENT, 1, "<Statement> := <Loop>"));
+        rules.put("r10", new ReductionRule(TokenType.STATEMENT, 2, "<Statement> := <InOut> ;"));
+        rules.put("r11", new ReductionRule(TokenType.STATEMENT, 2, "<Statement> := BASAG ;"));
 
-        rules.put("r11", new ReductionRule(TokenType.DECLARATION, 2, "<Decln> := <DType> <Declr>  "));
-        rules.put("r12", new ReductionRule(TokenType.DECLARATION, 4, "<Decln> := <DType> <Declr> ,<Declr> "));
+        rules.put("r12", new ReductionRule(TokenType.DECLARATION, 2, "<Decln> := <DType> <Declr>  "));
+        rules.put("r13", new ReductionRule(TokenType.DECLARATION, 4, "<Decln> := <DType> <Declr> ,<Declr> "));
 
-        rules.put("r13", new ReductionRule(TokenType.DECLARATOR, 1, "<Declr> := ID "));
-        rules.put("r14", new ReductionRule(TokenType.DECLARATOR, 3, "<Declr> := ID = <VarInit> "));
+        rules.put("r14", new ReductionRule(TokenType.DECLARATOR, 1, "<Declr> := ID "));
+        rules.put("r15", new ReductionRule(TokenType.DECLARATOR, 3, "<Declr> := ID = <VarInit> "));
         
-        rules.put("r15", new ReductionRule(TokenType.VARINIT, 1, "<VarInit> := <Exp> "));
+        rules.put("r16", new ReductionRule(TokenType.VARINIT, 1, "<VarInit> := <Exp> "));
 
      
-        rules.put("r16", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := <LogicExp> "));
-        rules.put("r17", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := <CastExp> "));
-        rules.put("r18", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := <LitExp> "));
-        rules.put("r19", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := ID "));
+        rules.put("r17", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := <LogicExp> "));
+        rules.put("r18", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := <CastExp> "));
+        rules.put("r19", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := <LitExp> "));
+        rules.put("r20", new ReductionRule(TokenType.EXPRESSION, 1, "<Exp> := ID "));
 
-        rules.put("r20", new ReductionRule(TokenType.ARITH_EXPRESSION, 3, "<ArithExp> := <ArithExp> ADDSUB <Term>"));
-        rules.put("r21", new ReductionRule(TokenType.ARITH_EXPRESSION, 1, "<ArithExp> := <Term> "));
+        rules.put("r21", new ReductionRule(TokenType.ARITH_EXPRESSION, 3, "<ArithExp> := <ArithExp> ADDSUB <Term>"));
+        rules.put("r22", new ReductionRule(TokenType.ARITH_EXPRESSION, 1, "<ArithExp> := <Term> "));
 
-        rules.put("r22", new ReductionRule(TokenType.TERM, 3, "<Term> := <Term> MULDIV <Factor>"));
-        rules.put("r23", new ReductionRule(TokenType.TERM, 1, "<Term> := <Factor>"));
+        rules.put("r23", new ReductionRule(TokenType.TERM, 3, "<Term> := <Term> MULDIV <Factor>"));
+        rules.put("r24", new ReductionRule(TokenType.TERM, 1, "<Term> := <Factor>"));
 
-        rules.put("r24", new ReductionRule(TokenType.FACTOR, 3, "<Factor> := <Factor> ^ <Expow>"));
-        rules.put("r25", new ReductionRule(TokenType.FACTOR, 1, "<Factor> := <Expow>"));
+        rules.put("r25", new ReductionRule(TokenType.FACTOR, 3, "<Factor> := <Factor> ^ <Expow>"));
+        rules.put("r26", new ReductionRule(TokenType.FACTOR, 1, "<Factor> := <Expow>"));
 
-        rules.put("r26", new ReductionRule(TokenType.EXPOW, 3, "<Expow> := (<Exp>)"));
-        rules.put("r27", new ReductionRule(TokenType.EXPOW, 1, "<Expow> := INTLIT"));
+        rules.put("r27", new ReductionRule(TokenType.EXPOW, 3, "<Expow> := (<Exp>)"));
+        rules.put("r28", new ReductionRule(TokenType.EXPOW, 1, "<Expow> := INTLIT"));
 
-        rules.put("r28", new ReductionRule(TokenType.LOGIC_EXPRESSION, 3, "<LogicExp> := <LogicExp> <Logop> <RelExp>"));
-        rules.put("r29", new ReductionRule(TokenType.LOGIC_EXPRESSION, 1, "<LogicExp> := <RelExp>"));
-        rules.put("r30", new ReductionRule(TokenType.LOGIC_EXPRESSION, 1, "<LogicExp> := BOOLCONST"));
+        rules.put("r29", new ReductionRule(TokenType.LOGIC_EXPRESSION, 3, "<LogicExp> := <LogicExp> <Logop> <RelExp>"));
+        rules.put("r30", new ReductionRule(TokenType.LOGIC_EXPRESSION, 1, "<LogicExp> := <RelExp>"));
+        rules.put("r31", new ReductionRule(TokenType.LOGIC_EXPRESSION, 1, "<LogicExp> := BOOLCONST"));
 
-        rules.put("r31", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := AND"));
-        rules.put("r32", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := OR"));
-        rules.put("r33", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := NOT"));
-        rules.put("r34", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := NAND"));
-        rules.put("r35", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := NOR"));
+        rules.put("r32", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := AND"));
+        rules.put("r33", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := OR"));
+        rules.put("r34", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := NOT"));
+        rules.put("r35", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := NAND"));
+        rules.put("r36", new ReductionRule(TokenType.LOGIC_OPERATOR, 1, "<Logop> := NOR"));
 
-        rules.put("r36", new ReductionRule(TokenType.REL_EXPRESSION, 3, "<RelExp> := <RelExp> RELOP <ArithExp>"));
-        rules.put("r37", new ReductionRule(TokenType.REL_EXPRESSION, 1, "<RelExp> := <ArithExp>"));
+        rules.put("r37", new ReductionRule(TokenType.REL_EXPRESSION, 3, "<RelExp> := <RelExp> RELOP <ArithExp>"));
+        rules.put("r38", new ReductionRule(TokenType.REL_EXPRESSION, 1, "<RelExp> := <ArithExp>"));
 
-        rules.put("r38", new ReductionRule(TokenType.CAST_EXPRESSION, 4, "<CastExp> := ( <Dtype> ) <Exp>"));
+        rules.put("r39", new ReductionRule(TokenType.CAST_EXPRESSION, 4, "<CastExp> := ( <Dtype> ) <Exp>"));
 
-        rules.put("r39", new ReductionRule(TokenType.LIT_EXPRESSION, 1, "<LitExp> := INTLIT"));
-        rules.put("r40", new ReductionRule(TokenType.LIT_EXPRESSION, 1, "<LitExp> := STRINGLIT"));
-        rules.put("r41", new ReductionRule(TokenType.LIT_EXPRESSION, 1, "<LitExp> := FLOATLIT"));
+        rules.put("r40", new ReductionRule(TokenType.LIT_EXPRESSION, 1, "<LitExp> := INTLIT"));
+        rules.put("r41", new ReductionRule(TokenType.LIT_EXPRESSION, 1, "<LitExp> := STRINGLIT"));
+        rules.put("r42", new ReductionRule(TokenType.LIT_EXPRESSION, 1, "<LitExp> := FLOATLIT"));
 
-        rules.put("r42", new ReductionRule(TokenType.STMNT_BLK, 3, "<StmntBlk> := { <Stmnt> }"));
+        rules.put("r43", new ReductionRule(TokenType.STMNT_BLK, 3, "<StmntBlk> := { <Stmnt> }"));
 
-        rules.put("r43", new ReductionRule(TokenType.CONDITION, 7, "<Cond> := KUNG ( <Exp> ) { <Stmnt> } "));
-        rules.put("r44", new ReductionRule(TokenType.CONDITION, 11, "<Cond> := KUNG ( <Exp> ) { <Stmnt> } MAIBA { <Stmnt> } "));
+        rules.put("r44", new ReductionRule(TokenType.CONDITION, 7, "<Cond> := KUNG ( <Exp> ) { <Stmnt> } "));
+        rules.put("r45", new ReductionRule(TokenType.CONDITION, 11, "<Cond> := KUNG ( <Exp> ) { <Stmnt> } MAIBA { <Stmnt> } "));
 
-        rules.put("r45", new ReductionRule(TokenType.LOOP, 7, "<Loop> := PARAIKOT ( <LoopCond> ) { <Stmnts> } "));
+        rules.put("r46", new ReductionRule(TokenType.LOOP, 7, "<Loop> := PARAIKOT ( <LoopCond> ) { <Stmnts> } "));
 
-        rules.put("r46", new ReductionRule(TokenType.LOOP_CONDITION, 5, "<LoopCond> := < Decln > ; <Exp> ; <UpDown> "));
+        rules.put("r47", new ReductionRule(TokenType.LOOP_CONDITION, 5, "<LoopCond> := < Decln > ; <Exp> ; <UpDown> "));
 
      
 
-        rules.put("r47", new ReductionRule(TokenType.UPDOWN, 2, "<UpDown> := ID INCREMENT"));
-        rules.put("r48", new ReductionRule(TokenType.UPDOWN, 2, "<UpDown> := ID DECREMENT"));
+        rules.put("r48", new ReductionRule(TokenType.UPDOWN, 2, "<UpDown> := ID INCREMENT"));
+        rules.put("r49", new ReductionRule(TokenType.UPDOWN, 2, "<UpDown> := ID DECREMENT"));
 
-        rules.put("r49", new ReductionRule(TokenType.INOUT, 1, "<InOut> := <In>"));
-        rules.put("r50", new ReductionRule(TokenType.INOUT, 1, "<InOut> := <Out>"));
+        rules.put("r50", new ReductionRule(TokenType.INOUT, 1, "<InOut> := <In>"));
+        rules.put("r51", new ReductionRule(TokenType.INOUT, 1, "<InOut> := <Out>"));
 
-        rules.put("r51", new ReductionRule(TokenType.IN, 3, "<In> := PATINGS ID INPUT"));
-        rules.put("r52", new ReductionRule(TokenType.OUT, 2, "<UpDown> := PAKITS  <StrPat>"));
+        rules.put("r52", new ReductionRule(TokenType.IN, 3, "<In> := PATINGS ID INPUT"));
+        rules.put("r53", new ReductionRule(TokenType.OUT, 2, "<UpDown> := PAKITS  <StrPat>"));
 
-        rules.put("r53", new ReductionRule(TokenType.STRING_PAT, 3, "<StrPat> := LQUOTE STRINGLIT RQUOTE "));
-        rules.put("r54", new ReductionRule(TokenType.STRING_PAT, 1, "<StrPat> := ID "));
-        rules.put("r55", new ReductionRule(TokenType.STRING_PAT, 5, "<StrPat> := LPAREN STRINGLIT RPAREN CONCAT <StrPat> "));
+        rules.put("r54", new ReductionRule(TokenType.STRING_PAT, 3, "<StrPat> := LQUOTE STRINGLIT RQUOTE "));
+        rules.put("r55", new ReductionRule(TokenType.STRING_PAT, 1, "<StrPat> := ID "));
+        rules.put("r56", new ReductionRule(TokenType.STRING_PAT, 5, "<StrPat> := LPAREN STRINGLIT RPAREN CONCAT <StrPat> "));
 
-        rules.put("r56", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := INT "));
-        rules.put("r57", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := BOOL "));
-        rules.put("r58", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := LUTANGS "));
-        rules.put("r59", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := CHAR "));
-        rules.put("r60", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := CONST "));
-        rules.put("r61", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := STRINGTHO "));
+        rules.put("r57", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := INT "));
+        rules.put("r58", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := BOOL "));
+        rules.put("r59", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := LUTANGS "));
+        rules.put("r60", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := CHAR "));
+        rules.put("r61", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := CONST "));
+        rules.put("r62", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := STRINGTHO "));
     }
 
     String parseTable[][];

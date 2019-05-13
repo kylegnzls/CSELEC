@@ -1,19 +1,19 @@
 Simula loopConstr {
-int x ;
-int x = 300;
+int x ;;
+int x = 300;;
 
 
-bool x = deins ;
-char y;
-lutangs x = 108.0 ;
-pakits x ;
-pakits ~" hello "~ ;
+bool x = deins ;;
+char y;;
+lutangs x = 108.0 ;;
+pakits x ;;
+pakits ~" hello "~ ;;
 
-patings x #> ;
+patings x #> ;;
 
 @@ hii
 
-pakits ~" num1 + num2 = "~ &+ result;
+pakits ~" num1 + num2 = "~ &+ result;;
 
 
 

@@ -313,7 +313,7 @@ public class Parser {
         rules.put("r62", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := CONST "));
         rules.put("r63", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := STRINGTHO "));
     }
-
+//lmao
     String parseTable[][];
 
     public Node startParse() {

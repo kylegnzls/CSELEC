@@ -314,6 +314,7 @@ public class Parser {
         rules.put("r63", new ReductionRule(TokenType.DTYPE, 1, "<DTYPE> := STRINGTHO "));
     }
 //lmao
+    //WAT THE ACTUAL FCO
     String parseTable[][];
 
     public Node startParse() {

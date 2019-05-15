@@ -1,19 +1,19 @@
 Simula x {
  int num1 = 1;
 	int nos2 = 2;
-        stringtho x = ~" xadsf "~ ;
+        
 	@@ num1 and nos2 will be added depending on the condition 
 
-	kung( num1 < 3 ) {
-		int summa = num1 + nos2;
+	kung( ( num1 ) < 3 ) {
+		
 		pakits ~" sagot: "~ ;
 		pakits summa ;
 	}
-	maiba{
-		int summa = num1 + 3;
-		pakits ~" wala eh! "~ ;
-		pakits summa;
+	maiba {
+		int x = 1;
+
+		 x = ( x ) + ( x );
 }
 
 }
-Wakas
+Wakas Wakas

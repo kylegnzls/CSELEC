@@ -1,20 +1,25 @@
 Simula loopConstr {
-int x ;;
-int x = 300;;
+int x ;
+int x = 300;
 
 
-bool x = deins ;;
-char y;;
+bool x = deins ;
+char y;
 lutangs x = 108.0 ;
-pakits x ;;
-pakits ~" hello "~ ;;
+pakits x ;
+pakits ~" hello "~ ;
 
-patings x #> ;;
+patings x #> ;
 
 @@ hii
 
-pakits ~" num1 + num2 = "~ &+ result;;
+pakits ~" num1 + num2 = "~ &+ result;
 
+kung ( ( x ) > 3 ) {
+
+pakits ~" num1 + num2 = "~ &+ result;
+pakits ~" num1 + num2 = "~ &+ result;
+}
 
 
 } Wakas Wakas

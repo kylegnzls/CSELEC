@@ -27,7 +27,7 @@ public class Test {
         Hashtable<Integer, TokenNum> numeric = new Hashtable<Integer, TokenNum>();
         Hashtable<Float, TokenFloat> floatie = new Hashtable<Float, TokenFloat>();
         reservedWords = Inhale.ExhaleReserves();
-        Scanner scan = new Scanner(reservedWords, identifiers, numeric, floatie, "‪D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test12.txt");
+        Scanner scan = new Scanner(reservedWords, identifiers, numeric, floatie, "‪D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test1.txt");
 
         while (Scanner.IsInputEnd()) {
             Token currentToken = scan.ConsumeNextToken();
@@ -72,7 +72,7 @@ public class Test {
             }
 
         }
-        Scanner scan2 = new Scanner(reservedWords, identifiers, numeric, floatie, "D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test12.txt");
+        Scanner scan2 = new Scanner(reservedWords, identifiers, numeric, floatie, "D:\\Github\\CSELEC\\Ytho\\src\\ytho\\TestFiles\\Test1.txt");
 
         Parser parse = new Parser(scan2);
         Node root = parse.startParse();

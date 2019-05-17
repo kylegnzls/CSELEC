@@ -1,6 +1,6 @@
 Simula x {
- int num1 = 1;
-	int nos2 = 2;
+        int num1 = 1;
+	int num2 = 2;
         
 	@@ num1 and nos2 will be added depending on the condition 
 
@@ -10,10 +10,12 @@ Simula x {
 		pakits summa ;
 	}
 	maiba {
-		int x = 1;
+		int x = 1 ;
 
-		 x = ( x ) + ( x );
+		 x =  ( x )  +  ( x ) ;
 }
+
+
 
 }
 Wakas Wakas

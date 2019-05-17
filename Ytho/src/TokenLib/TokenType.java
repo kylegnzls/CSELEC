@@ -21,7 +21,7 @@ public enum TokenType {
     COMMA,
     ASSIGN,
     ADDSUB,// 10
-    MULDIV, 
+    MULDIV,
     EXPON,
     LPAREN,
     RPAREN,
@@ -33,7 +33,9 @@ public enum TokenType {
     NAND, //20
     NOR,
     RELOP,
+    LQUOTE,
     STRINGLIT,
+    RQUOTE,
     FLOATLIT,
     KUNG,
     MAIBA,
@@ -43,8 +45,6 @@ public enum TokenType {
     PATINGS,//30
     INPUT,
     PAKITS,
-    LQUOTE,
-    RQUOTE,
     CONCAT,
     INTEGER,
     BOOL,
@@ -54,19 +54,18 @@ public enum TokenType {
     STRINGTHO,
     DOLLAR,
     //42
-    
+
     ERROR,
     WHITESPACE,
     NEWLINE,
     COMMENT,
-    
     START,//46
     STMNTS,
     STMNT, //non terminals
     DECLN,
     DECLR,
     VARINIT,
-     EXP,
+    EXP,
     ARITHEXP,
     TERM,
     FACTOR,
@@ -87,7 +86,6 @@ public enum TokenType {
     OUT,
     STRPAT,
     DTYPE,
-    
     CHARLITERAL,
     TYPE,
     STRINGLITERAL

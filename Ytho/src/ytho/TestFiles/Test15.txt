@@ -1,4 +1,0 @@
-Simula x {
-bool x = deins;
-}
-Wakas Wakas

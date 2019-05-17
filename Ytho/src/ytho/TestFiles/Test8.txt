@@ -1,7 +1,7 @@
 Simula toOther {
     	stringtho nums = ~" 3 "~ ;
-int num = nums.toInt();
-    	pakita numS;
+int num = (int) nums;
+    	pakits numS;
 
 }
-Wakas
+Wakas Wakas

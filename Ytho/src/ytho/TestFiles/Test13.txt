@@ -1,39 +1,32 @@
-Simula calculator{
+Simula calculator {
 @@This is an example of a comment
-@--
-	A simple Calculator that implements addition or subtraction
---@
-	int x = 0;
-	char y;
-int first;
-int second;
-int sum;
 
-paraikot(int x=0; x=_=3; x+>){
-	pakits "Calculator";
-	pakits "---------------";
+	int x = 0 ;
+	char y ;
+int first ;
+int second ;
+int sum ;
 
-	pakits "Choose";
-	pakits "A. Addition";
-	pakits "B. Subtraction";
-	patings y #> "choose: ";
+paraikot ( int  x  = 0 ; ( x ) =_= 3 ; x+> ){
+	pakits ~" Calculator "~;
+	
 
-	kung(y=_='B' |_| y=_='b'){
-	patings first #> "First Number: ";
-	patings second #> "Second Number: ";
-	sum = first-second;
+	pakits ~"Choose"~;
+	pakits ~"A. Addition"~;
+	pakits ~"B. Subtraction"~;
+	patings y #> ;
+
+	kung  (  ( y )  =_=  ( B )  ) {
+kung (  ( y ) =_= ( b ) ) {
+pakits ~"First Number:"~;
+pakits ~"Second Number:"~;
+	
+	sum = first - second;
 	pakits sum;
-} 
+} }
 
 char cho;
-patings cho #> "do you want to try again? y/n(lower-case): ";
 
-kung(cho =_= 'y'){
-	x=0;
-}
-maiba{
-	x=3;
-}
 }
 
-}Wakas
+}Wakas Wakas

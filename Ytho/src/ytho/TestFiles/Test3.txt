@@ -1,24 +1,25 @@
 Simula x {    	
-      int num1 = 4, num2 = 2 , result;
+      int num1 = 4 ;
+int num2 = 2 ;
     	
     	@@ Using addition operator
-    	result = num1 + num2;
+    	result =  ( num1 ) + ( num2 );
     	pakits ~" num1 + num2 = "~ &+ result ;
 	
     	@@ Using subtraction operator
-    	result = num1 - num2;
+    	result = ( num1 ) - ( num2 );
     	pakits ~" num1 - num2 = "~ &+ result;
     	
     	@@ Using multiplication operator
-    	result = num1 * num2;
+    	result = ( num1 ) * ( num2 );
     	pakits ~" num1 * num2 = "~ &+ result;
 
     	@@ Using division operator
-    	result = num1 / num2;
+    	result = ( num1 ) / ( num2 );
     	pakits ~" num1 / num2 = "~ &+ result;
 	
 @@ Using exponent operator
-    	result = num1 ^ num2;
+    	result = ( num1 ) ^ ( num2 );
     	pakits ~" num1 ^ num2 = "~ &+ result;
 }
-Wakas
+Wakas Wakas

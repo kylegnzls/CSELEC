@@ -1172,7 +1172,7 @@ public class Scanner {
                     if (IsDigit(c)) {
                         CURRENT_STATE = 118;
                     } else if (c == ' ' || c == ';') {
-                        System.out.println(tokenS);
+                       // System.out.println(tokenS);
                         Pushback();
                         tokenS = Remove(tokenS);
                         

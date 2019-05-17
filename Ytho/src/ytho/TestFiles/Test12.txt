@@ -2,7 +2,7 @@ Simula loopConstr {
 int x ;
 int x = 300;
 
-
+stringtho x = ~" adsf "~ ;
 bool x = deins ;
 char y;
 lutangs x = 108.0 ;
@@ -18,6 +18,8 @@ pakits ~" num1 + num2 = "~ &+ result;
 kung ( ( x ) > 3 ) {
 
 pakits ~" num1 + num2 = "~ &+ result;
+pakits ~" num1 + num2 = "~ &+ result;
+}maiba {
 pakits ~" num1 + num2 = "~ &+ result;
 }
 

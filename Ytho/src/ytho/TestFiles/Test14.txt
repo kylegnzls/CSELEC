@@ -1,9 +1,10 @@
 Simula omsimDeins {
-    	bool weh = omsim;
-	kung(weh =_+= deins){
-		pakits "true";
-	}maiba{
-		pakits "false";
+    	bool weh = omsim ;
+
+	kung ( ( weh ) =_=  deins  ) {
+		pakits ~"true"~ ;
+	} maiba {
+		pakits ~"false"~;
 	}
 	
-}Wakas
+}Wakas Wakas
